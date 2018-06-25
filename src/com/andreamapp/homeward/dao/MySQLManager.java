@@ -237,9 +237,10 @@ public class MySQLManager {
                 int[] res = null;
                 if (state == StatementState.Batching) {
                     for (String sql : sqlList) {
-                        stmt.addBatch(sql);
+//                        stmt.addBatch(sql);
+                        stmt.executeUpdate(sql);
                     }
-                    res = stmt.executeBatch();
+//                    res = stmt.executeBatch();
                 }
                 else if(state == StatementState.Preparing){
                     boolean isQuery = ((PreparedStatement) stmt).execute();

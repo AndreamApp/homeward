@@ -30,8 +30,8 @@ class MySQLManagerTest {
 
     void batchExecute() throws SQLException {
        int[] res = MySQLManager.getInstance()
-                .execute("update manager set username = 'Andrea' where username = 'Andream'")
-                .execute("update manager set username = 'Superscalar' where username = 'Andrea'")
+                .execute("update manager set username = 'Andrea' where username = 'Superscalar'")
+                .execute("update manager set username = 'Andream' where username = 'Andrea'")
                 .update();
     }
 

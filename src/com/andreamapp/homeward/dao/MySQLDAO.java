@@ -2,8 +2,13 @@ package com.andreamapp.homeward.dao;
 
 import com.andreamapp.homeward.bean.Manager;
 
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MySQLDAO implements
         ManagerDAO
@@ -79,6 +84,22 @@ public class MySQLDAO implements
         }
     }
 
+    @Override
+    public List<Manager> getAllManagers() {
+        List<Manager> managers = new ArrayList<>();
+        try {
+            try (ResultSet res = query("select * from manager")) {
+                if (res.next()) {
+                    managers.add(getManagerFromResult(res));
+                }
+            }
+            return managers;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return managers;
+        }
+    }
+
     public Manager getManagerByUsername(String username) {
         Manager manager = null;
         try {
@@ -101,5 +122,34 @@ public class MySQLDAO implements
             return manager;
         }
         return null;
+    }
+
+    @Override
+    public TableModel getManagerModel(List<Manager> managers) {
+        return new DefaultTableModel(new Object[]{
+                "管理员ID", "售票点ID", "用户名", "密码", "姓名", "性别", "管理员类别"
+        }, managers.size()) {
+            @Override
+            public Object getValueAt(int rowIndex, int columnIndex) {
+                Manager manager = managers.get(rowIndex);
+                switch (columnIndex){
+                    case 0:
+                        return manager.getManagerId();
+                    case 1:
+                        return manager.getPointId();
+                    case 2:
+                        return manager.getUsername();
+                    case 3:
+                        return manager.getPassword();
+                    case 4:
+                        return manager.getName();
+                    case 5:
+                        return manager.getSex();
+                    case 6:
+                        return manager.getManagerType();
+                }
+                return null;
+            }
+        };
     }
 }
