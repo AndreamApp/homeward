@@ -11,7 +11,7 @@ public class MySQLManager {
 
     private static MySQLManager sInstance;
 
-    private static synchronized MySQLManager getInstance() {
+    public static synchronized MySQLManager getInstance() {
         if (sInstance == null) {
             sInstance = new MySQLManager();
         }
@@ -32,18 +32,13 @@ public class MySQLManager {
      * @throws SQLException 连接异常
      */
     public boolean connect(String user, String pass) throws SQLException {
-        if (mConnection != null && !mConnection.isClosed()) {
-            return true;
-        }
         try {
             Class.forName(DRIVER);
-            this.mConnection = DriverManager.getConnection("jdbc:mysql://localhost", user, pass);
+            this.mConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/db_train?characterEncoding=utf-8&serverTimezone=UTC", user, pass);
             return true;
         } catch (SQLException e) {
-            e.printStackTrace();
             throw e;
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
             throw new RuntimeException(e);
         }
     }
@@ -90,8 +85,8 @@ public class MySQLManager {
      * @param sql 待执行的sql语句
      * @return {@link StatementBuilder}
      */
-    public StatementBuilder prepare(String sql) {
-        return new StatementBuilder().prepare(sql);
+    public StatementBuilder prepare(String sql, Object ... params) {
+        return new StatementBuilder().prepare(sql, params);
     }
 
     private enum StatementState {
@@ -190,8 +185,8 @@ public class MySQLManager {
                 try {
                     PreparedStatement stmt = (PreparedStatement) this.stmt;
                     for (Object obj : params) {
-                        stmt.setObject(prepareParamIndex, obj);
                         prepareParamIndex++;
+                        stmt.setObject(prepareParamIndex, obj);
                     }
                 } catch (SQLException e) {
                     e.printStackTrace();
@@ -214,7 +209,7 @@ public class MySQLManager {
                 else if(state == StatementState.Preparing){
                     res = ((PreparedStatement) stmt).executeQuery();
                 }
-                close();
+                //close();
                 return res;
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -253,7 +248,7 @@ public class MySQLManager {
         /**
          * 关闭{@link Statement}
          */
-        private void close() {
+        public void close() {
             try {
                 if (stmt != null && !stmt.isClosed()) {
                     try {
