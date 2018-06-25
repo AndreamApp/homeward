@@ -1,32 +1,32 @@
 package com.andreamapp.homeward.bean;
 
 public class Manager {
-    private String manager_id;
-    private String point_id;
+    private int manager_id;
+    private int point_id;
     private String username;
     private String password;
     private String name;
-    private Sex sex;
-    private Type manager_type;
+    private int sex;
+    private int manager_type;
 
-    public enum Type{
-        SuperManager,
-        Seller,
-    }
+    public static final int TYPE_SUPERUSER = 1;
+    public static final int TYPE_SELLER = 2;
+    public static final int SEX_FEMALE = 0;
+    public static final int SEX_MALE = 1;
 
-    public String getManager_id() {
+    public int getManagerId() {
         return manager_id;
     }
 
-    public void setManagerId(String manager_id) {
+    public void setManagerId(int manager_id) {
         this.manager_id = manager_id;
     }
 
-    public String getPointId() {
+    public int getPointId() {
         return point_id;
     }
 
-    public void setPointId(String point_id) {
+    public void setPointId(int point_id) {
         this.point_id = point_id;
     }
 
@@ -54,19 +54,19 @@ public class Manager {
         this.name = name;
     }
 
-    public Sex getSex() {
+    public int getSex() {
         return sex;
     }
 
-    public void setSex(Sex sex) {
+    public void setSex(int sex) {
         this.sex = sex;
     }
 
-    public Type getManagerType() {
+    public int getManagerType() {
         return manager_type;
     }
 
-    public void setManagerType(Type manager_type) {
+    public void setManagerType(int manager_type) {
         this.manager_type = manager_type;
     }
 }

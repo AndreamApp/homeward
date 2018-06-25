@@ -19,6 +19,7 @@ public class MySQLManager {
     }
 
     private Connection mConnection;
+    private MySQLDAO mDAO;
 
     private MySQLManager() {
     }
@@ -34,7 +35,8 @@ public class MySQLManager {
     public boolean connect(String user, String pass) throws SQLException {
         try {
             Class.forName(DRIVER);
-            this.mConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/db_train?characterEncoding=utf-8&serverTimezone=UTC", user, pass);
+            this.mConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/db_train?characterEncoding=utf-8&serverTimezone=UTC&useSSL=FALSE", user, pass);
+            this.mDAO = new MySQLDAO();
             return true;
         } catch (SQLException e) {
             throw e;
@@ -87,6 +89,14 @@ public class MySQLManager {
      */
     public StatementBuilder prepare(String sql, Object ... params) {
         return new StatementBuilder().prepare(sql, params);
+    }
+
+    /**
+     * 获取DAO数据处理对象
+     * @return {@link MySQLDAO}
+     */
+    public MySQLDAO dao() {
+        return mDAO;
     }
 
     private enum StatementState {
