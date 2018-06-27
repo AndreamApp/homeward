@@ -1,5 +1,6 @@
 package com.andreamapp.homeward.bean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Train {
@@ -29,5 +30,15 @@ public class Train {
 
     public void setTrainPassby(List<Passby> train_passby) {
         this.train_passby = train_passby;
+    }
+
+    public String getTrainPassbyString() {
+        StringBuilder passby = new StringBuilder('|');
+        if(train_passby != null){
+            for(Passby p : train_passby){
+                passby.append(p.getDepartStation().getStationId()).append('|');
+            }
+        }
+        return passby.toString();
     }
 }

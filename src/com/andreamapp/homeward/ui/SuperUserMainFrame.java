@@ -1,6 +1,6 @@
 package com.andreamapp.homeward.ui;
 
-import com.andreamapp.homeward.bean.Manager;
+import com.andreamapp.homeward.bean.*;
 import com.andreamapp.homeward.dao.MySQLDAO;
 import com.andreamapp.homeward.dao.MySQLManager;
 
@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.List;
 
 public class SuperUserMainFrame extends JFrame{
@@ -24,6 +25,7 @@ public class SuperUserMainFrame extends JFrame{
     private TrainOrderPanel orderPanel = new TrainOrderPanel();
 
     public SuperUserMainFrame(){
+        setSize(1024, 768);
         initComponents();
     }
 
@@ -128,8 +130,13 @@ public class SuperUserMainFrame extends JFrame{
             });
         }
 
+        public float[] getColumnWeight(int columnCount){
+            float[] defaultWeight = new float[columnCount];
+            Arrays.fill(defaultWeight, 1.0f);
+            return defaultWeight;
+        }
+
         public abstract TableModel getTableModel();
-        public abstract float[] getColumnWeight(int columnCount);
         public abstract void onInsert();
         public abstract void onDelete(int[] selectedRows);
         public abstract void onUpdate(int[] selectedRows);
@@ -137,26 +144,27 @@ public class SuperUserMainFrame extends JFrame{
     }
 
     private class CustomerPanel extends ModelPanel{
-        List<Manager> data;
+        List<Customer> data;
 
         @Override
         public TableModel getTableModel() {
             if(data == null){
-                data = MySQLManager.getInstance().dao().getAllManagers();
+                data = MySQLManager.getInstance().dao().getAllCustomers();
             }
-            return MySQLManager.getInstance().dao().getManagerModel(data);
+            return MySQLManager.getInstance().dao().getCustomerModel(data);
         }
 
         @Override
         public float[] getColumnWeight(int columnCount) {
             return new float[]{
-                1, 1, 2, 2, 2, 1, 1
+                2, 2, 1, 1, 1
             };
         }
 
         @Override
         public void onInsert() {
             // InsertDialog
+
         }
 
         @Override
@@ -211,22 +219,14 @@ public class SuperUserMainFrame extends JFrame{
     }
 
     private class SellPointPanel extends ModelPanel{
-
-        List<Manager> data;
+        List<TicketPoint> data;
 
         @Override
         public TableModel getTableModel() {
             if(data == null){
-                data = MySQLManager.getInstance().dao().getAllManagers();
+                data = MySQLManager.getInstance().dao().getAllTicketPoints();
             }
-            return MySQLManager.getInstance().dao().getManagerModel(data);
-        }
-
-        @Override
-        public float[] getColumnWeight(int columnCount) {
-            return new float[]{
-                    1, 1, 2, 2, 2, 1, 1
-            };
+            return MySQLManager.getInstance().dao().getTicketPointModel(data);
         }
 
         @Override
@@ -250,21 +250,14 @@ public class SuperUserMainFrame extends JFrame{
 
     private class TrainPanel extends ModelPanel{
 
-        List<Manager> data;
+        List<Train> data;
 
         @Override
         public TableModel getTableModel() {
             if(data == null){
-                data = MySQLManager.getInstance().dao().getAllManagers();
+                data = MySQLManager.getInstance().dao().getAllTrains();
             }
-            return MySQLManager.getInstance().dao().getManagerModel(data);
-        }
-
-        @Override
-        public float[] getColumnWeight(int columnCount) {
-            return new float[]{
-                    1, 1, 2, 2, 2, 1, 1
-            };
+            return MySQLManager.getInstance().dao().getTrainModel(data);
         }
 
         @Override
@@ -288,21 +281,14 @@ public class SuperUserMainFrame extends JFrame{
 
     private class TrainSchedulePanel extends ModelPanel{
 
-        List<Manager> data;
+        List<TrainSchedule> data;
 
         @Override
         public TableModel getTableModel() {
             if(data == null){
-                data = MySQLManager.getInstance().dao().getAllManagers();
+                data = MySQLManager.getInstance().dao().getTrainScheduleList(100, 0);
             }
-            return MySQLManager.getInstance().dao().getManagerModel(data);
-        }
-
-        @Override
-        public float[] getColumnWeight(int columnCount) {
-            return new float[]{
-                    1, 1, 2, 2, 2, 1, 1
-            };
+            return MySQLManager.getInstance().dao().getTrainScheduleModel(data);
         }
 
         @Override
@@ -326,21 +312,14 @@ public class SuperUserMainFrame extends JFrame{
 
     private class TrainOrderPanel extends ModelPanel{
 
-        List<Manager> data;
+        List<TrainOrder> data;
 
         @Override
         public TableModel getTableModel() {
             if(data == null){
-                data = MySQLManager.getInstance().dao().getAllManagers();
+                data = MySQLManager.getInstance().dao().getTrainOrderList(100, 0);
             }
-            return MySQLManager.getInstance().dao().getManagerModel(data);
-        }
-
-        @Override
-        public float[] getColumnWeight(int columnCount) {
-            return new float[]{
-                    1, 1, 2, 2, 2, 1, 1
-            };
+            return MySQLManager.getInstance().dao().getTrainOrderModel(data);
         }
 
         @Override

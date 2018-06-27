@@ -13,14 +13,12 @@ public class TrainOrder {
     private Station arrive_station;
     private boolean is_student_ticket;
     private float money;
-    private State order_state;
+    private int order_state;
 
-    public enum State{
-        Reserved, // 预订
-        Cancled,  // 取消
-        Payed,    // 支付
-        Refunded, // 退款
-    }
+    public static final int STATE_RESERVED = 1;
+    public static final int STATE_CANCLED = 2;
+    public static final int STATE_PAYED = 3;
+    public static final int STATE_REFUNDED = 4;
 
     public int getOrderId() {
         return order_id;
@@ -118,11 +116,11 @@ public class TrainOrder {
         this.money = money;
     }
 
-    public State getOrderState() {
+    public int getOrderState() {
         return order_state;
     }
 
-    public void setOrderState(State order_state) {
+    public void setOrderState(int order_state) {
         this.order_state = order_state;
     }
 }

@@ -2,10 +2,16 @@ package com.andreamapp.homeward.bean;
 
 public class Customer {
     private String name;
-    private Sex sex;
+    private int sex;
     private String id_num;
     private String tel;
-    private Type customer_type;
+    private int customer_type;
+
+    public static final int SEX_FEMALE = 0;
+    public static final int SEX_MALE = 1;
+
+    public static final int TYPE_STUDENT = 2;
+    public static final int TYPE_NORMAL = 1;
 
     public String getName() {
         return name;
@@ -15,11 +21,15 @@ public class Customer {
         this.name = name;
     }
 
-    public Sex getSex() {
+    public int getSex() {
         return sex;
     }
 
-    public void setSex(Sex sex) {
+    public String getSexString(){
+        return sex == SEX_FEMALE ? "女" : "男";
+    }
+
+    public void setSex(int sex) {
         this.sex = sex;
     }
 
@@ -39,16 +49,15 @@ public class Customer {
         this.tel = tel;
     }
 
-    public Type getCustomerType() {
+    public int getCustomerType() {
         return customer_type;
     }
 
-    public void setCustomerType(Type customer_type) {
-        this.customer_type = customer_type;
+    public String getCustomerTypeString() {
+        return customer_type == TYPE_STUDENT ? "学生" : "普通";
     }
 
-    public enum Type{
-        Normal,
-        Student,
+    public void setCustomerType(int customer_type) {
+        this.customer_type = customer_type;
     }
 }

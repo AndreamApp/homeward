@@ -112,6 +112,7 @@ public class LoginFrame extends javax.swing.JFrame {
         if(manager != null){
             JOptionPane.showMessageDialog(null, "登陆成功");
             new SuperUserMainFrame().setVisible(true);
+            dispose();
         }
         else {
             JOptionPane.showMessageDialog(null, "登录失败");

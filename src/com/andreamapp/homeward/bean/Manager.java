@@ -58,12 +58,20 @@ public class Manager {
         return sex;
     }
 
+    public String getSexString() {
+        return sex == SEX_FEMALE ? "女" : "男";
+    }
+
     public void setSex(int sex) {
         this.sex = sex;
     }
 
     public int getManagerType() {
         return manager_type;
+    }
+
+    public String getManagerTypeString() {
+        return manager_type == TYPE_SUPERUSER ? "管理员" : "售票员";
     }
 
     public void setManagerType(int manager_type) {
