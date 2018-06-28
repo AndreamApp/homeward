@@ -13,4 +13,5 @@ public interface TrainDAO {
 
     Train getTrainById(String train_id);
     List<Train> getAllTrains();
+    List<Train> searchTrains(String key);
 }

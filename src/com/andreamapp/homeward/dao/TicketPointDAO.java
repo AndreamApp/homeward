@@ -13,4 +13,5 @@ public interface TicketPointDAO {
 
     TicketPoint getTicketPointById(int point_id);
     List<TicketPoint> getAllTicketPoints();
+    List<TicketPoint> searchTicketPoints(String key);
 }

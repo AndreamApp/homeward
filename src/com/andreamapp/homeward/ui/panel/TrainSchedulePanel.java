@@ -48,7 +48,6 @@ public class TrainSchedulePanel extends ModelPanel {
     }
 
     @Override
-    public void onSelect() {
-        // SelectDialog
+    public void onSearch(String key) {
     }
 }

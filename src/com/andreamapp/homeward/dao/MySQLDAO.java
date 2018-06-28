@@ -125,6 +125,15 @@ public class MySQLDAO implements
                 .load("select * from manager");
     }
 
+    @Override
+    public List<Manager> searchManagers(String key) {
+        key = '%' + key + '%';
+        return new Loader<>(this::getManagerFromResult)
+                .load("select * from manager where manager_id = ? or name like ? or username like ?" +
+                                " or point_id = ?",
+                        key, key, key, key);
+    }
+
     public Manager getManagerByUsername(String username) {
         return new Loader<>(this::getManagerFromResult)
                 .loadOne("select * from manager where username = ?", username);
@@ -184,6 +193,14 @@ public class MySQLDAO implements
     public Customer getCustomerByIdNum(String id_num) {
         return new Loader<>(this::getCustomerFromResult)
                 .loadOne("select * from customer where id_num = ?", id_num);
+    }
+
+    @Override
+    public List<Customer> searchCustomers(String key) {
+        key = '%' + key + '%';
+        return new Loader<>(this::getCustomerFromResult)
+                .load("select * from customer where id_num like ? or name like ? or tel = ?",
+                        key, key, key);
     }
 
     @Override
@@ -281,6 +298,14 @@ public class MySQLDAO implements
     }
 
     @Override
+    public List<TicketPoint> searchTicketPoints(String key) {
+        key = '%' + key + '%';
+        return new Loader<>(this::getTicketPointFromResult)
+                .load("select * from ticket_point where point_id = ? or username like ? or address like ?",
+                        key, key, key);
+    }
+
+    @Override
     public void insertTrain(Train train) {
         update("insert into train " +
                         "(train_id, train_type, train_passby) values " +
@@ -330,6 +355,14 @@ public class MySQLDAO implements
     }
 
     @Override
+    public List<Train> searchTrains(String key) {
+        key = '%' + key + '%';
+        return new Loader<>(this::getTrainFromResult)
+                .load("select * from train where train_id = ? or train_type = ? or train_schedule like ?",
+                        key, key, key);
+    }
+
+    @Override
     public void insertTrainOrder(TrainOrder order) {
         update("insert into ticket_order " +
                         "(point_id, id_num, sche_id, seat_id, train_id, depart_station_order, arrive_station_order, depart_station, arrive_station, is_stu_ticket, money, order_state) values " +
@@ -375,7 +408,7 @@ public class MySQLDAO implements
         TrainOrder order = new TrainOrder();
         order.setOrderId(res.getInt("order_id"));
         TicketPoint point = new TicketPoint();
-        point.setPointId(res.getInt("poinr_id"));
+        point.setPointId(res.getInt("point_id"));
         order.setTicketPoint(point);
 
         Customer buyer = new Customer();
@@ -405,11 +438,19 @@ public class MySQLDAO implements
         return order;
     }
 
-
     @Override
     public List<TrainOrder> getTrainOrderList(int limit, int skip) {
         return new Loader<>(this::getOrderFromResult)
                 .load("select * from ticket_order");
+    }
+
+    @Override
+    public List<TrainOrder> searchTrainOrders(String key) {
+        String likeKey = '%' + key + '%';
+        return new Loader<>(this::getOrderFromResult)
+                .load("select * from ticket_order where order_id = ? or point_id = ? or id_num like ?" +
+                                " or sche_id = ? or train_id = ? or depart_station = ? or arrive_station = ?",
+                        key, key, likeKey, key, key, key, key);
     }
 
     @Override

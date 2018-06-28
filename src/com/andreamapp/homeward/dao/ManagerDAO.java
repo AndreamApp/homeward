@@ -12,6 +12,7 @@ public interface ManagerDAO {
     void updateManager(Manager manager);
     Manager getManagerById(String manager_id);
     List<Manager> getAllManagers();
+    List<Manager> searchManagers(String key);
 
     Manager login(String username, String password);
 }

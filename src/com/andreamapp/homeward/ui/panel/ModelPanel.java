@@ -3,6 +3,7 @@ package com.andreamapp.homeward.ui.panel;
 import com.andreamapp.homeward.ui.widget.JCenterTable;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -14,9 +15,10 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 
 public abstract class ModelPanel extends JPanel {
-    private JButton btnInsert, btnDelete, btnUpdate, btnSelect;
+    private JTextField editSearch;
+    private JButton btnSearch, btnInsert, btnUpdate, btnDelete;
     protected JTable table;
-    protected TableModel model;
+    protected DefaultTableModel model;
 
     public ModelPanel(){
         // 自定义样式的表格
@@ -34,24 +36,30 @@ public abstract class ModelPanel extends JPanel {
 
     private JPanel btnPanel(){
         JPanel btnPanel = new JPanel(new FlowLayout());
+        btnPanel.add(editSearch = new JTextField());
+        btnPanel.add(btnSearch = new JButton("搜索"));
         btnPanel.add(btnInsert = new JButton("添加"));
-        btnPanel.add(btnDelete = new JButton("删除"));
         btnPanel.add(btnUpdate = new JButton("修改"));
-        btnPanel.add(btnSelect = new JButton("筛选"));
-        btnInsert.addActionListener(e -> onInsert());
-        btnDelete.addActionListener(e -> {
-            int[] rows = table.getSelectedRows();
-            if(rows.length > 0){
-                onDelete(modelIndexes(rows));
-            }
+        btnPanel.add(btnDelete = new JButton("删除"));
+        editSearch.setColumns(50);
+        editSearch.setFont(new Font("宋体", Font.PLAIN, 14));
+        btnSearch.addActionListener(e -> {
+            String key = editSearch.getText();
+            onSearch(key.trim());
         });
+        btnInsert.addActionListener(e -> onInsert());
         btnUpdate.addActionListener(e -> {
             int row = table.getSelectedRow();
             if(row >= 0){ // selected something
                 onUpdate(modelIndex(row));
             }
         });
-        btnSelect.addActionListener(e -> onSelect());
+        btnDelete.addActionListener(e -> {
+            int[] rows = table.getSelectedRows();
+            if(rows.length > 0){
+                onDelete(modelIndexes(rows));
+            }
+        });
         return btnPanel;
     }
 
@@ -141,12 +149,12 @@ public abstract class ModelPanel extends JPanel {
         setModel(tableModel);
         table.validate();
         table.updateUI();
-        //((DefaultTableModel)table.getModel()).fireTableDataChanged();
+//        ((DefaultTableModel)table.getModel()).fireTableDataChanged();
     }
 
-    public abstract TableModel getTableModel();
+    public abstract DefaultTableModel getTableModel();
+    public abstract void onSearch(String key);
     public abstract void onInsert();
     public abstract void onDelete(int[] selectedRows);
     public abstract void onUpdate(int selectedRow);
-    public abstract void onSelect();
 }

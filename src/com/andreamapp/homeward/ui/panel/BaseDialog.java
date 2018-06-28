@@ -94,6 +94,12 @@ public class BaseDialog extends JDialog {
         relayout();
     }
 
+    protected JLabel addLabel(String name, String text){
+        JLabel label = new JLabel(text);
+        addItem(name, label);
+        return label;
+    }
+
     protected JTextField addField(String name, String text){
         JTextField edit = new JTextField();
         edit.setColumns(30);

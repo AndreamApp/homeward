@@ -5,14 +5,19 @@ import com.andreamapp.homeward.bean.Customer;
 import com.andreamapp.homeward.dao.MySQLManager;
 import com.andreamapp.homeward.utils.Constants;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class CustomerPanel extends ModelPanel {
     List<Customer> customers;
 
+    private void fetchAll(){
+        customers = MySQLManager.getInstance().dao().getAllCustomers();
+    }
+
     @Override
     public ListTableModel getTableModel() {
-        customers = MySQLManager.getInstance().dao().getAllCustomers();
+        if(customers == null) fetchAll();
         return new ListTableModel<Customer>(Constants.ColumnName.CUSTOMER, customers) {
             @Override
             public Object getValueAt(int row, int column) {
@@ -40,6 +45,17 @@ public class CustomerPanel extends ModelPanel {
     }
 
     @Override
+    public void onSearch(String key) {
+        if(key.equals("")){
+            fetchAll();
+        }
+        else{
+            customers = MySQLManager.getInstance().dao().searchCustomers(key);
+        }
+        refresh();
+    }
+
+    @Override
     public void onInsert() {
         new BaseDialog() {
             {
@@ -59,6 +75,7 @@ public class CustomerPanel extends ModelPanel {
                 customer.setTel(field(3));
                 customer.setCustomerType(option(4) + 1);
                 MySQLManager.getInstance().dao().insertCustomer(customer);
+                fetchAll();
                 refresh();
                 super.onOK();
             }
@@ -71,6 +88,9 @@ public class CustomerPanel extends ModelPanel {
         for(int row : selectedRows){
             Customer customer = customers.get(row);
             MySQLManager.getInstance().dao().deleteCustomer(customer);
+        }
+        for(int i = selectedRows.length - 1; i >= 0; i--){
+            customers.remove(i);
         }
         refresh();
     }
@@ -101,9 +121,4 @@ public class CustomerPanel extends ModelPanel {
             }
         }.popup("修改用户");
     }
-
-    @Override
-    public void onSelect() {
-    }
-
 }

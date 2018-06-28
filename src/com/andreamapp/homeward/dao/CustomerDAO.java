@@ -12,4 +12,5 @@ public interface CustomerDAO {
     void upsertCustomer(Customer customer);
     Customer getCustomerByIdNum(String id_num);
     List<Customer> getAllCustomers();
+    List<Customer> searchCustomers(String key);
 }
