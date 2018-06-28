@@ -43,18 +43,21 @@ public class CustomerPanel extends ModelPanel {
     public void onInsert() {
         new BaseDialog() {
             {
-                for (String label : Constants.ColumnName.CUSTOMER) {
-                    addFieldItem(label);
-                }
+                String[] columns = Constants.ColumnName.CUSTOMER;
+                addField(columns[0], "");
+                addField(columns[1], "");
+                addComboBox(columns[2], "女", "男");
+                addField(columns[3], "");
+                addComboBox(columns[4], "普通", "学生");
             }
             @Override
             protected void onOK() {
                 Customer customer = new Customer();
                 customer.setIdNum(field(0));
                 customer.setName(field(1));
-                customer.setSex(Integer.parseInt(field(2)));
+                customer.setSex(option(2));
                 customer.setTel(field(3));
-                customer.setCustomerType(Integer.parseInt(field(4)));
+                customer.setCustomerType(option(4) + 1);
                 MySQLManager.getInstance().dao().insertCustomer(customer);
                 refresh();
                 super.onOK();
@@ -78,20 +81,20 @@ public class CustomerPanel extends ModelPanel {
         Customer customer = customers.get(selectedRow);
         new BaseDialog() {
             {
-                String[] labels = Constants.ColumnName.CUSTOMER;
-                addFieldItem(labels[0]).setText(customer.getIdNum());
-                addFieldItem(labels[1]).setText(customer.getName());
-                addFieldItem(labels[2]).setText(String.valueOf(customer.getSex()));
-                addFieldItem(labels[3]).setText(customer.getTel());
-                addFieldItem(labels[4]).setText(String.valueOf(customer.getCustomerType()));
+                String[] columns = Constants.ColumnName.CUSTOMER;
+                addField(columns[0], customer.getIdNum());
+                addField(columns[1], customer.getName());
+                addComboBox(columns[2], "女", "男").setSelectedIndex(customer.getSex());
+                addField(columns[3], customer.getTel());
+                addComboBox(columns[4], "普通", "学生").setSelectedIndex(customer.getCustomerType() - 1);
             }
             @Override
             protected void onOK() {
                 customer.setIdNum(field(0));
                 customer.setName(field(1));
-                customer.setSex(Integer.parseInt(field(2)));
+                customer.setSex(option(2));
                 customer.setTel(field(3));
-                customer.setCustomerType(Integer.parseInt(field(4)));
+                customer.setCustomerType(option(4) + 1);
                 MySQLManager.getInstance().dao().updateCustomer(customer);
                 refresh();
                 super.onOK();

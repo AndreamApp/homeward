@@ -94,15 +94,36 @@ public class BaseDialog extends JDialog {
         relayout();
     }
 
-    protected JTextField addFieldItem(String text){
+    protected JTextField addField(String name, String text){
         JTextField edit = new JTextField();
         edit.setColumns(30);
-        addItem(text, edit);
+        edit.setText(text);
+        addItem(name, edit);
         return edit;
+    }
+
+    protected JComboBox addComboBox(String name, String... options){
+        JComboBox box = new JComboBox<>(options);
+        addItem(name, box);
+        return box;
+    }
+
+    protected JCheckBox addCheckBox(String text, boolean state){
+        JCheckBox box = new JCheckBox("", state);
+        addItem(text, box);
+        return box;
     }
 
     protected String field(int n){
         return ((JTextField) componentList.get(n)).getText();
+    }
+
+    protected int option(int n){
+        return ((JComboBox) componentList.get(n)).getSelectedIndex();
+    }
+
+    protected boolean checked(int n){
+        return ((JCheckBox) componentList.get(n)).isSelected();
     }
 
     protected void onOK() {

@@ -3,7 +3,6 @@ package com.andreamapp.homeward.ui.panel;
 import com.andreamapp.homeward.ui.widget.JCenterTable;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
