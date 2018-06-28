@@ -1,4 +1,4 @@
-package com.andreamapp.homeward.ui.panel;
+package com.andreamapp.homeward.ui.panel.base;
 
 import com.andreamapp.homeward.ui.widget.JCenterTable;
 

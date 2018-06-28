@@ -1,8 +1,10 @@
 package com.andreamapp.homeward.ui.panel;
 
-import com.andreamapp.homeward.bean.Manager;
 import com.andreamapp.homeward.bean.TicketPoint;
 import com.andreamapp.homeward.dao.MySQLManager;
+import com.andreamapp.homeward.ui.panel.base.BaseDialog;
+import com.andreamapp.homeward.ui.panel.base.ListTableModel;
+import com.andreamapp.homeward.ui.panel.base.ModelPanel;
 import com.andreamapp.homeward.utils.Constants;
 
 import java.util.List;
