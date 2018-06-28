@@ -3,14 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="06737e02-fa00-4512-a447-12f3ffba06f2" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/com/andreamapp/homeward/bean/TrainSchedule.java" afterPath="$PROJECT_DIR$/src/com/andreamapp/homeward/bean/TrainSchedule.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/panel/CustomerPanel.java" afterPath="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/panel/CustomerPanel.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/panel/ManagerPanel.java" afterPath="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/panel/ManagerPanel.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/panel/SellPointPanel.java" afterPath="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/panel/SellPointPanel.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/panel/TrainPanel.java" afterPath="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/panel/TrainPanel.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/panel/TrainSchedulePanel.java" afterPath="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/panel/TrainSchedulePanel.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/panel/base/BaseDialog.java" afterPath="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/panel/base/BaseDialog.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/panel/base/ModelPanel.java" afterPath="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/panel/base/ModelPanel.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -65,8 +57,8 @@
       <file leaf-file-name="TrainSchedulePanel.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/andreamapp/homeward/ui/panel/TrainSchedulePanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-660">
-              <caret line="12" column="36" lean-forward="false" selection-start-line="12" selection-start-column="36" selection-end-line="12" selection-end-column="36" />
+            <state relative-caret-position="330">
+              <caret line="54" column="1" lean-forward="true" selection-start-line="54" selection-start-column="1" selection-end-line="54" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -722,7 +714,14 @@
       <option name="project" value="LOCAL" />
       <updated>1530207442961</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="[Refactor] Simplify code, add comment, fix warnings">
+      <created>1530209096278</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1530209096278</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -769,7 +768,8 @@
     <MESSAGE value="[Add] Manager &amp; TicketPoint panel" />
     <MESSAGE value="[Add] Manager &amp; TicketPoint panel --amend" />
     <MESSAGE value="[Add] Train cascade CRUD in panel UI" />
-    <option name="LAST_COMMIT_MESSAGE" value="[Add] Train cascade CRUD in panel UI" />
+    <MESSAGE value="[Refactor] Simplify code, add comment, fix warnings" />
+    <option name="LAST_COMMIT_MESSAGE" value="[Refactor] Simplify code, add comment, fix warnings" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1341,8 +1341,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/andreamapp/homeward/ui/panel/TrainSchedulePanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-660">
-          <caret line="12" column="36" lean-forward="false" selection-start-line="12" selection-start-column="36" selection-end-line="12" selection-end-column="36" />
+        <state relative-caret-position="330">
+          <caret line="54" column="1" lean-forward="true" selection-start-line="54" selection-start-column="1" selection-end-line="54" selection-end-column="1" />
           <folding />
         </state>
       </provider>
