@@ -10,15 +10,14 @@ import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Method;
 import java.util.Arrays;
 
+@SuppressWarnings("FieldCanBeLocal")
 public abstract class ModelPanel extends JPanel {
     private JTextField editSearch;
     private JButton btnSearch, btnInsert, btnUpdate, btnDelete;
     protected JTable table;
-    protected DefaultTableModel model;
+    private DefaultTableModel model;
 
     public ModelPanel(){
         // 自定义样式的表格
@@ -63,18 +62,6 @@ public abstract class ModelPanel extends JPanel {
         return btnPanel;
     }
 
-    private void popupDialog(Class<? extends BaseDialog> cls){
-        if(cls == null) return;
-        try {
-            Constructor<? extends BaseDialog> constructor = cls.getConstructor();
-            BaseDialog dialog = constructor.newInstance();
-            Method popup = cls.getMethod("popup");
-            popup.invoke(dialog);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     /**
      * 根据视图上的下标值获取对应的Model里的下标值
      * 这两个值并不总是相等的，因为可能有{@link RowSorter}的存在
@@ -97,7 +84,7 @@ public abstract class ModelPanel extends JPanel {
         return res;
     }
 
-    public void setModel(TableModel model){
+    private void setModel(TableModel model){
         // 列宽
         setColumnWeight();
         // 排序
@@ -138,18 +125,25 @@ public abstract class ModelPanel extends JPanel {
         });
     }
 
+    /**
+     * 获取表格中各个列的宽度，子类可重写该函数
+     * @param columnCount 列数
+     * @return 各列宽度的权重，默认权重相同
+     */
     public float[] getColumnWeight(int columnCount){
         float[] defaultWeight = new float[columnCount];
         Arrays.fill(defaultWeight, 1.0f);
         return defaultWeight;
     }
 
+    /**
+     * 更新Table中的数据，会重新调用{@link #getTableModel()}
+     */
     public void refresh(){
         TableModel tableModel = getTableModel();
         setModel(tableModel);
         table.validate();
         table.updateUI();
-//        ((DefaultTableModel)table.getModel()).fireTableDataChanged();
     }
 
     public abstract DefaultTableModel getTableModel();

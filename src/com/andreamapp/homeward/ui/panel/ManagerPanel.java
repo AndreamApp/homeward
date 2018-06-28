@@ -11,7 +11,7 @@ import com.andreamapp.homeward.utils.Constants;
 import java.util.List;
 
 public class ManagerPanel extends ModelPanel {
-    List<Manager> managers;
+    private List<Manager> managers;
 
     private void fetchAll(){
         managers = MySQLManager.getInstance().dao().getAllManagers();
@@ -64,7 +64,8 @@ public class ManagerPanel extends ModelPanel {
     @Override
     public void onInsert() {
         new BaseDialog() {
-            {
+            @Override
+            protected void initComponents() {
                 // "管理员ID", "售票点ID", "用户名", "密码", "姓名", "性别", "管理员类别"
                 String[] columns = Constants.ColumnName.MANAGER;
                 addField(columns[1], "");
@@ -109,7 +110,8 @@ public class ManagerPanel extends ModelPanel {
         if(selectedRow < 0) return;
         Manager manager = managers.get(selectedRow);
         new BaseDialog() {
-            {
+            @Override
+            protected void initComponents() {
                 // "管理员ID", "售票点ID", "用户名", "密码", "姓名", "性别", "管理员类别"
                 String[] columns = Constants.ColumnName.MANAGER;
                 addLabel(columns[0], String.valueOf(manager.getManagerId()));
@@ -120,6 +122,7 @@ public class ManagerPanel extends ModelPanel {
                 addComboBox(columns[5], "女", "男").setSelectedIndex(manager.getSex());
                 addComboBox(columns[6], "管理员", "售票员").setSelectedIndex(manager.getManagerType() - 1);
             }
+
             @Override
             protected void onOK() {
                 manager.setPointId(Integer.parseInt(field(1)));

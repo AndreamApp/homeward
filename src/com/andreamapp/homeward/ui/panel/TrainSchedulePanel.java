@@ -10,7 +10,7 @@ import java.util.List;
 
 public class TrainSchedulePanel extends ModelPanel {
 
-    List<TrainSchedule> schedules;
+    private List<TrainSchedule> schedules;
 
     @Override
     public ListTableModel getTableModel() {

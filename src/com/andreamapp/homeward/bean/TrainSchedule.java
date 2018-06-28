@@ -8,6 +8,7 @@ public class TrainSchedule {
     private Date presell_time;
     private float speed;
     private Train train;
+    //
 
     public int getScheId() {
         return sche_id;

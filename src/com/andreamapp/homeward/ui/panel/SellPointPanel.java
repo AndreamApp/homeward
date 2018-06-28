@@ -10,7 +10,7 @@ import com.andreamapp.homeward.utils.Constants;
 import java.util.List;
 
 public class SellPointPanel extends ModelPanel {
-    List<TicketPoint> ticketPoints;
+    private List<TicketPoint> ticketPoints;
 
     private void fetchAll(){
         ticketPoints = MySQLManager.getInstance().dao().getAllTicketPoints();
@@ -52,13 +52,15 @@ public class SellPointPanel extends ModelPanel {
     @Override
     public void onInsert() {
         new BaseDialog() {
-            {
+            @Override
+            protected void initComponents() {
                 // "售票点ID", "售票点名称", "售票点地址", "营业时间"
                 String[] columns = Constants.ColumnName.TICKET_POINT;
                 addField(columns[1], "");
                 addField(columns[2], "");
                 addField(columns[3], "");
             }
+
             @Override
             protected void onOK() {
                 TicketPoint point = new TicketPoint();
@@ -91,7 +93,8 @@ public class SellPointPanel extends ModelPanel {
         if(selectedRow < 0) return;
         TicketPoint point = ticketPoints.get(selectedRow);
         new BaseDialog() {
-            {
+            @Override
+            protected void initComponents() {
                 // "售票点ID", "售票点名称", "售票点地址", "营业时间"
                 String[] columns = Constants.ColumnName.TICKET_POINT;
                 addLabel(columns[0], String.valueOf(point.getPointId()));
@@ -99,6 +102,7 @@ public class SellPointPanel extends ModelPanel {
                 addField(columns[2], point.getAddress());
                 addField(columns[3], point.getOpenTime());
             }
+
             @Override
             protected void onOK() {
                 point.setUsername(field(1));

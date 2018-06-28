@@ -8,6 +8,7 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings({"FieldCanBeLocal", "UnusedReturnValue", "WeakerAccess"})
 public class BaseDialog extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
@@ -24,7 +25,7 @@ public class BaseDialog extends JDialog {
     private int padding = 10;
     private int btnWidth = 100, btnHeight = 30;
     private int tableHeight = 200;
-    int dialogWidth = 400, dialogHeight = 300;
+    private int dialogWidth = 400, dialogHeight = 300;
 
     public BaseDialog() {
         contentPane = new JPanel();
@@ -52,14 +53,21 @@ public class BaseDialog extends JDialog {
         });
 
         // call onCancel() on ESCAPE
-        contentPane.registerKeyboardAction(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
-        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+        contentPane.registerKeyboardAction(e -> onCancel(),
+                KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+
+        initComponents();
     }
 
-    protected void relayout(){
+    /**
+     * 子类重写该方法用于添加自定义的控件
+     */
+    protected void initComponents(){}
+
+    /**
+     * 由于使用绝对布局，每次添加新控件时会调用此方法
+     */
+    private void relayout(){
         int x = leftMargin + padding, y = topMargin, width = labelWidth, height = labelHeight;
         for(int i = 0; i < labelList.size(); i++){
             y += padding;
@@ -87,6 +95,11 @@ public class BaseDialog extends JDialog {
         addItem(null, component);
     }
 
+    /**
+     * 向对话框中添加一个组件
+     * @param text 组件的说明文字，显示在左边
+     * @param component 组件显示在右边
+     */
     protected void addItem(String text, Component component){
         if(text != null){
             JLabel label = new JLabel();
@@ -102,12 +115,24 @@ public class BaseDialog extends JDialog {
         relayout();
     }
 
+    /**
+     * 向对话框中添加一个{@link JLabel}
+     * @param name 控件说明文字
+     * @param text JLabel的初始内容
+     * @return {@link JLabel}
+     */
     protected JLabel addLabel(String name, String text){
         JLabel label = new JLabel(text);
         addItem(name, label);
         return label;
     }
 
+    /**
+     * 向对话框中添加一个{@link JTextField}
+     * @param name 控件说明文字
+     * @param text JTextField的初始内容
+     * @return {@link JTextField}
+     */
     protected JTextField addField(String name, String text){
         JTextField edit = new JTextField();
         edit.setColumns(30);
@@ -116,18 +141,35 @@ public class BaseDialog extends JDialog {
         return edit;
     }
 
+    /**
+     * 向对话框中添加一个{@link JComboBox}
+     * @param name 控件说明文字
+     * @param options JComboBox的选项
+     * @return {@link JComboBox}
+     */
     protected JComboBox addComboBox(String name, String... options){
         JComboBox box = new JComboBox<>(options);
         addItem(name, box);
         return box;
     }
 
-    protected JCheckBox addCheckBox(String text, boolean state){
+    /**
+     * 向对话框中添加一个{@link JCheckBox}
+     * @param name 控件说明文字
+     * @param state JCheckBox的初始状态
+     * @return {@link JCheckBox}
+     */
+    protected JCheckBox addCheckBox(String name, boolean state){
         JCheckBox box = new JCheckBox("", state);
-        addItem(text, box);
+        addItem(name, box);
         return box;
     }
 
+    /**
+     * 向对话框中添加一个{@link JTable}
+     * @param text 控件说明文字
+     * @return {@link JTable}
+     */
     protected JTable addTable(String text){
         JCenterTable table = new JCenterTable();
         JScrollPane scrollPane = new JScrollPane(table);
@@ -135,32 +177,61 @@ public class BaseDialog extends JDialog {
         return table;
     }
 
+    /**
+     * 获取{@link JTextField}控件的值
+     * @param n 控件的序号
+     * @return JTextField的当前内容
+     */
     protected String field(int n){
         return ((JTextField) componentList.get(n)).getText();
     }
 
+    /**
+     * 获取{@link JComboBox}控件的值
+     * @param n 控件的序号
+     * @return JComboBox当前所选项的索引值（从0开始）
+     */
     protected int option(int n){
         return ((JComboBox) componentList.get(n)).getSelectedIndex();
     }
 
+    /**
+     * 获取{@link JCheckBox}控件的值
+     * @param n 控件的序号
+     * @return JCheckBox当前状态
+     */
     protected boolean checked(int n){
         return ((JCheckBox) componentList.get(n)).isSelected();
     }
 
+    /**
+     * 确定按钮的回调函数
+     */
     protected void onOK() {
         // add your code here
         dispose();
     }
 
+    /**
+     * 取消按钮的回调函数
+     */
     protected void onCancel() {
         // add your code here if necessary
         dispose();
     }
 
+    /**
+     * 启动一个无标题的对话框
+     * convenient for {@link #popup(String)}
+     */
     public void popup(){
         popup("");
     }
 
+    /**
+     * 根据布局设置合适的大小，并启动该对话框
+     * @param title 对话框标题
+     */
     public void popup(String title){
         setTitle(title);
         setSize(dialogWidth, dialogHeight);

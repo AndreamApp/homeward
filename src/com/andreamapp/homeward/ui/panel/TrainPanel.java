@@ -94,10 +94,8 @@ public class TrainPanel extends ModelPanel {
     @Override
     public void onInsert() {
         new BaseDialog() {
-            {
-                initComponents();
-            }
-            private void initComponents(){
+            @Override
+            protected void initComponents(){
                 // "车次", "列车类型", "途经站点"
                 String[] columns = Constants.ColumnName.TRAIN;
                 addField(columns[0], "");
@@ -138,10 +136,8 @@ public class TrainPanel extends ModelPanel {
         if(selectedRow < 0) return;
         Train train = trains.get(selectedRow);
         new BaseDialog() {
-            {
-                initComponents();
-            }
-            private void initComponents(){
+            @Override
+            protected void initComponents(){
                 // "车次", "列车类型", "途经站点"
                 String[] columns = Constants.ColumnName.TRAIN;
                 addField(columns[0], train.getTrainId());

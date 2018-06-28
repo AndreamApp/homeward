@@ -11,7 +11,7 @@ import com.andreamapp.homeward.utils.Constants;
 import java.util.List;
 
 public class CustomerPanel extends ModelPanel {
-    List<Customer> customers;
+    private List<Customer> customers;
 
     private void fetchAll(){
         customers = MySQLManager.getInstance().dao().getAllCustomers();
@@ -60,7 +60,8 @@ public class CustomerPanel extends ModelPanel {
     @Override
     public void onInsert() {
         new BaseDialog() {
-            {
+            @Override
+            protected void initComponents() {
                 String[] columns = Constants.ColumnName.CUSTOMER;
                 addField(columns[0], "");
                 addField(columns[1], "");
@@ -68,6 +69,7 @@ public class CustomerPanel extends ModelPanel {
                 addField(columns[3], "");
                 addComboBox(columns[4], "普通", "学生");
             }
+
             @Override
             protected void onOK() {
                 Customer customer = new Customer();
@@ -102,6 +104,8 @@ public class CustomerPanel extends ModelPanel {
         if(selectedRow < 0) return;
         Customer customer = customers.get(selectedRow);
         new BaseDialog() {
+            @Override
+            protected void initComponents()
             {
                 String[] columns = Constants.ColumnName.CUSTOMER;
                 addField(columns[0], customer.getIdNum());
