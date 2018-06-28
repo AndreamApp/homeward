@@ -1,10 +1,7 @@
 package com.andreamapp.homeward.dao;
 
 import com.andreamapp.homeward.bean.*;
-import com.andreamapp.homeward.utils.Constants;
 
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
@@ -12,19 +9,23 @@ import java.util.*;
 public class MySQLDAO implements
         CustomerDAO, ManagerDAO, StationDAO, TicketPointDAO, TrainDAO, TrainOrderDAO, TrainScheduleDAO
 {
+    @SuppressWarnings("WeakerAccess")
     public ResultSet query(String sql){
         return MySQLManager.getInstance().execute(sql).query();
     }
 
+    @SuppressWarnings("WeakerAccess")
     public int[] update(String sql){
         return MySQLManager.getInstance().execute(sql).update();
     }
 
+    @SuppressWarnings("WeakerAccess")
     public ResultSet query(String sql, Object ... params){
         if(params == null || params.length == 0) return query(sql);
         return MySQLManager.getInstance().prepare(sql, params).query();
     }
 
+    @SuppressWarnings("WeakerAccess")
     public int[] update(String sql, Object ... params){
         if(params == null || params.length == 0) return update(sql);
         return MySQLManager.getInstance().prepare(sql, params).update();
@@ -37,11 +38,11 @@ public class MySQLDAO implements
     private class Loader<T> {
         private Parser<T> parser;
 
-        public Loader(Parser<T> parser) {
+        Loader(Parser<T> parser) {
             this.parser = parser;
         }
 
-        public List<T> load(String sql, Object ... params){
+        List<T> load(String sql, Object... params) {
             List<T> rows = new ArrayList<>();
             try {
                 try (ResultSet res = query(sql, params)) {
@@ -56,7 +57,7 @@ public class MySQLDAO implements
             }
         }
 
-        public T loadOne(String sql, Object ... params){
+        T loadOne(String sql, Object... params) {
             T row = null;
             try {
                 try (ResultSet res = query(sql, params)) {
@@ -132,6 +133,7 @@ public class MySQLDAO implements
                         key, key, key, key);
     }
 
+    @SuppressWarnings("WeakerAccess")
     public Manager getManagerByUsername(String username) {
         return new Loader<>(this::getManagerFromResult)
                 .loadOne("select * from manager where username = ?", username);
@@ -240,7 +242,7 @@ public class MySQLDAO implements
         return station;
     }
 
-    Map<String, Station> stationMap;
+    private Map<String, Station> stationMap;
 
     public Station getStationByName(String name){
         // init map
@@ -270,7 +272,7 @@ public class MySQLDAO implements
         return res;
     }
 
-    public Station getStationById(int id){
+    private Station getStationById(int id) {
         return new Loader<>(this::getStationFromResult)
                 .loadOne("select * from station where station_id = " + id);
     }
@@ -570,7 +572,7 @@ public class MySQLDAO implements
                 schedule.getScheId());
     }
 
-    public TrainSchedule getScheduleFromResult(ResultSet res) throws SQLException {
+    private TrainSchedule getScheduleFromResult(ResultSet res) throws SQLException {
         TrainSchedule schedule = new TrainSchedule();
         schedule.setScheId(res.getInt("sche_id"));
         schedule.setDepartTime(res.getDate("depart_time"));
@@ -586,6 +588,12 @@ public class MySQLDAO implements
     public List<TrainSchedule> getTrainScheduleList(int limit, int skip) {
         return new Loader<>(this::getScheduleFromResult)
                 .load("select * from train_schedule");
+    }
+
+    public List<TrainSchedule> searchTrainSchedule(String key) {
+        return new Loader<>(this::getScheduleFromResult)
+                .load("select * from train_schedule where sche_id = ? or depart_time = ? or presell_time = ? or train_id = ?",
+                        key, key, key, key);
     }
 
     @Override

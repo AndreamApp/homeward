@@ -4,7 +4,9 @@ import com.andreamapp.homeward.ui.widget.JCenterTable;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -87,8 +89,8 @@ public class BaseDialog extends JDialog {
         buttonCancel.setBounds(x + padding + btnWidth + padding, y, btnWidth, btnHeight);
         y += btnHeight;
         y += padding;
-        dialogWidth = x + width + padding + fieldWidth + padding + leftMargin + 20;
-        dialogHeight = y + topMargin + 40;
+        dialogWidth = x + width + padding + fieldWidth + padding + leftMargin + 70;
+        dialogHeight = y + topMargin + 85;
     }
 
     protected void addItem(Component component){

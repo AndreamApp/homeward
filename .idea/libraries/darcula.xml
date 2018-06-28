@@ -3,6 +3,7 @@
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/lib/darcula.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/mysql-connector-java-8.0.11.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/SwingSets3(BeautyEyeLNFDemo).jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
