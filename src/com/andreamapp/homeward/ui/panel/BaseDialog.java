@@ -10,18 +10,27 @@ public class BaseDialog extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
-    private List<Component> boxList = new ArrayList<>();
+    private List<Component> labelList = new ArrayList<>();
     private List<Component> componentList = new ArrayList<>();
-    private GroupLayout layout;
+
+    private int leftMargin = 12;
+    private int topMargin = 12;
+    private int labelWidth = 100;
+    private int labelHeight = 30;
+    private int fieldWidth = 300;
+    private int fieldHeight = 30;
+    private int padding = 10;
+    private int btnWidth = 100, btnHeight = 30;
+    int dialogWidth = 400, dialogHeight = 300;
 
     public BaseDialog() {
         contentPane = new JPanel();
         buttonOK = new JButton("确定");
         buttonCancel = new JButton("取消");
 
-        layout = new GroupLayout(contentPane);
-        layout.setAutoCreateGaps(true);
-        contentPane.setLayout(layout);
+        contentPane.setLayout(null);
+        contentPane.add(buttonOK);
+        contentPane.add(buttonCancel);
         relayout();
 
         setContentPane(contentPane);
@@ -48,18 +57,22 @@ public class BaseDialog extends JDialog {
     }
 
     protected void relayout(){
-        GroupLayout.SequentialGroup verticle = layout.createSequentialGroup();
-        GroupLayout.ParallelGroup horizontal = layout.createParallelGroup(GroupLayout.Alignment.LEADING);
-        for(Component c : boxList){
-            verticle.addComponent(c);
-            horizontal.addComponent(c);
+        int x = leftMargin + padding, y = topMargin, width = labelWidth, height = labelHeight;
+        for(int i = 0; i < labelList.size(); i++){
+            y += padding;
+            if(labelList.get(i) != null)
+                labelList.get(i).setBounds(x, y, width, height);
+            componentList.get(i).setBounds(x + width + padding, y, fieldWidth, fieldHeight);
+            y += fieldHeight;
+            y += padding;
         }
-        verticle.addComponent(buttonOK);
-        verticle.addComponent(buttonCancel);
-        horizontal.addComponent(buttonOK);
-        horizontal.addComponent(buttonCancel);
-        layout.setVerticalGroup(verticle);
-        layout.setHorizontalGroup(horizontal);
+        y += padding;
+        buttonOK.setBounds(x, y, btnWidth, btnHeight);
+        buttonCancel.setBounds(x + padding + btnWidth + padding, y, btnWidth, btnHeight);
+        y += btnHeight;
+        y += padding;
+        dialogWidth = x + width + padding + fieldWidth + padding + leftMargin + 20;
+        dialogHeight = y + topMargin + 40;
     }
 
     protected void addItem(Component component){
@@ -70,15 +83,14 @@ public class BaseDialog extends JDialog {
         if(text != null){
             JLabel label = new JLabel();
             label.setText(text);
-            Box box = Box.createHorizontalBox();
-            box.add(label);
-            box.add(component);
-            boxList.add(box);
+            labelList.add(label);
+            contentPane.add(label);
         }
         else{
-            boxList.add(component);
+            labelList.add(null);
         }
         componentList.add(component);
+        contentPane.add(component);
         relayout();
     }
 
@@ -104,7 +116,14 @@ public class BaseDialog extends JDialog {
     }
 
     public void popup(){
-        setSize(600, 400);
+        popup("");
+    }
+
+    public void popup(String title){
+        setTitle(title);
+        setSize(dialogWidth, dialogHeight);
+        setResizable(false);
+        setLocationRelativeTo(null);
         setVisible(true);
     }
 }

@@ -40,8 +40,18 @@ public abstract class ModelPanel extends JPanel {
         btnPanel.add(btnUpdate = new JButton("修改"));
         btnPanel.add(btnSelect = new JButton("筛选"));
         btnInsert.addActionListener(e -> onInsert());
-        btnDelete.addActionListener(e -> onDelete(table.getSelectedRows()));
-        btnUpdate.addActionListener(e -> onUpdate(table.getSelectedRow()));
+        btnDelete.addActionListener(e -> {
+            int[] rows = table.getSelectedRows();
+            if(rows.length > 0){
+                onDelete(modelIndexes(rows));
+            }
+        });
+        btnUpdate.addActionListener(e -> {
+            int row = table.getSelectedRow();
+            if(row >= 0){ // selected something
+                onUpdate(modelIndex(row));
+            }
+        });
         btnSelect.addActionListener(e -> onSelect());
         return btnPanel;
     }
@@ -56,6 +66,28 @@ public abstract class ModelPanel extends JPanel {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * 根据视图上的下标值获取对应的Model里的下标值
+     * 这两个值并不总是相等的，因为可能有{@link RowSorter}的存在
+     * @param index JTable视图下标
+     * @return 在Model中的下标
+     */
+    private int modelIndex(int index){
+        RowSorter sorter = table.getRowSorter();
+        if(sorter != null){
+            return sorter.convertRowIndexToModel(index);
+        }
+        return index;
+    }
+
+    private int[] modelIndexes(int[] index){
+        int[] res = new int[index.length];
+        for(int i = 0; i < index.length; i++){
+            res[i] = modelIndex(index[i]);
+        }
+        return res;
     }
 
     public void setModel(TableModel model){

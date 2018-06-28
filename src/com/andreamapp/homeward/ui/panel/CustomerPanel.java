@@ -5,7 +5,6 @@ import com.andreamapp.homeward.bean.Customer;
 import com.andreamapp.homeward.dao.MySQLManager;
 import com.andreamapp.homeward.utils.Constants;
 
-import java.awt.*;
 import java.util.List;
 
 public class CustomerPanel extends ModelPanel {
@@ -60,7 +59,7 @@ public class CustomerPanel extends ModelPanel {
                 refresh();
                 super.onOK();
             }
-        }.popup();
+        }.popup("添加用户");
     }
 
     @Override
@@ -97,7 +96,7 @@ public class CustomerPanel extends ModelPanel {
                 refresh();
                 super.onOK();
             }
-        }.popup();
+        }.popup("修改用户");
     }
 
     @Override

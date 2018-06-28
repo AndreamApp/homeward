@@ -2,6 +2,7 @@ package com.andreamapp.homeward.ui;
 
 import com.andreamapp.homeward.dao.MySQLManager;
 import com.andreamapp.homeward.ui.panel.*;
+import com.andreamapp.homeward.utils.WindowUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,8 +18,8 @@ public class SuperUserMainFrame extends JFrame{
     private TrainOrderPanel orderPanel = new TrainOrderPanel();
 
     public SuperUserMainFrame(){
-        setSize(1024, 768);
         initComponents();
+        setSize(1024, 768);
     }
 
     private void initComponents(){
