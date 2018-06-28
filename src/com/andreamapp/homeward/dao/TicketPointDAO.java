@@ -13,5 +13,4 @@ public interface TicketPointDAO {
 
     TicketPoint getTicketPointById(int point_id);
     List<TicketPoint> getAllTicketPoints();
-    TableModel getTicketPointModel(List<TicketPoint> points);
 }

@@ -14,20 +14,20 @@ import java.util.List;
 public class MySQLDAO implements
         CustomerDAO, ManagerDAO, StationDAO, TicketPointDAO, TrainDAO, TrainOrderDAO, TrainScheduleDAO
 {
-    private ResultSet query(String sql){
+    public ResultSet query(String sql){
         return MySQLManager.getInstance().execute(sql).query();
     }
 
-    private int[] update(String sql){
+    public int[] update(String sql){
         return MySQLManager.getInstance().execute(sql).update();
     }
 
-    private ResultSet query(String sql, Object ... params){
+    public ResultSet query(String sql, Object ... params){
         if(params == null || params.length == 0) return query(sql);
         return MySQLManager.getInstance().prepare(sql, params).query();
     }
 
-    private int[] update(String sql, Object ... params){
+    public int[] update(String sql, Object ... params){
         if(params == null || params.length == 0) return update(sql);
         return MySQLManager.getInstance().prepare(sql, params).update();
     }
@@ -140,33 +140,6 @@ public class MySQLDAO implements
     }
 
     @Override
-    public TableModel getManagerModel(List<Manager> managers) {
-        return new DefaultTableModel(Constants.ColumnName.MANAGER, managers.size()) {
-            @Override
-            public Object getValueAt(int rowIndex, int columnIndex) {
-                Manager manager = managers.get(rowIndex);
-                switch (columnIndex){
-                    case 0:
-                        return manager.getManagerId();
-                    case 1:
-                        return manager.getPointId();
-                    case 2:
-                        return manager.getUsername();
-                    case 3:
-                        return manager.getPassword();
-                    case 4:
-                        return manager.getName();
-                    case 5:
-                        return manager.getSexString();
-                    case 6:
-                        return manager.getManagerTypeString();
-                }
-                return null;
-            }
-        };
-    }
-
-    @Override
     public void insertCustomer(Customer customer) {
         update("insert into customer " +
                         "(name, sex, id_num, tel, customer_type) values " +
@@ -220,29 +193,6 @@ public class MySQLDAO implements
     }
 
     @Override
-    public TableModel getCustomerModel(List<Customer> customers) {
-        return new DefaultTableModel(Constants.ColumnName.CUSTOMER, customers.size()){
-            @Override
-            public Object getValueAt(int row, int column) {
-                Customer customer = customers.get(row);
-                switch (column){
-                    case 0:
-                        return customer.getIdNum();
-                    case 1:
-                        return customer.getName();
-                    case 2:
-                        return customer.getSexString();
-                    case 3:
-                        return customer.getTel();
-                    case 4:
-                        return customer.getCustomerTypeString();
-                }
-                return null;
-            }
-        };
-    }
-
-    @Override
     public void insertStation(Station station) {
         update("insert into station " +
                         "(station_name) values " +
@@ -279,23 +229,6 @@ public class MySQLDAO implements
     public List<Station> getAllStations() {
         return new Loader<>(this::getStationFromResult)
                 .load("select * from station");
-    }
-
-    @Override
-    public TableModel getStationModel(List<Station> stations) {
-        return new DefaultTableModel(Constants.ColumnName.STATION, stations.size()){
-            @Override
-            public Object getValueAt(int row, int column) {
-                Station station = stations.get(row);
-                switch (column){
-                    case 0:
-                        return station.getStationId();
-                    case 1:
-                        return station.getStationName();
-                }
-                return null;
-            }
-        };
     }
 
     @Override
@@ -348,27 +281,6 @@ public class MySQLDAO implements
     }
 
     @Override
-    public TableModel getTicketPointModel(List<TicketPoint> points) {
-        return new DefaultTableModel(Constants.ColumnName.TICKET_POINT, points.size()){
-            @Override
-            public Object getValueAt(int row, int column) {
-                TicketPoint point = points.get(row);
-                switch (column){
-                    case 0:
-                        return point.getPointId();
-                    case 1:
-                        return point.getUsername();
-                    case 2:
-                        return point.getAddress();
-                    case 3:
-                        return point.getOpenTime();
-                }
-                return null;
-            }
-        };
-    }
-
-    @Override
     public void insertTrain(Train train) {
         update("insert into train " +
                         "(train_id, train_type, train_passby) values " +
@@ -415,25 +327,6 @@ public class MySQLDAO implements
     public List<Train> getAllTrains() {
         return new Loader<>(this::getTrainFromResult)
                 .load("select * from train");
-    }
-
-    @Override
-    public TableModel getTrainModel(List<Train> trains) {
-        return new DefaultTableModel(Constants.ColumnName.TRAIN, trains.size()){
-            @Override
-            public Object getValueAt(int row, int column) {
-                Train train = trains.get(row);
-                switch (column){
-                    case 0:
-                        return train.getTrainId();
-                    case 1:
-                        return train.getTrainType();
-                    case 2:
-                        return train.getTrainPassbyString();
-                }
-                return null;
-            }
-        };
     }
 
     @Override
@@ -530,41 +423,6 @@ public class MySQLDAO implements
     }
 
     @Override
-    public TableModel getTrainOrderModel(List<TrainOrder> trainOrders) {
-        return new DefaultTableModel(Constants.ColumnName.ORDER, trainOrders.size()){
-            @Override
-            public Object getValueAt(int row, int column) {
-                TrainOrder order = trainOrders.get(row);
-                switch (column){
-                    case 0:
-                        return order.getOrderId();
-                    case 1:
-                        return order.getTicketPoint().getPointId();
-                    case 2:
-                        return order.getBuyer().getIdNum();
-                    case 3:
-                        return order.getTrainSchedule().getScheId();
-                    case 4:
-                        return order.getSeat().getSeatId();
-                    case 5:
-                        return order.getTrain().getTrainId();
-                    case 6:
-                        return order.getDepartStation().getStationName();
-                    case 7:
-                        return order.getArriveStation().getStationName();
-                    case 8:
-                        return order.isStudentTicket();
-                    case 9:
-                        return order.getMoney();
-                    case 10:
-                        return order.getOrderState();
-                }
-                return null;
-            }
-        };
-    }
-
-    @Override
     public void insertTrainSchedule(TrainSchedule schedule) {
         update("insert into train_schedule " +
                         "(depart_time, presell_time, speed, train_id) values " +
@@ -617,26 +475,4 @@ public class MySQLDAO implements
         return null;
     }
 
-    @Override
-    public TableModel getTrainScheduleModel(List<TrainSchedule> schedules) {
-        return new DefaultTableModel(Constants.ColumnName.SCHEDULE, schedules.size()){
-            @Override
-            public Object getValueAt(int row, int column) {
-                TrainSchedule schedule = schedules.get(row);
-                switch (column){
-                    case 0:
-                        return schedule.getScheId();
-                    case 1:
-                        return schedule.getDepartTime();
-                    case 2:
-                        return schedule.getPresellTime();
-                    case 3:
-                        return schedule.getSpeed();
-                    case 4:
-                        return schedule.getTrain().getTrainId();
-                }
-                return null;
-            }
-        };
-    }
 }

@@ -1,4 +1,4 @@
-package com.andreamapp.homeward.ui;
+package com.andreamapp.homeward.ui.widget;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;

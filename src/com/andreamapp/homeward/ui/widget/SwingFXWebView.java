@@ -1,4 +1,4 @@
-package com.andreamapp.homeward.ui;
+package com.andreamapp.homeward.ui.widget;
 
 import com.sun.javafx.application.PlatformImpl;
 import java.awt.BorderLayout;
@@ -51,7 +51,6 @@ public class SwingFXWebView extends JPanel {
     }
 
     private void initComponents(){
-
         jfxPanel = new JFXPanel();
 
         setLayout(new BorderLayout());

@@ -12,5 +12,4 @@ public interface StationDAO {
     void updateStation(Station station);
 
     List<Station> getAllStations();
-    TableModel getStationModel(List<Station> stations);
 }

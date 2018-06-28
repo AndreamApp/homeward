@@ -14,6 +14,4 @@ public interface ManagerDAO {
     List<Manager> getAllManagers();
 
     Manager login(String username, String password);
-
-    TableModel getManagerModel(List<Manager> managers);
 }

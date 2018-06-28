@@ -35,7 +35,7 @@ public class MySQLManager {
     public boolean connect(String user, String pass) throws SQLException {
         try {
             Class.forName(DRIVER);
-            this.mConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/db_train?characterEncoding=utf-8&serverTimezone=UTC&useSSL=FALSE", user, pass);
+            this.mConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/db_train?allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=utf-8&serverTimezone=UTC", user, pass);
             this.mDAO = new MySQLDAO();
             return true;
         } catch (SQLException e) {
@@ -158,7 +158,9 @@ public class MySQLManager {
             if (state == StatementState.Ready) {
                 state = StatementState.Batching;
                 try {
-                    stmt = mConnection.createStatement();
+                    stmt = mConnection.createStatement(
+                            ResultSet.TYPE_SCROLL_INSENSITIVE,
+                            ResultSet.CONCUR_READ_ONLY);
                 } catch (SQLException e) {
                     e.printStackTrace();
                     throw new RuntimeException(e);
@@ -176,7 +178,9 @@ public class MySQLManager {
         public StatementBuilder prepare(String sql, Object... params) {
             try {
                 state = StatementState.Preparing;
-                stmt = mConnection.prepareStatement(sql);
+                stmt = mConnection.prepareStatement(sql,
+                        ResultSet.TYPE_SCROLL_INSENSITIVE,
+                        ResultSet.CONCUR_READ_ONLY);
                 put(params);
                 return this;
             } catch (SQLException e) {

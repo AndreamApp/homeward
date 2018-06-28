@@ -17,5 +17,4 @@ public interface TrainOrderDAO {
     List<TrainOrder> getTrainOrderList(int limit, int skip);
     List<TrainOrder> getTrainOrderListByCustomer(Customer customer, int limit, int skip);
     List<TrainOrder> getTrainOrderListBySeller(Manager seller, int limit, int skip);
-    TableModel getTrainOrderModel(List<TrainOrder> trainOrders);
 }
