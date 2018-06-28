@@ -1,5 +1,7 @@
 package com.andreamapp.homeward.ui.panel.base;
 
+import com.andreamapp.homeward.ui.widget.JCenterTable;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -21,6 +23,7 @@ public class BaseDialog extends JDialog {
     private int fieldHeight = 30;
     private int padding = 10;
     private int btnWidth = 100, btnHeight = 30;
+    private int tableHeight = 200;
     int dialogWidth = 400, dialogHeight = 300;
 
     public BaseDialog() {
@@ -62,8 +65,13 @@ public class BaseDialog extends JDialog {
             y += padding;
             if(labelList.get(i) != null)
                 labelList.get(i).setBounds(x, y, width, height);
-            componentList.get(i).setBounds(x + width + padding, y, fieldWidth, fieldHeight);
-            y += fieldHeight;
+            Component c = componentList.get(i);
+            int componentHeight = fieldHeight;
+            if(c instanceof JScrollPane){
+                componentHeight = tableHeight;
+            }
+            c.setBounds(x + width + padding, y, fieldWidth, componentHeight);
+            y += componentHeight;
             y += padding;
         }
         y += padding;
@@ -118,6 +126,13 @@ public class BaseDialog extends JDialog {
         JCheckBox box = new JCheckBox("", state);
         addItem(text, box);
         return box;
+    }
+
+    protected JTable addTable(String text){
+        JCenterTable table = new JCenterTable();
+        JScrollPane scrollPane = new JScrollPane(table);
+        addItem(text, scrollPane);
+        return table;
     }
 
     protected String field(int n){

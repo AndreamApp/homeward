@@ -1,27 +1,10 @@
 package com.andreamapp.homeward.bean;
 
-public class Seat {
-    private int seat_id;
+public class SeatGroup {
     private Train train;
     private int carriage_num;
     private int seat_num;
     private String seat_type;
-
-    // TODO: enum Type toString(). eg. 软卧，硬卧，硬座，无座
-    public enum Type{
-        SoftBerth,
-        HardBerth,
-        HardSeat,
-        NoSeat,
-    }
-
-    public int getSeatId() {
-        return seat_id;
-    }
-
-    public void setSeatId(int seat_id) {
-        this.seat_id = seat_id;
-    }
 
     public Train getTrain() {
         return train;

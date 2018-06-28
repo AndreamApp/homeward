@@ -7,9 +7,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class MySQLDAO implements
         CustomerDAO, ManagerDAO, StationDAO, TicketPointDAO, TrainDAO, TrainOrderDAO, TrainScheduleDAO
@@ -242,6 +240,41 @@ public class MySQLDAO implements
         return station;
     }
 
+    Map<String, Station> stationMap;
+
+    public Station getStationByName(String name){
+        // init map
+        if(stationMap == null){
+            stationMap = new HashMap<>();
+        }
+        // find in cache first
+        if(stationMap.containsKey(name)){
+            return stationMap.get(name);
+        }
+        // or find it in database, and refresh cache
+        List<Station> stations = getAllStations();
+        Station res = null;
+        for(Station s : stations){
+            if(name.equals(s.getStationName())){
+                res = s;
+            }
+            stationMap.put(s.getStationName(), s);
+        }
+        // or insert it into database
+        if(res == null){
+            res = new Station();
+            res.setStationName(name);
+            insertStation(res);
+            res = getStationByName(name);
+        }
+        return res;
+    }
+
+    public Station getStationById(int id){
+        return new Loader<>(this::getStationFromResult)
+                .loadOne("select * from station where station_id = " + id);
+    }
+
     @Override
     public List<Station> getAllStations() {
         return new Loader<>(this::getStationFromResult)
@@ -328,10 +361,27 @@ public class MySQLDAO implements
 
     @Override
     public void updateTrain(Train train) {
-        update("update train set train_type = ?, train_passby" +
+        update("update train set train_type = ?, train_passby = ?" +
                         " where train_id = ?",
                 train.getTrainType(), train.getTrainPassbyString(),
                 train.getTrainId());
+        if(train.getTrainPassby() != null){
+            for(Passby passby : train.getTrainPassby()){
+                update("insert into passby (train_id, station_order, depart_station, arrive_station, distance, stay_time) " +
+                        "values( ?, ?, ?, ?, ?, ? )",
+                        passby.getTrain().getTrainId(), passby.getStationOrder(), passby.getDepartStation().getStationId(), passby.getArriveStation().getStationId(),
+                        passby.getDistance(), passby.getStayTime());
+            }
+        }
+        if(train.getSeats() != null){
+            for(SeatGroup sg : train.getSeats()){
+                for(int i = 1; i <= sg.getSeatNum(); i++){
+                    update("insert into seat (train_id, carriage_num, seat_num, seat_type) " +
+                                    "values(?, ?, ?, ?)",
+                            sg.getTrain().getTrainId(), sg.getCarriageNum(), i, sg.getSeatType());
+                }
+            }
+        }
     }
 
     @Override
@@ -343,8 +393,35 @@ public class MySQLDAO implements
         Train train = new Train();
         train.setTrainId(res.getString("train_id"));
         train.setTrainType(res.getString("train_type"));
-        // TODO
-        //train.setTrainPassby(res.getString("passby"));
+        // load passby
+        List<Passby> passby = new ArrayList<>();
+        ResultSet pres = query("select * from passby where train_id = ?", train.getTrainId());
+        while(pres.next()){
+            Passby p = new Passby();
+            p.setTrain(train);
+            p.setStationOrder(pres.getInt("station_order"));
+            p.setStayTime(pres.getInt("stay_time"));
+            p.setDistance(pres.getFloat("distance"));
+            p.setArriveStation(getStationById(pres.getInt("arrive_station")));
+            p.setDepartStation(getStationById(pres.getInt("depart_station")));
+            passby.add(p);
+        }
+        train.setTrainPassby(passby);
+        pres.close();
+        // load seats
+        List<SeatGroup> seatGroups = new ArrayList<>();
+        pres = query("select train_id, carriage_num, count(seat_num) as cnt, seat_type from seat where train_id = ?" +
+                        " group by train_id, carriage_num, seat_type",
+                train.getTrainId());
+        while(pres.next()){
+            SeatGroup sg = new SeatGroup();
+            sg.setTrain(train);
+            sg.setCarriageNum(pres.getInt("carriage_num"));
+            sg.setSeatNum(pres.getInt("cnt"));
+            sg.setSeatType(pres.getString("seat_type"));
+            seatGroups.add(sg);
+        }
+        train.setSeats(seatGroups);
         return train;
     }
 
@@ -356,10 +433,10 @@ public class MySQLDAO implements
 
     @Override
     public List<Train> searchTrains(String key) {
-        key = '%' + key + '%';
+        String searchKey = '%' + key + '%';
         return new Loader<>(this::getTrainFromResult)
-                .load("select * from train where train_id = ? or train_type = ? or train_schedule like ?",
-                        key, key, key);
+                .load("select * from train where train_id = ? or train_type = ? or train_passby like ?",
+                        key, key, searchKey);
     }
 
     @Override
