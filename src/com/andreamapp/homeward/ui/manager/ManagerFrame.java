@@ -1,14 +1,13 @@
-package com.andreamapp.homeward.ui;
+package com.andreamapp.homeward.ui.manager;
 
 import com.andreamapp.homeward.dao.MySQLManager;
-import com.andreamapp.homeward.ui.panel.*;
 import com.andreamapp.homeward.utils.LookUtils;
 
 import javax.swing.*;
 import java.awt.*;
 import java.sql.SQLException;
 
-public class SuperUserMainFrame extends JFrame{
+public class ManagerFrame extends JFrame {
 
     private CustomerPanel customerPanel = new CustomerPanel();
     private ManagerPanel managerPanel = new ManagerPanel();
@@ -18,7 +17,7 @@ public class SuperUserMainFrame extends JFrame{
     private TrainOrderPanel orderPanel = new TrainOrderPanel();
 
     @SuppressWarnings("WeakerAccess")
-    public SuperUserMainFrame(){
+    public ManagerFrame() {
         initComponents();
         setSize(1024, 768);
     }
@@ -41,7 +40,7 @@ public class SuperUserMainFrame extends JFrame{
 //        LookUtils.darcula();
         LookUtils.beautyEye();
         MySQLManager.getInstance().connect("root", "andreamApp97");
-        JFrame frame = new SuperUserMainFrame();
+        JFrame frame = new ManagerFrame();
         frame.setSize(800, 600);
         frame.setVisible(true);
     }

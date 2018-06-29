@@ -1,11 +1,11 @@
-package com.andreamapp.homeward.ui.panel;
+package com.andreamapp.homeward.ui.manager;
 
 
 import com.andreamapp.homeward.bean.Manager;
 import com.andreamapp.homeward.dao.MySQLManager;
-import com.andreamapp.homeward.ui.panel.base.BaseDialog;
-import com.andreamapp.homeward.ui.panel.base.ListTableModel;
-import com.andreamapp.homeward.ui.panel.base.ModelPanel;
+import com.andreamapp.homeward.ui.base.ListTableModel;
+import com.andreamapp.homeward.ui.base.ModelPanel;
+import com.andreamapp.homeward.ui.widget.XDialog;
 import com.andreamapp.homeward.utils.Constants;
 
 import java.util.List;
@@ -63,7 +63,7 @@ public class ManagerPanel extends ModelPanel {
 
     @Override
     public void onInsert() {
-        new BaseDialog() {
+        new XDialog() {
             @Override
             protected void initComponents() {
                 // "管理员ID", "售票点ID", "用户名", "密码", "姓名", "性别", "管理员类别"
@@ -109,7 +109,7 @@ public class ManagerPanel extends ModelPanel {
     public void onUpdate(int selectedRow) {
         if(selectedRow < 0) return;
         Manager manager = managers.get(selectedRow);
-        new BaseDialog() {
+        new XDialog() {
             @Override
             protected void initComponents() {
                 // "管理员ID", "售票点ID", "用户名", "密码", "姓名", "性别", "管理员类别"

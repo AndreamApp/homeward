@@ -1,6 +1,6 @@
-package com.andreamapp.homeward.ui.panel.base;
+package com.andreamapp.homeward.ui.base;
 
-import com.andreamapp.homeward.ui.widget.JCenterTable;
+import com.andreamapp.homeward.ui.widget.XTable;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -21,7 +21,7 @@ public abstract class ModelPanel extends JPanel {
 
     public ModelPanel(){
         // 自定义样式的表格
-        table = new JCenterTable();
+        table = new XTable();
         model = getTableModel();
         setModel(model);
 

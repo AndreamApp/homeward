@@ -7,16 +7,20 @@ package com.andreamapp.homeward.ui;
 
 import com.andreamapp.homeward.bean.Manager;
 import com.andreamapp.homeward.dao.MySQLManager;
+import com.andreamapp.homeward.ui.manager.ManagerFrame;
+import com.andreamapp.homeward.ui.seller.SellerFrame;
+import com.andreamapp.homeward.utils.LookUtils;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
 /**
  *
  * @author Andream
  */
+@SuppressWarnings("FieldCanBeLocal")
 public class LoginFrame extends javax.swing.JFrame {
 
     /**
@@ -49,15 +53,11 @@ public class LoginFrame extends javax.swing.JFrame {
 
         text_password.setText("密码");
 
-        btn_login.setFont(new java.awt.Font("宋体", 0, 14)); // NOI18N
+        btn_login.setFont(new java.awt.Font("宋体", Font.PLAIN, 14)); // NOI18N
         btn_login.setText("登录");
-        btn_login.addActionListener(new ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                login(evt);
-            }
-        });
+        btn_login.addActionListener(this::login);
 
-        text_title.setFont(new java.awt.Font("宋体", 0, 24)); // NOI18N
+        text_title.setFont(new java.awt.Font("宋体", Font.PLAIN, 24)); // NOI18N
         text_title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         text_title.setText("火车票售票管理系统");
         text_title.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -112,7 +112,15 @@ public class LoginFrame extends javax.swing.JFrame {
                 .login(username, password);
         if(manager != null){
             JOptionPane.showMessageDialog(null, "登陆成功");
-            new SuperUserMainFrame().setVisible(true);
+            switch (manager.getManagerType()) {
+                case Manager.TYPE_SUPERUSER:
+                    new ManagerFrame().setVisible(true);
+                    break;
+                case Manager.TYPE_SELLER:
+                    new SellerFrame().setVisible(true);
+                    break;
+            }
+
             dispose();
         }
         else {
@@ -124,34 +132,16 @@ public class LoginFrame extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /*
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        */
-        try {
-            UIManager.setLookAndFeel("com.bulenkov.darcula.DarculaLaf");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        LookUtils.beautyEye();
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    MySQLManager.getInstance().connect("root", "andreamApp97");
-                    new LoginFrame().setVisible(true);
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                    JOptionPane.showMessageDialog(null, "数据库连接失败！");
-                }
+        EventQueue.invokeLater(() -> {
+            try {
+                MySQLManager.getInstance().connect("root", "andreamApp97");
+                new LoginFrame().setVisible(true);
+            } catch (SQLException e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, "数据库连接失败！");
             }
         });
     }

@@ -1,11 +1,11 @@
-package com.andreamapp.homeward.ui.panel;
+package com.andreamapp.homeward.ui.manager;
 
 import com.andreamapp.homeward.bean.Train;
 import com.andreamapp.homeward.bean.TrainSchedule;
 import com.andreamapp.homeward.dao.MySQLManager;
-import com.andreamapp.homeward.ui.panel.base.BaseDialog;
-import com.andreamapp.homeward.ui.panel.base.ListTableModel;
-import com.andreamapp.homeward.ui.panel.base.ModelPanel;
+import com.andreamapp.homeward.ui.base.ListTableModel;
+import com.andreamapp.homeward.ui.base.ModelPanel;
+import com.andreamapp.homeward.ui.widget.XDialog;
 import com.andreamapp.homeward.utils.Constants;
 
 import javax.swing.*;
@@ -57,7 +57,7 @@ public class TrainSchedulePanel extends ModelPanel {
 
     @Override
     public void onInsert() {
-        new BaseDialog() {
+        new XDialog() {
             @Override
             protected void initComponents() {
                 // "列车行程ID", "出发时间", "预售时间", "配速", "车次"
@@ -108,7 +108,7 @@ public class TrainSchedulePanel extends ModelPanel {
     public void onUpdate(int selectedRow) {
         if (selectedRow < 0) return;
         TrainSchedule schedule = schedules.get(selectedRow);
-        new BaseDialog() {
+        new XDialog() {
             @Override
             protected void initComponents() {
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

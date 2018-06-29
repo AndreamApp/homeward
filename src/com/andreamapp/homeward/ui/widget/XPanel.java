@@ -1,23 +1,17 @@
-package com.andreamapp.homeward.ui.panel.base;
-
-import com.andreamapp.homeward.ui.widget.JCenterTable;
+package com.andreamapp.homeward.ui.widget;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-@SuppressWarnings({"FieldCanBeLocal", "UnusedReturnValue", "WeakerAccess"})
-public class BaseDialog extends JDialog {
-    private JPanel contentPane;
-    private JButton buttonOK;
-    private JButton buttonCancel;
+@SuppressWarnings({"FieldCanBeLocal", "WeakerAccess"})
+public class XPanel extends JPanel {
     private List<Component> labelList = new ArrayList<>();
     private List<Component> componentList = new ArrayList<>();
+    private List<JButton> btnList = new ArrayList<>();
 
     private int leftMargin = 12;
     private int topMargin = 12;
@@ -28,57 +22,32 @@ public class BaseDialog extends JDialog {
     private int padding = 10;
     private int btnWidth = 100, btnHeight = 30;
     private int tableHeight = 200;
-    private int dialogWidth = 400, dialogHeight = 300;
+    protected int panelWidth = 400, panelHeight = 300;
 
-    public BaseDialog() {
-        contentPane = new JPanel();
-        buttonOK = new JButton("确定");
-        buttonCancel = new JButton("取消");
-
-        contentPane.setLayout(null);
-        contentPane.add(buttonOK);
-        contentPane.add(buttonCancel);
-        relayout();
-
-        setContentPane(contentPane);
-        setModal(true);
-        getRootPane().setDefaultButton(buttonOK);
-
-        buttonOK.addActionListener(e -> onOK());
-        buttonCancel.addActionListener(e -> onCancel());
-
-        // call onCancel() when cross is clicked
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
-                onCancel();
-            }
-        });
-
-        // call onCancel() on ESCAPE
-        contentPane.registerKeyboardAction(e -> onCancel(),
-                KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
-
+    public XPanel() {
+        this.setLayout(null);
         initComponents();
+        relayout();
     }
 
     /**
      * 子类重写该方法用于添加自定义的控件
      */
-    protected void initComponents(){}
+    protected void initComponents() {
+    }
 
     /**
      * 由于使用绝对布局，每次添加新控件时会调用此方法
      */
-    private void relayout(){
+    private void relayout() {
         int x = leftMargin + padding, y = topMargin, width = labelWidth, height = labelHeight;
-        for(int i = 0; i < labelList.size(); i++){
+        for (int i = 0; i < labelList.size(); i++) {
             y += padding;
-            if(labelList.get(i) != null)
+            if (labelList.get(i) != null)
                 labelList.get(i).setBounds(x, y, width, height);
             Component c = componentList.get(i);
             int componentHeight = fieldHeight;
-            if(c instanceof JScrollPane){
+            if (c instanceof JScrollPane) {
                 componentHeight = tableHeight;
             }
             c.setBounds(x + width + padding, y, fieldWidth, componentHeight);
@@ -86,61 +55,69 @@ public class BaseDialog extends JDialog {
             y += padding;
         }
         y += padding;
-        buttonOK.setBounds(x, y, btnWidth, btnHeight);
-        buttonCancel.setBounds(x + padding + btnWidth + padding, y, btnWidth, btnHeight);
+        // add btn as last line
+        int offset = x;
+        for (JButton btn : btnList) {
+            btn.setBounds(x, y, btnWidth, btnHeight);
+            offset += padding + btnWidth + padding;
+        }
+        offset -= btnWidth + padding;
+
         y += btnHeight;
         y += padding;
-        dialogWidth = x + width + padding + fieldWidth + padding + leftMargin + 70;
-        dialogHeight = y + topMargin + 85;
+        panelWidth = Math.max(x + width + padding + fieldWidth + padding + leftMargin + 70, offset);
+        panelHeight = y + topMargin + 85;
     }
 
-    protected Component componentAt(int n) {
+    public Component componentAt(int n) {
         return componentList.get(n);
     }
 
-    protected void addItem(Component component){
+    public void addItem(Component component) {
         addItem(null, component);
     }
 
     /**
-     * 向对话框中添加一个组件
-     * @param text 组件的说明文字，显示在左边
+     * 向容器中添加一个组件
+     *
+     * @param text      组件的说明文字，显示在左边
      * @param component 组件显示在右边
      */
-    protected void addItem(String text, Component component){
-        if(text != null){
+    public void addItem(String text, Component component) {
+        if (text != null) {
             JLabel label = new JLabel();
             label.setText(text);
             labelList.add(label);
-            contentPane.add(label);
-        }
-        else{
+            this.add(label);
+        } else {
             labelList.add(null);
         }
         componentList.add(component);
-        contentPane.add(component);
+        this.add(component);
         relayout();
     }
 
     /**
-     * 向对话框中添加一个{@link JLabel}
+     * 向容器中添加一个{@link JLabel}
+     *
      * @param name 控件说明文字
      * @param text JLabel的初始内容
      * @return {@link JLabel}
      */
-    protected JLabel addLabel(String name, String text){
+    public JLabel addLabel(String name, String text) {
         JLabel label = new JLabel(text);
         addItem(name, label);
         return label;
     }
 
     /**
-     * 向对话框中添加一个{@link JTextField}
+     * 向容器中添加一个{@link JTextField}
+     *
      * @param name 控件说明文字
      * @param text JTextField的初始内容
      * @return {@link JTextField}
      */
-    protected JTextField addField(String name, String text){
+    public JTextField addField(String name, String text) {
         JTextField edit = new JTextField();
         edit.setColumns(30);
         edit.setText(text);
@@ -149,13 +126,13 @@ public class BaseDialog extends JDialog {
     }
 
     /**
-     * 向对话框中添加一个{@link JTextField}，文本框中只能输入非负整数
+     * 向容器中添加一个{@link JTextField}，文本框中只能输入非负整数
      *
      * @param name  控件说明文字
      * @param value 初始值
      * @return {@link JTextField}
      */
-    protected JTextField addNumberField(String name, Integer value) {
+    public JTextField addNumberField(String name, Integer value) {
         JTextField field = new JTextField();
         field.addKeyListener(new KeyAdapter() {
             public void keyTyped(KeyEvent e) {
@@ -176,13 +153,13 @@ public class BaseDialog extends JDialog {
     }
 
     /**
-     * 向对话框中添加一个{@link JTextField}，文本框中只能输入非负小数
+     * 向容器中添加一个{@link JTextField}，文本框中只能输入非负小数
      *
      * @param name  控件说明文字
      * @param value 初始值
      * @return {@link JTextField}
      */
-    protected JTextField addFloatField(String name, Float value) {
+    public JTextField addFloatField(String name, Float value) {
         JTextField field = new JTextField();
         field.addKeyListener(new KeyAdapter() {
             public void keyTyped(KeyEvent e) {
@@ -204,47 +181,65 @@ public class BaseDialog extends JDialog {
     }
 
     /**
-     * 向对话框中添加一个{@link JComboBox}
-     * @param name 控件说明文字
+     * 向容器中添加一个{@link JComboBox}
+     *
+     * @param name    控件说明文字
      * @param options JComboBox的选项
      * @return {@link JComboBox}
      */
-    protected JComboBox addComboBox(String name, String... options){
+    public JComboBox addComboBox(String name, String... options) {
         JComboBox box = new JComboBox<>(options);
         addItem(name, box);
         return box;
     }
 
     /**
-     * 向对话框中添加一个{@link JCheckBox}
-     * @param name 控件说明文字
+     * 向容器中添加一个{@link JCheckBox}
+     *
+     * @param name  控件说明文字
      * @param state JCheckBox的初始状态
      * @return {@link JCheckBox}
      */
-    protected JCheckBox addCheckBox(String name, boolean state){
+    public JCheckBox addCheckBox(String name, boolean state) {
         JCheckBox box = new JCheckBox("", state);
         addItem(name, box);
         return box;
     }
 
     /**
-     * 向对话框中添加一个{@link JTable}
+     * 向容器中添加一个{@link JTable}
+     *
      * @param text 控件说明文字
      * @return {@link JTable}
      */
-    protected JTable addTable(String text){
-        JCenterTable table = new JCenterTable();
+    public JTable addTable(String text) {
+        XTable table = new XTable();
         JScrollPane scrollPane = new JScrollPane(table);
         addItem(text, scrollPane);
         return table;
     }
 
     /**
+     * 在容器最后一行从左向右依次添加{@link JButton}
+     *
+     * @param text 控件说明文字
+     * @return {@link JButton}
+     */
+    public JButton addBtn(String text) {
+        JButton btn = new JButton(text);
+        btnList.add(btn);
+        this.add(btn);
+        relayout();
+        return btn;
+    }
+
+    /**
      * 获取{@link JTextField}控件的值
+     *
      * @param n 控件的序号
      * @return JTextField的当前内容
      */
-    protected String field(int n){
+    public String field(int n) {
         return ((JTextField) componentList.get(n)).getText();
     }
 
@@ -254,7 +249,7 @@ public class BaseDialog extends JDialog {
      * @param n 控件的序号
      * @return JTextField的当前内容
      */
-    protected int fieldInt(int n) {
+    public int fieldInt(int n) {
         return Integer.parseInt(((JTextField) componentList.get(n)).getText());
     }
 
@@ -264,16 +259,17 @@ public class BaseDialog extends JDialog {
      * @param n 控件的序号
      * @return JTextField的当前内容
      */
-    protected float fieldFloat(int n) {
+    public float fieldFloat(int n) {
         return Float.parseFloat(((JTextField) componentList.get(n)).getText());
     }
 
     /**
      * 获取{@link JComboBox}控件的值
+     *
      * @param n 控件的序号
      * @return JComboBox当前所选项的索引值（从0开始）
      */
-    protected int option(int n){
+    public int option(int n) {
         return ((JComboBox) componentList.get(n)).getSelectedIndex();
     }
 
@@ -283,52 +279,18 @@ public class BaseDialog extends JDialog {
      * @param n 控件的序号
      * @return JComboBox当前所选项的索引值（从0开始）
      */
-    protected Object optionValue(int n) {
+    public Object optionValue(int n) {
         return ((JComboBox) componentList.get(n)).getSelectedItem();
     }
 
     /**
      * 获取{@link JCheckBox}控件的值
+     *
      * @param n 控件的序号
      * @return JCheckBox当前状态
      */
-    protected boolean checked(int n){
+    public boolean checked(int n) {
         return ((JCheckBox) componentList.get(n)).isSelected();
     }
 
-    /**
-     * 确定按钮的回调函数
-     */
-    protected void onOK() {
-        // add your code here
-        dispose();
-    }
-
-    /**
-     * 取消按钮的回调函数
-     */
-    protected void onCancel() {
-        // add your code here if necessary
-        dispose();
-    }
-
-    /**
-     * 启动一个无标题的对话框
-     * convenient for {@link #popup(String)}
-     */
-    public void popup(){
-        popup("");
-    }
-
-    /**
-     * 根据布局设置合适的大小，并启动该对话框
-     * @param title 对话框标题
-     */
-    public void popup(String title){
-        setTitle(title);
-        setSize(dialogWidth, dialogHeight);
-        setResizable(false);
-        setLocationRelativeTo(null);
-        setVisible(true);
-    }
 }

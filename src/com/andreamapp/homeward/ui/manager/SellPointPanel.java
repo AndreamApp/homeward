@@ -1,10 +1,10 @@
-package com.andreamapp.homeward.ui.panel;
+package com.andreamapp.homeward.ui.manager;
 
 import com.andreamapp.homeward.bean.TicketPoint;
 import com.andreamapp.homeward.dao.MySQLManager;
-import com.andreamapp.homeward.ui.panel.base.BaseDialog;
-import com.andreamapp.homeward.ui.panel.base.ListTableModel;
-import com.andreamapp.homeward.ui.panel.base.ModelPanel;
+import com.andreamapp.homeward.ui.base.ListTableModel;
+import com.andreamapp.homeward.ui.base.ModelPanel;
+import com.andreamapp.homeward.ui.widget.XDialog;
 import com.andreamapp.homeward.utils.Constants;
 
 import java.util.List;
@@ -51,7 +51,7 @@ public class SellPointPanel extends ModelPanel {
 
     @Override
     public void onInsert() {
-        new BaseDialog() {
+        new XDialog() {
             @Override
             protected void initComponents() {
                 // "售票点ID", "售票点名称", "售票点地址", "营业时间"
@@ -92,7 +92,7 @@ public class SellPointPanel extends ModelPanel {
     public void onUpdate(int selectedRow) {
         if(selectedRow < 0) return;
         TicketPoint point = ticketPoints.get(selectedRow);
-        new BaseDialog() {
+        new XDialog() {
             @Override
             protected void initComponents() {
                 // "售票点ID", "售票点名称", "售票点地址", "营业时间"

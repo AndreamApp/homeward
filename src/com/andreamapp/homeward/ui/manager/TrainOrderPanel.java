@@ -1,10 +1,10 @@
-package com.andreamapp.homeward.ui.panel;
+package com.andreamapp.homeward.ui.manager;
 
 import com.andreamapp.homeward.bean.*;
 import com.andreamapp.homeward.dao.MySQLManager;
-import com.andreamapp.homeward.ui.panel.base.BaseDialog;
-import com.andreamapp.homeward.ui.panel.base.ListTableModel;
-import com.andreamapp.homeward.ui.panel.base.ModelPanel;
+import com.andreamapp.homeward.ui.base.ListTableModel;
+import com.andreamapp.homeward.ui.base.ModelPanel;
+import com.andreamapp.homeward.ui.widget.XDialog;
 import com.andreamapp.homeward.utils.Constants;
 import com.andreamapp.homeward.utils.StringUtils;
 
@@ -158,7 +158,7 @@ public class TrainOrderPanel extends ModelPanel {
 
     @Override
     public void onInsert() {
-        new BaseDialog() {
+        new XDialog() {
 
             @Override
             protected void initComponents() {
@@ -247,7 +247,7 @@ public class TrainOrderPanel extends ModelPanel {
     public void onUpdate(int selectedRow) {
         if (selectedRow < 0) return;
         TrainOrder order = orders.get(selectedRow);
-        new BaseDialog() {
+        new XDialog() {
             @Override
             protected void initComponents() {
                 // "售票点ID", "用户身份证", "列车行程ID", "车次", "车厢", "座位号", "座位类型", "起始站", "到达站", "学生票", "金额", "订单状态"

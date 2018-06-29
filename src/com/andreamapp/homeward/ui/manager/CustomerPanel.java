@@ -1,11 +1,11 @@
-package com.andreamapp.homeward.ui.panel;
+package com.andreamapp.homeward.ui.manager;
 
 
 import com.andreamapp.homeward.bean.Customer;
 import com.andreamapp.homeward.dao.MySQLManager;
-import com.andreamapp.homeward.ui.panel.base.BaseDialog;
-import com.andreamapp.homeward.ui.panel.base.ListTableModel;
-import com.andreamapp.homeward.ui.panel.base.ModelPanel;
+import com.andreamapp.homeward.ui.base.ListTableModel;
+import com.andreamapp.homeward.ui.base.ModelPanel;
+import com.andreamapp.homeward.ui.widget.XDialog;
 import com.andreamapp.homeward.utils.Constants;
 
 import java.util.List;
@@ -59,7 +59,7 @@ public class CustomerPanel extends ModelPanel {
 
     @Override
     public void onInsert() {
-        new BaseDialog() {
+        new XDialog() {
             @Override
             protected void initComponents() {
                 // "身份证号码", "姓名", "性别", "电话", "用户类型"
@@ -104,7 +104,7 @@ public class CustomerPanel extends ModelPanel {
     public void onUpdate(int selectedRow) {
         if(selectedRow < 0) return;
         Customer customer = customers.get(selectedRow);
-        new BaseDialog() {
+        new XDialog() {
             @Override
             protected void initComponents()
             {

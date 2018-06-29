@@ -1,7 +1,6 @@
-package com.andreamapp.homeward.ui.panel.base;
+package com.andreamapp.homeward.ui.base;
 
 import javax.swing.table.DefaultTableModel;
-import java.sql.ResultSet;
 import java.util.Arrays;
 import java.util.List;
 

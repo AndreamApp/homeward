@@ -5,10 +5,10 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 
-public class JCenterTable extends JTable{
+public class XTable extends JTable {
     private DefaultTableCellRenderer cellRenderer = new MyCellRenderer();
 
-    public JCenterTable(){
+    public XTable() {
         setFont(new Font("宋体", 0, 14));
         setRowHeight(30);
     }
