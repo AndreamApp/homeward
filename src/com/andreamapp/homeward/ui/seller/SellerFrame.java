@@ -8,14 +8,13 @@ import java.awt.*;
 import java.sql.SQLException;
 
 public class SellerFrame extends JFrame {
-    private QueryPanel queryPanel = new QueryPanel();
     private OrderPanel orderPanel = new OrderPanel();
     private HistoryPanel historyPanel = new HistoryPanel();
     private ModifyPasswordPanel modifyPasswordPanel = new ModifyPasswordPanel();
 
     @SuppressWarnings("WeakerAccess")
     public SellerFrame() {
-        setSize(1024, 768);
+        setSize(600, 500);
         setLocationRelativeTo(null);
         initComponents();
     }
@@ -23,7 +22,6 @@ public class SellerFrame extends JFrame {
     private void initComponents() {
         JTabbedPane tabbedPane1 = new JTabbedPane();
         tabbedPane1.setFont(new Font("宋体", Font.PLAIN, 14));
-        tabbedPane1.addTab("车票查询", queryPanel);
         tabbedPane1.addTab("预订列表", orderPanel);
         tabbedPane1.addTab("预订记录", historyPanel);
         tabbedPane1.addTab("修改密码", modifyPasswordPanel);

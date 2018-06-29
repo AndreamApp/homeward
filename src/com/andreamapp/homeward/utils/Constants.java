@@ -1,5 +1,7 @@
 package com.andreamapp.homeward.utils;
 
+import com.andreamapp.homeward.bean.Manager;
+
 public class Constants {
     public static class ColumnName{
         public static final String[] CUSTOMER = {
@@ -27,4 +29,6 @@ public class Constants {
                 "订单ID", "用户姓名", "车次", "起始站", "到达站", "金额", "订单状态" // 座位车厢 座位号 座位类别
         };
     }
+
+    public static Manager currentManager;
 }

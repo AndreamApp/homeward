@@ -9,6 +9,7 @@ import com.andreamapp.homeward.bean.Manager;
 import com.andreamapp.homeward.dao.MySQLManager;
 import com.andreamapp.homeward.ui.manager.ManagerFrame;
 import com.andreamapp.homeward.ui.seller.SellerFrame;
+import com.andreamapp.homeward.utils.Constants;
 import com.andreamapp.homeward.utils.LookUtils;
 
 import javax.swing.*;
@@ -111,6 +112,7 @@ public class LoginFrame extends javax.swing.JFrame {
         Manager manager = MySQLManager.getInstance().dao()
                 .login(username, password);
         if(manager != null){
+            Constants.currentManager = manager;
             JOptionPane.showMessageDialog(null, "登陆成功");
             switch (manager.getManagerType()) {
                 case Manager.TYPE_SUPERUSER:

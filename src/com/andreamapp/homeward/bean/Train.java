@@ -33,7 +33,7 @@ public class Train {
     }
 
     public String getTrainPassbyString() {
-        StringBuilder passby = new StringBuilder("|");
+        StringBuilder passby = new StringBuilder("");
         if(train_passby != null){
             for(Passby p : train_passby){
                 passby.append(p.getDepartStation().getStationName()).append('|');

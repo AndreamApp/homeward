@@ -100,6 +100,11 @@ public class MySQLDAO implements
                 manager.getManagerId());
     }
 
+    public void modifyPassword(Manager manager, String password) {
+        manager.setPassword(password);
+        updateManager(manager);
+    }
+
     private Manager getManagerFromResult(ResultSet res) throws SQLException {
         Manager manager = new Manager();
         manager.setManagerId(res.getInt("manager_id"));
@@ -630,9 +635,28 @@ public class MySQLDAO implements
                         key, key, key, key);
     }
 
+    private TrainSchedule fillScheduleWithTrain(ResultSet res) throws SQLException {
+        TrainSchedule schedule = getScheduleFromResult(res);
+        schedule.setTrain(getTrainById(schedule.getTrain().getTrainId()));
+        return schedule;
+    }
+
+    @SuppressWarnings("deprecation")
     @Override
-    public List<TrainSchedule> searchTrainSchedule(Date depart_date, Station depart_station, Station arrive_station) {
-        return null;
+    public List<TrainSchedule> searchTrainSchedule(Date depart_date, Station depart_station, Station arrive_station, boolean isStudent) {
+        Date start = new Date(depart_date.getTime());
+        start.setHours(0);
+        start.setMinutes(0);
+        start.setSeconds(0);
+        Date end = new Date(depart_date.getTime());
+        start.setHours(23);
+        start.setMinutes(59);
+        start.setSeconds(59);
+        String searchKey = '%' + depart_station.getStationName() + '%' + arrive_station.getStationName() + '%';
+        return new Loader<>(this::fillScheduleWithTrain)
+                .load("select * from train_schedule as s" +
+                                " join train as t on t.train_id = s.train_id where depart_time between ? and ? and t.train_passby like ?",
+                        start, end, searchKey);
     }
 
 }
