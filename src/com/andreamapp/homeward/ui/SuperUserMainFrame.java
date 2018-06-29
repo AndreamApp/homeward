@@ -2,6 +2,7 @@ package com.andreamapp.homeward.ui;
 
 import com.andreamapp.homeward.dao.MySQLManager;
 import com.andreamapp.homeward.ui.panel.*;
+import com.andreamapp.homeward.utils.LookUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -38,7 +39,7 @@ public class SuperUserMainFrame extends JFrame{
 
     public static void main(String[] args) throws SQLException {
 //        LookUtils.darcula();
-//        LookUtils.beautyEye();
+        LookUtils.beautyEye();
         MySQLManager.getInstance().connect("root", "andreamApp97");
         JFrame frame = new SuperUserMainFrame();
         frame.setSize(800, 600);

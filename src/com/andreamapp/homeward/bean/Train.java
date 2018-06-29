@@ -1,6 +1,5 @@
 package com.andreamapp.homeward.bean;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Train {
@@ -34,7 +33,7 @@ public class Train {
     }
 
     public String getTrainPassbyString() {
-        StringBuilder passby = new StringBuilder('|');
+        StringBuilder passby = new StringBuilder("|");
         if(train_passby != null){
             for(Passby p : train_passby){
                 passby.append(p.getDepartStation().getStationName()).append('|');
@@ -49,5 +48,33 @@ public class Train {
 
     public void setSeats(List<SeatGroup> seats) {
         this.seats = seats;
+    }
+
+    public float calcMoneyBetween(int departStationOrder, int arriveStationOrder, String seatType, boolean isStudent) {
+        if (departStationOrder == 0 || departStationOrder >= arriveStationOrder || arriveStationOrder - 1 > train_passby.size()) {
+            return -1;
+        }
+        float distance = 0;
+        for (int i = departStationOrder; i < arriveStationOrder; i++) {
+            distance += train_passby.get(i - 1).getDistance();
+        }
+        float baseDistance = (int) (distance - (((int) distance) % 20));
+        if (baseDistance < 20) {
+            baseDistance = 20;
+        }
+        float discount = isStudent ? 0.5f : 1.0f;
+        float ratio = 0.06861f;
+        if ("硬座".equals(seatType) || "无座".equals(seatType)) {
+            ratio *= discount;
+        } else if ("硬卧".equals(seatType)) {
+            ratio *= 0.8f + discount;
+        } else if ("软卧".equals(seatType)) {
+            ratio *= 2.5f + discount;
+        }
+        float money = baseDistance * ratio;
+        float insurance = money * 0.02f;
+        float basicCost = 2.5f;
+        money = Math.round(money + insurance + basicCost);
+        return money;
     }
 }

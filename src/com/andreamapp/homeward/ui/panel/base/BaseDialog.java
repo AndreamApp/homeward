@@ -94,6 +94,10 @@ public class BaseDialog extends JDialog {
         dialogHeight = y + topMargin + 85;
     }
 
+    protected Component componentAt(int n) {
+        return componentList.get(n);
+    }
+
     protected void addItem(Component component){
         addItem(null, component);
     }
@@ -245,23 +249,23 @@ public class BaseDialog extends JDialog {
     }
 
     /**
-     * 获取{@link JFormattedTextField}控件的值
+     * 获取{@link JTextField}控件的值
      *
      * @param n 控件的序号
-     * @return JFormattedTextField的当前内容
+     * @return JTextField的当前内容
      */
     protected int fieldInt(int n) {
-        return (int) ((JFormattedTextField) componentList.get(n)).getValue();
+        return Integer.parseInt(((JTextField) componentList.get(n)).getText());
     }
 
     /**
-     * 获取{@link JFormattedTextField}控件的值
+     * 获取{@link JTextField}控件的值
      *
      * @param n 控件的序号
-     * @return JFormattedTextField的当前内容
+     * @return JTextField的当前内容
      */
     protected float fieldFloat(int n) {
-        return (float) ((JFormattedTextField) componentList.get(n)).getValue();
+        return Float.parseFloat(((JTextField) componentList.get(n)).getText());
     }
 
     /**
@@ -271,6 +275,16 @@ public class BaseDialog extends JDialog {
      */
     protected int option(int n){
         return ((JComboBox) componentList.get(n)).getSelectedIndex();
+    }
+
+    /**
+     * 获取{@link JComboBox}控件的值
+     *
+     * @param n 控件的序号
+     * @return JComboBox当前所选项的索引值（从0开始）
+     */
+    protected Object optionValue(int n) {
+        return ((JComboBox) componentList.get(n)).getSelectedItem();
     }
 
     /**

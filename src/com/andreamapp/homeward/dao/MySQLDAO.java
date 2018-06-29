@@ -314,7 +314,8 @@ public class MySQLDAO implements
 
     @Override
     public TicketPoint getTicketPointById(int point_id) {
-        return null;
+        return new Loader<>(this::getTicketPointFromResult)
+                .loadOne("select * from ticket_point where point_id = ?", point_id);
     }
 
     private TicketPoint getTicketPointFromResult(ResultSet res) throws SQLException {
@@ -388,7 +389,8 @@ public class MySQLDAO implements
 
     @Override
     public Train getTrainById(String train_id) {
-        return null;
+        return new Loader<>(this::getTrainFromResult)
+                .loadOne("select * from train where train_id = ?", train_id);
     }
 
     private Train getTrainFromResult(ResultSet res) throws SQLException {
@@ -441,6 +443,30 @@ public class MySQLDAO implements
                         key, key, searchKey);
     }
 
+    private Seat getSeatFromResult(ResultSet res) throws SQLException {
+        Seat seat = new Seat();
+        seat.setSeatId(res.getInt("seat_id"));
+        Train train = new Train();
+        train.setTrainId(res.getString("train_id"));
+        seat.setTrain(train);
+        seat.setCarriageNum(res.getInt("carriage_num"));
+        seat.setSeatNum(res.getInt("seat_num"));
+        seat.setSeatType(res.getString("seat_type"));
+        return seat;
+    }
+
+    public Seat getSeat(String train_id, int carriageNum, int seatNum) {
+        return new Loader<>(this::getSeatFromResult)
+                .loadOne("select * from seat where train_id = ? and carriage_num = ? and seat_num = ?",
+                        train_id, carriageNum, seatNum);
+    }
+
+    public Seat getSeatById(int id) {
+        return new Loader<>(this::getSeatFromResult)
+                .loadOne("select * from seat where seat_id = ?",
+                        id);
+    }
+
     @Override
     public void insertTrainOrder(TrainOrder order) {
         update("insert into ticket_order " +
@@ -477,7 +503,7 @@ public class MySQLDAO implements
                         " depart_station_order = ?, arrive_station_order = ?, depart_station = ?, arrive_station = ?," +
                         " is_stu_ticket = ?, money = ?, order_state = ?" +
                         " where order_id = ?",
-                order.getTicketPoint().getPointId(), order.getBuyer().getIdNum(), order.getSeat().getSeatId(), order.getTrain().getTrainId(),
+                order.getTicketPoint().getPointId(), order.getBuyer().getIdNum(), order.getTrainSchedule().getScheId(), order.getSeat().getSeatId(), order.getTrain().getTrainId(),
                 order.getDepart_station_order(), order.getArriveStationOrder(), order.getDepartStation().getStationName(), order.getArriveStation().getStationName(),
                 order.isStudentTicket(), order.getMoney(), order.getOrderState(),
                 order.getOrderId());
@@ -498,15 +524,18 @@ public class MySQLDAO implements
         schedule.setScheId(res.getInt("sche_id"));
         order.setTrainSchedule(schedule);
 
+        Seat seat = new Seat();
+        seat.setSeatId(res.getInt("seat_id"));
+        order.setSeat(seat);
+
         Train train = new Train();
         train.setTrainId(res.getString("train_id"));
         order.setTrain(train);
 
         order.setDepartStationRrder(res.getInt("depart_station_order"));
         order.setArriveStationOrder(res.getInt("arrive_station_order"));
-        Station depart = new Station(), arrive = new Station();
-        depart.setStationName(res.getString("depart_station"));
-        arrive.setStationName(res.getString("arrive_station"));
+        Station depart = getStationByName(res.getString("depart_station"));
+        Station arrive = getStationByName(res.getString("arrive_station"));
         order.setDepartStation(depart);
         order.setArriveStation(arrive);
 
@@ -528,8 +557,8 @@ public class MySQLDAO implements
         String likeKey = '%' + key + '%';
         return new Loader<>(this::getOrderFromResult)
                 .load("select * from ticket_order where order_id = ? or point_id = ? or id_num like ?" +
-                                " or sche_id = ? or train_id = ? or depart_station = ? or arrive_station = ?",
-                        key, key, likeKey, key, key, key, key);
+                                " or sche_id = ? or train_id = ? or depart_station like ? or arrive_station like ?",
+                        key, key, likeKey, key, key, likeKey, likeKey);
     }
 
     @Override
@@ -588,6 +617,11 @@ public class MySQLDAO implements
     public List<TrainSchedule> getTrainScheduleList(int limit, int skip) {
         return new Loader<>(this::getScheduleFromResult)
                 .load("select * from train_schedule");
+    }
+
+    public TrainSchedule getTrainScheduleById(int id) {
+        return new Loader<>(this::getScheduleFromResult)
+                .loadOne("select * from train_schedule where sche_id = ?", id);
     }
 
     public List<TrainSchedule> searchTrainSchedule(String key) {
