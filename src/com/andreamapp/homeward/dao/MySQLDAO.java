@@ -643,20 +643,45 @@ public class MySQLDAO implements
 
     @SuppressWarnings("deprecation")
     @Override
-    public List<TrainSchedule> searchTrainSchedule(Date depart_date, Station depart_station, Station arrive_station, boolean isStudent) {
-        Date start = new Date(depart_date.getTime());
-        start.setHours(0);
-        start.setMinutes(0);
-        start.setSeconds(0);
-        Date end = new Date(depart_date.getTime());
-        start.setHours(23);
-        start.setMinutes(59);
-        start.setSeconds(59);
-        String searchKey = '%' + depart_station.getStationName() + '%' + arrive_station.getStationName() + '%';
+    public List<TrainSchedule> searchTrainSchedule(String depart_station, String arrive_station, Date depart_date, boolean isStudent) {
+        Calendar startDate = Calendar.getInstance();
+        startDate.setTime(depart_date);
+        startDate.set(Calendar.HOUR_OF_DAY, 0);
+        startDate.set(Calendar.MINUTE, 0);
+        startDate.set(Calendar.SECOND, 0);
+        startDate.set(Calendar.MILLISECOND, 0);
+        Date start = startDate.getTime();
+        Calendar endDate = Calendar.getInstance();
+        endDate.setTime(depart_date);
+        endDate.add(Calendar.DATE, 1);
+        Date end = endDate.getTime();
+        String searchKey = '%' + depart_station + '%';
+        String searchKey2 = '%' + arrive_station + '%';
         return new Loader<>(this::fillScheduleWithTrain)
                 .load("select * from train_schedule as s" +
-                                " join train as t on t.train_id = s.train_id where depart_time between ? and ? and t.train_passby like ?",
-                        start, end, searchKey);
+                                " join train as t on t.train_id = s.train_id where (depart_time between ? and ?)" +
+                                " and t.train_passby like ?" +
+                                " and t.train_passby like ?",
+                        start, end, searchKey, searchKey2);
+    }
+
+    private SeatAggregate getSeatAggregateFromResult(ResultSet res) throws SQLException {
+        SeatAggregate sa = new SeatAggregate();
+        sa.setSeatType(res.getString("seat_type"));
+        sa.setSeatNum(res.getInt("seat_cnt"));
+        return sa;
+    }
+
+    public List<SeatAggregate> getSeatAggregateInSchedule(TrainSchedule schedule, int departStationOrder, int arriveStationOrder) {
+        return new Loader<>(this::getSeatAggregateFromResult)
+                .load("select s.seat_type, count(s.seat_id) as seat_cnt from seat as s" +
+                                " left outer join ticket_order as o on  s.seat_id = o.seat_id and sche_id = ?" +
+                                " where order_state is null or order_state = ? or order_state = ?" +
+                                " or depart_station_order >= ? or arrive_station_order <= ?" +
+                                " group by seat_type",
+                        schedule.getScheId(),
+                        TrainOrder.STATE_CANCLED, TrainOrder.STATE_REFUNDED,
+                        arriveStationOrder, departStationOrder);
     }
 
 }

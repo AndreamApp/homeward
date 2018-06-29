@@ -1,6 +1,5 @@
 package com.andreamapp.homeward.dao;
 
-import com.andreamapp.homeward.bean.Station;
 import com.andreamapp.homeward.bean.TrainSchedule;
 
 import java.util.Date;
@@ -14,5 +13,5 @@ public interface TrainScheduleDAO {
 
     List<TrainSchedule> getTrainScheduleList(int limit, int skip);
 
-    List<TrainSchedule> searchTrainSchedule(Date depart_date, Station depart_station, Station arrive_station, boolean isStudent);
+    List<TrainSchedule> searchTrainSchedule(String depart_station, String arrive_station, Date depart_date, boolean isStudent);
 }

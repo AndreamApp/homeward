@@ -14,7 +14,7 @@ public class SellerFrame extends JFrame {
 
     @SuppressWarnings("WeakerAccess")
     public SellerFrame() {
-        setSize(600, 500);
+        setSize(1024, 768);
         setLocationRelativeTo(null);
         initComponents();
     }

@@ -33,10 +33,15 @@ public class Train {
     }
 
     public String getTrainPassbyString() {
-        StringBuilder passby = new StringBuilder("");
+        StringBuilder passby = new StringBuilder("|");
         if(train_passby != null){
+            int i = 0;
             for(Passby p : train_passby){
                 passby.append(p.getDepartStation().getStationName()).append('|');
+                if (i == train_passby.size() - 1) {
+                    passby.append(p.getArriveStation().getStationName()).append('|');
+                }
+                i++;
             }
         }
         return passby.toString();
