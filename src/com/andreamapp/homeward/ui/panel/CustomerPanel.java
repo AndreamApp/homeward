@@ -62,6 +62,7 @@ public class CustomerPanel extends ModelPanel {
         new BaseDialog() {
             @Override
             protected void initComponents() {
+                // "身份证号码", "姓名", "性别", "电话", "用户类型"
                 String[] columns = Constants.ColumnName.CUSTOMER;
                 addField(columns[0], "");
                 addField(columns[1], "");

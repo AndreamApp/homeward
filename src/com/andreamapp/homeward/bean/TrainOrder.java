@@ -1,5 +1,6 @@
 package com.andreamapp.homeward.bean;
 
+@SuppressWarnings("WeakerAccess")
 public class TrainOrder {
     private int order_id;
     private TicketPoint ticket_point;
@@ -122,5 +123,19 @@ public class TrainOrder {
 
     public void setOrderState(int order_state) {
         this.order_state = order_state;
+    }
+
+    public String getOrderStateString() {
+        switch (order_state) {
+            case STATE_RESERVED:
+                return "预订";
+            case STATE_CANCLED:
+                return "已取消";
+            case STATE_PAYED:
+                return "已支付";
+            case STATE_REFUNDED:
+                return "已退订";
+        }
+        return "未知";
     }
 }

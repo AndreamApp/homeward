@@ -4,6 +4,7 @@ import com.andreamapp.homeward.ui.widget.JCenterTable;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -144,6 +145,61 @@ public class BaseDialog extends JDialog {
     }
 
     /**
+     * 向对话框中添加一个{@link JTextField}，文本框中只能输入非负整数
+     *
+     * @param name  控件说明文字
+     * @param value 初始值
+     * @return {@link JTextField}
+     */
+    protected JTextField addNumberField(String name, Integer value) {
+        JTextField field = new JTextField();
+        field.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!((c >= '0') && (c <= '9') ||
+                        (c == KeyEvent.VK_BACK_SPACE) ||
+                        (c == KeyEvent.VK_DELETE))) {
+                    getToolkit().beep();
+                    e.consume();
+                }
+            }
+        });
+        if (value != null) {
+            field.setText(String.valueOf(value));
+        }
+        addItem(name, field);
+        return field;
+    }
+
+    /**
+     * 向对话框中添加一个{@link JTextField}，文本框中只能输入非负小数
+     *
+     * @param name  控件说明文字
+     * @param value 初始值
+     * @return {@link JTextField}
+     */
+    protected JTextField addFloatField(String name, Float value) {
+        JTextField field = new JTextField();
+        field.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!((c >= '0') && (c <= '9') ||
+                        (c == '.') ||
+                        (c == KeyEvent.VK_BACK_SPACE) ||
+                        (c == KeyEvent.VK_DELETE))) {
+                    getToolkit().beep();
+                    e.consume();
+                }
+            }
+        });
+        if (value != null) {
+            field.setText(String.valueOf(value));
+        }
+        addItem(name, field);
+        return field;
+    }
+
+    /**
      * 向对话框中添加一个{@link JComboBox}
      * @param name 控件说明文字
      * @param options JComboBox的选项
@@ -186,6 +242,26 @@ public class BaseDialog extends JDialog {
      */
     protected String field(int n){
         return ((JTextField) componentList.get(n)).getText();
+    }
+
+    /**
+     * 获取{@link JFormattedTextField}控件的值
+     *
+     * @param n 控件的序号
+     * @return JFormattedTextField的当前内容
+     */
+    protected int fieldInt(int n) {
+        return (int) ((JFormattedTextField) componentList.get(n)).getValue();
+    }
+
+    /**
+     * 获取{@link JFormattedTextField}控件的值
+     *
+     * @param n 控件的序号
+     * @return JFormattedTextField的当前内容
+     */
+    protected float fieldFloat(int n) {
+        return (float) ((JFormattedTextField) componentList.get(n)).getValue();
     }
 
     /**

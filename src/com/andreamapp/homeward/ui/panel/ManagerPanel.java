@@ -68,7 +68,7 @@ public class ManagerPanel extends ModelPanel {
             protected void initComponents() {
                 // "管理员ID", "售票点ID", "用户名", "密码", "姓名", "性别", "管理员类别"
                 String[] columns = Constants.ColumnName.MANAGER;
-                addField(columns[1], "");
+                addNumberField(columns[1], 0);
                 addField(columns[2], "");
                 addField(columns[3], "");
                 addField(columns[4], "");
@@ -78,7 +78,7 @@ public class ManagerPanel extends ModelPanel {
             @Override
             protected void onOK() {
                 Manager manager = new Manager();
-                manager.setPointId(Integer.parseInt(field(0)));
+                manager.setPointId(fieldInt(0));
                 manager.setUsername(field(1));
                 manager.setPassword(field(2));
                 manager.setName(field(3));
@@ -115,7 +115,7 @@ public class ManagerPanel extends ModelPanel {
                 // "管理员ID", "售票点ID", "用户名", "密码", "姓名", "性别", "管理员类别"
                 String[] columns = Constants.ColumnName.MANAGER;
                 addLabel(columns[0], String.valueOf(manager.getManagerId()));
-                addField(columns[1], String.valueOf(manager.getPointId()));
+                addNumberField(columns[1], manager.getPointId());
                 addField(columns[2], manager.getUsername());
                 addField(columns[3], manager.getPassword());
                 addField(columns[4], manager.getName());
@@ -125,7 +125,7 @@ public class ManagerPanel extends ModelPanel {
 
             @Override
             protected void onOK() {
-                manager.setPointId(Integer.parseInt(field(1)));
+                manager.setPointId(fieldInt(1));
                 manager.setUsername(field(2));
                 manager.setPassword(field(3));
                 manager.setName(field(4));

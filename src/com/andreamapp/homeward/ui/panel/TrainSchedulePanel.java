@@ -117,7 +117,7 @@ public class TrainSchedulePanel extends ModelPanel {
                 addLabel(columns[0], String.valueOf(schedule.getScheId()));
                 addField(columns[1], format.format(schedule.getDepartTime()));
                 addField(columns[2], format.format(schedule.getPresellTime()));
-                addField(columns[3], String.valueOf(schedule.getSpeed()));
+                addFloatField(columns[3], schedule.getSpeed());
                 addField(columns[4], schedule.getTrain().getTrainId());
             }
 
@@ -127,7 +127,7 @@ public class TrainSchedulePanel extends ModelPanel {
                     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                     schedule.setDepartTime(format.parse(field(0)));
                     schedule.setPresellTime(format.parse(field(1)));
-                    schedule.setSpeed(Float.parseFloat((field(2))));
+                    schedule.setSpeed(fieldFloat(2));
                     Train train = new Train();
                     train.setTrainId(field(3));
                     schedule.setTrain(train);
