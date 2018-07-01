@@ -17,7 +17,7 @@ import java.util.List;
 
 public class TrainOrderPanel extends ModelPanel {
 
-    private List<TrainOrder> orders;
+    protected List<TrainOrder> orders;
 
     private void fetchAll() {
         orders = MySQLManager.getInstance().dao().getTrainOrderList(100, 0);

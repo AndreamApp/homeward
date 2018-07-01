@@ -17,6 +17,7 @@ public abstract class ModelPanel extends JPanel {
     private JTextField editSearch;
     private JButton btnSearch, btnInsert, btnUpdate, btnDelete;
     protected JTable table;
+    protected JPanel btnPanel;
     private DefaultTableModel model;
 
     public ModelPanel(){
@@ -34,7 +35,7 @@ public abstract class ModelPanel extends JPanel {
     }
 
     private JPanel btnPanel(){
-        JPanel btnPanel = new JPanel(new FlowLayout());
+        btnPanel = new JPanel(new FlowLayout());
         btnPanel.add(editSearch = new JTextField());
         btnPanel.add(btnSearch = new JButton("搜索"));
         btnPanel.add(btnInsert = new JButton("添加"));
