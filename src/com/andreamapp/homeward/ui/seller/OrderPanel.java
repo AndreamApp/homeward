@@ -7,10 +7,13 @@ import com.andreamapp.homeward.ui.widget.XDialog;
 import com.andreamapp.homeward.ui.widget.XTextField;
 import com.andreamapp.homeward.utils.Constants;
 import com.andreamapp.homeward.utils.StringUtils;
+import org.jdesktop.swingx.JXImagePanel;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ItemEvent;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -417,7 +420,14 @@ public class OrderPanel extends JPanel {
                 order.setMoney(seatMoney);
                 order.setOrderState(TrainOrder.STATE_RESERVED);
                 MySQLManager.getInstance().dao().insertTrainOrder(order);
-                super.onOK();
+                PayDialog pay = new PayDialog();
+                pay.popup("等待用户支付...");
+                if (pay.result) {
+                    order.setOrderState(TrainOrder.STATE_PAYED);
+                    MySQLManager.getInstance().dao().updateTrainOrder(order);
+                    JOptionPane.showMessageDialog(null, "支付成功！");
+                    dispose();
+                }
             }
 
             private String[] getCarriages() {
@@ -476,6 +486,29 @@ public class OrderPanel extends JPanel {
                     seatNumBox.addItem(seat);
                 }
             }
+        }
+    }
+
+    private class PayDialog extends XDialog {
+        JXImagePanel imagePanel;
+        boolean result = false;
+
+        @Override
+        protected void initComponents() {
+            try {
+                imagePanel = new JXImagePanel(new URL("file:///D:/Andream/CQU/Homework/数据库实验/课程设计/homeward/res/qrcode.png"));
+                imagePanel.setPreferredSize(new Dimension(500, 500));
+                imagePanel.setStyle(JXImagePanel.Style.SCALED);
+                addItem(imagePanel, 500, 500);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        protected void onOK() {
+            result = true;
+            super.onOK();
         }
     }
 }
