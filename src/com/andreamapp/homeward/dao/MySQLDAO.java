@@ -181,7 +181,12 @@ public class MySQLDAO implements
 
     @Override
     public void upsertCustomer(Customer customer) {
-
+        Customer c = getCustomerByIdNum(customer.getIdNum());
+        if (c == null) {
+            insertCustomer(customer);
+        } else {
+            updateCustomer(customer);
+        }
     }
 
     private Customer getCustomerFromResult(ResultSet res) throws SQLException {
@@ -212,6 +217,13 @@ public class MySQLDAO implements
     public List<Customer> getAllCustomers() {
         return new Loader<>(this::getCustomerFromResult)
                 .load("select * from customer");
+    }
+
+    public int getSexFromIdNum(String idNum) {
+        if (idNum.length() == 18) {
+            return (idNum.charAt(16) - '0') % 2;
+        }
+        return 0;
     }
 
     @Override
@@ -684,4 +696,11 @@ public class MySQLDAO implements
                         arriveStationOrder, departStationOrder);
     }
 
+    public List<Seat> getFreeSeats(TrainSchedule schedule) {
+        return new Loader<>(this::getSeatFromResult)
+                .load("select * from seat" +
+                                " left outer join ticket_order as o on seat.seat_id = o.seat_id" +
+                                " where seat.train_id = ? and (o.sche_id is null or (o.sche_id = ? and (o.order_state = 2 or o.order_state = 4)))",
+                        schedule.getTrain().getTrainId(), schedule.getScheId());
+    }
 }

@@ -1,19 +1,24 @@
 package com.andreamapp.homeward.ui.seller;
 
-import com.andreamapp.homeward.bean.Train;
-import com.andreamapp.homeward.bean.TrainSchedule;
+import com.andreamapp.homeward.bean.*;
 import com.andreamapp.homeward.dao.MySQLManager;
+import com.andreamapp.homeward.ui.widget.MeasurablePanel;
+import com.andreamapp.homeward.ui.widget.XDialog;
 import com.andreamapp.homeward.ui.widget.XTextField;
+import com.andreamapp.homeward.utils.Constants;
 import com.andreamapp.homeward.utils.StringUtils;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ItemEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
+@SuppressWarnings({"WeakerAccess", "FieldCanBeLocal"})
 public class OrderPanel extends JPanel {
     private JTextField departStationText;
     private JTextField arriveStationText;
@@ -37,6 +42,9 @@ public class OrderPanel extends JPanel {
 
     public OrderPanel() {
         initComponents();
+        departStationText.setText("北京");
+        arriveStationText.setText("上海");
+        departDateText.setText("2018-07-20");
     }
 
     private void initComponents() {
@@ -116,7 +124,10 @@ public class OrderPanel extends JPanel {
         relayout();
     }
 
-    private class TrainInfoItem extends JPanel {
+    /**
+     * 显示列车起始时间、起始站点、经过时间、车次名称
+     */
+    private class TrainInfoItem extends JPanel implements MeasurablePanel {
         private TrainSchedule schedule;
         private Train train;
         private TrainSchedule.Extra extra;
@@ -187,37 +198,50 @@ public class OrderPanel extends JPanel {
 
         private void initLayout() {
             setLayout(null);
-            int x = leftMargin, y = topMargin;
+            int x = 0, y = 0;
             x += padding;
             y += padding;
             departTime.setBounds(x, y, 100, 50);
             y += padding + 50 + padding;
             departStation.setBounds(x, y, 100, 50);
             x += 100 + 50;
-            y = leftMargin + padding + 20;
+            y = padding + 20;
             trainId.setBounds(x, y, 160, 30);
             y += padding + 30 + padding;
             passTime.setBounds(x, y, 160, 30);
             x += 160 + 50;
-            y = leftMargin + padding;
+            y = padding;
             arriveTime.setBounds(x, y, 100, 50);
             y += padding + 50 + padding;
             arriveStation.setBounds(x, y, 100, 50);
             x += 100 + 50;
-            y = leftMargin + padding;
+            y += padding + 40;
             itemWidth = x;
             itemHeight = y;
         }
+
+        @Override
+        public int width() {
+            return itemWidth;
+        }
+
+        @Override
+        public int height() {
+            return itemHeight;
+        }
     }
 
-    private class ScheduleItem extends JPanel {
+    /**
+     * 显示列车信息和预订信息
+     */
+    private class ScheduleItem extends JPanel implements MeasurablePanel {
         private TrainSchedule schedule;
         private Train train;
         private TrainSchedule.Extra extra;
         private String departStationNameInQuery, arriveStationNameInQuery;
+        private boolean isStudent;
 
-        private JLabel departTime, departStation, arriveTime, arriveStation;
-        private JLabel trainId, passTime;
+        private TrainInfoItem trainInfoItem;
         private JLabel hardSeat, hardBerth, softBerth, noSeat;
         private JButton orderHardSeat, orderHardBerth, orderSoftBerth, orderNoSeat;
         int itemWidth = 900, itemHeight = 200;
@@ -227,18 +251,14 @@ public class OrderPanel extends JPanel {
             this.train = schedule.getTrain();
             this.departStationNameInQuery = departStation;
             this.arriveStationNameInQuery = arriveStation;
+            this.isStudent = isStudent;
             this.extra = schedule.getExtra(departStation, arriveStation, isStudent);
+            this.trainInfoItem = new TrainInfoItem(schedule, extra);
             initComponents();
         }
 
         private void initValues() {
             SimpleDateFormat format = new SimpleDateFormat("hh:mm");
-            departTime.setText(format.format(extra.departTime));
-            arriveTime.setText(format.format(extra.arriveTime));
-            departStation.setText(extra.departStationName);
-            arriveStation.setText(extra.arriveStationName);
-            trainId.setText(extra.trainId);
-            passTime.setText(extra.passTime);
             hardSeat.setText("硬座  " + extra.hardSeatNum + "张  " + extra.hardSeatMoney + "元");
             hardBerth.setText("硬卧  " + extra.hardBerthNum + "张  " + extra.hardBerthMoney + "元");
             softBerth.setText("软卧  " + extra.softBerthNum + "张  " + extra.softBerthMoney + "元");
@@ -257,12 +277,7 @@ public class OrderPanel extends JPanel {
         }
 
         private void initialize() {
-            add(departTime = new JLabel());
-            add(arriveTime = new JLabel());
-            add(departStation = new JLabel());
-            add(arriveStation = new JLabel());
-            add(trainId = new JLabel());
-            add(passTime = new JLabel());
+            add(trainInfoItem);
             add(hardSeat = new JLabel());
             add(hardBerth = new JLabel());
             add(softBerth = new JLabel());
@@ -271,14 +286,10 @@ public class OrderPanel extends JPanel {
             add(orderHardBerth = new JButton("预订"));
             add(orderSoftBerth = new JButton("预订"));
             add(orderNoSeat = new JButton("预订"));
-            orderHardBerth.addActionListener(e -> {
-//                TODO: order dialog
-//                buyer info
-//                choose seat
-//                MySQLManager.getInstance().dao().insertTrainOrder(order);
-//                TODO: jie zhang dialog
-
-            });
+            orderHardSeat.addActionListener(e -> new OrderDialog("硬座").popup("预订硬座票"));
+            orderHardBerth.addActionListener(e -> new OrderDialog("硬卧").popup("预订硬卧票"));
+            orderSoftBerth.addActionListener(e -> new OrderDialog("软卧").popup("预订软卧票"));
+            orderNoSeat.addActionListener(e -> new OrderDialog("无座").popup("预订无座票"));
         }
 
         private void initBtn(JLabel btn, Font font, int horizontalAlign, int verticalAlign) {
@@ -299,13 +310,6 @@ public class OrderPanel extends JPanel {
             Font midFont = new Font("宋体", Font.PLAIN, 16);
             Font smallFont = new Font("宋体", Font.PLAIN, 14);
 
-            initBtn(departTime, boldFont, SwingConstants.CENTER, SwingConstants.BOTTOM);
-            initBtn(departStation, bigFont, SwingConstants.CENTER, SwingConstants.TOP);
-            initBtn(arriveTime, boldFont, SwingConstants.CENTER, SwingConstants.BOTTOM);
-            initBtn(arriveStation, bigFont, SwingConstants.CENTER, SwingConstants.TOP);
-
-            initBtn(trainId, smallFont, SwingConstants.CENTER, SwingConstants.BOTTOM);
-            initBtn(passTime, smallFont, SwingConstants.CENTER, SwingConstants.TOP);
             initBtn(hardSeat, midFont, SwingConstants.CENTER, SwingConstants.CENTER);
             initBtn(hardBerth, midFont, SwingConstants.CENTER, SwingConstants.CENTER);
             initBtn(softBerth, midFont, SwingConstants.CENTER, SwingConstants.CENTER);
@@ -322,20 +326,8 @@ public class OrderPanel extends JPanel {
             int x = leftMargin, y = topMargin;
             x += padding;
             y += padding;
-            departTime.setBounds(x, y, 100, 50);
-            y += padding + 50 + padding;
-            departStation.setBounds(x, y, 100, 50);
-            x += 100 + 50;
-            y = leftMargin + padding + 20;
-            trainId.setBounds(x, y, 160, 30);
-            y += padding + 30 + padding;
-            passTime.setBounds(x, y, 160, 30);
-            x += 160 + 50;
-            y = leftMargin + padding;
-            arriveTime.setBounds(x, y, 100, 50);
-            y += padding + 50 + padding;
-            arriveStation.setBounds(x, y, 100, 50);
-            x += 100 + 50;
+            trainInfoItem.setBounds(x, y, trainInfoItem.itemWidth, trainInfoItem.itemHeight);
+            x += trainInfoItem.itemWidth + 50;
             y = leftMargin + padding;
             hardSeat.setBounds(x, y, 200, 30);
             y += 30 + padding;
@@ -357,6 +349,133 @@ public class OrderPanel extends JPanel {
             y += 30 + 10 + topMargin;
             itemWidth = x;
             itemHeight = y;
+        }
+
+        @Override
+        public int width() {
+            return itemWidth;
+        }
+
+        @Override
+        public int height() {
+            return itemHeight;
+        }
+
+        @SuppressWarnings("unchecked")
+        private class OrderDialog extends XDialog {
+            private JLabel dateInfo, seatInfo;
+            private TrainInfoItem trainInfoItem;
+            private JComboBox carriageBox, seatNumBox;
+            private String seatType;
+            private float seatMoney;
+            private List<Seat> freeSeats;
+
+            public OrderDialog(String seatType) {
+                this.seatType = seatType;
+                if ("硬座".equals(seatType)) {
+                    seatMoney = extra.hardSeatMoney;
+                } else if ("硬卧".equals(seatType)) {
+                    seatMoney = extra.hardBerthMoney;
+                } else if ("软卧".equals(seatType)) {
+                    seatMoney = extra.softBerthMoney;
+                } else if ("无座".equals(seatType)) {
+                    seatMoney = extra.noSeatMoney;
+                }
+                init();
+            }
+
+            @Override
+            protected void onOK() {
+                String name = field(2);
+                String idNum = field(3);
+                String tel = field(4);
+                Customer buyer = new Customer();
+                buyer.setName(name);
+                buyer.setIdNum(idNum);
+                buyer.setCustomerType(isStudent ? 1 : 0);
+                buyer.setSex(MySQLManager.getInstance().dao().getSexFromIdNum(idNum));
+                buyer.setTel(tel);
+                MySQLManager.getInstance().dao().upsertCustomer(buyer);
+
+                int carriage = Integer.parseInt((String) Objects.requireNonNull(carriageBox.getSelectedItem()));
+                int seatNum = (int) seatNumBox.getSelectedItem();
+                Seat seat = MySQLManager.getInstance().dao().getSeat(train.getTrainId(), carriage, seatNum);
+
+                TrainOrder order = new TrainOrder();
+                TicketPoint point = new TicketPoint();
+                point.setPointId(Constants.currentManager.getPointId());
+                order.setTicketPoint(point);
+                order.setBuyer(buyer);
+                order.setTrainSchedule(schedule);
+                order.setSeat(seat);
+                order.setTrain(train);
+                order.setDepartStation(MySQLManager.getInstance().dao().getStationByName(extra.departStationName));
+                order.setArriveStation(MySQLManager.getInstance().dao().getStationByName(extra.arriveStationName));
+                order.setDepartStationRrder(extra.departStationOrder);
+                order.setArriveStationOrder(extra.arriveStationOrder);
+                order.setStudentTicket(isStudent);
+                order.setMoney(seatMoney);
+                order.setOrderState(TrainOrder.STATE_RESERVED);
+                MySQLManager.getInstance().dao().insertTrainOrder(order);
+                super.onOK();
+            }
+
+            private String[] getCarriages() {
+                List<String> carriageList = new ArrayList<>();
+                for (Seat s : freeSeats) {
+                    String num = String.valueOf(s.getCarriageNum());
+                    if (s.getSeatType().equals(seatType) && !carriageList.contains(num)) {
+                        carriageList.add(num);
+                    }
+                }
+                String[] carriages = new String[carriageList.size()];
+                carriageList.toArray(carriages);
+                return carriages;
+            }
+
+            public List<Integer> getFreeSeatIn(int carriage) {
+                List<Integer> seats = new ArrayList<>();
+                for (Seat s : freeSeats) {
+                    if (s.getCarriageNum() == carriage) {
+                        seats.add(s.getSeatNum());
+                    }
+                }
+                return seats;
+            }
+
+            private void init() {
+                SimpleDateFormat format = new SimpleDateFormat("MM月dd日  hh时mm分开");
+                String departDate = format.format(extra.departTime);
+                freeSeats = MySQLManager.getInstance().dao().getFreeSeats(schedule);
+
+                addItem(dateInfo = new JLabel(train.getTrainId() + "次列车  " + departDate + "    " + seatType + "  " + seatMoney + "元"), 500, 40);
+                addItem(trainInfoItem = new TrainInfoItem(schedule, extra));
+                addField("乘客姓名", "");
+                addField("身份证号码", "");
+                addField("手机号码", "");
+                carriageBox = addComboBox("车厢", getCarriages());
+                (seatNumBox = addComboBox("座位号")).setEnabled(false);
+
+                initBtn(dateInfo, new Font("宋体", Font.PLAIN, 16), SwingConstants.CENTER, SwingConstants.CENTER);
+                carriageBox.addItemListener(e -> {
+                    if (ItemEvent.SELECTED == e.getStateChange()) {
+                        int carriage = Integer.parseInt((String) e.getItem());
+                        selectCarriage(carriage);
+                    }
+                });
+                buttonOK.setText("去支付");
+                // init carriage and seat
+                selectCarriage(Integer.parseInt((String) carriageBox.getItemAt(0)));
+                relayout();
+            }
+
+            private void selectCarriage(int carriage) {
+                seatNumBox.setEnabled(true);
+                seatNumBox.removeAllItems();
+                for (Integer seat : getFreeSeatIn(carriage)) {
+                    seatNumBox.addItem(seat);
+                }
+            }
         }
     }
 }

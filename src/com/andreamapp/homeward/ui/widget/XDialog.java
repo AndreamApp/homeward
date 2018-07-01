@@ -9,7 +9,7 @@ import java.awt.event.WindowEvent;
 @SuppressWarnings({"FieldCanBeLocal", "UnusedReturnValue", "WeakerAccess"})
 public class XDialog extends JDialog {
     private XPanel panel;
-    private JButton buttonOK, buttonCancel;
+    protected JButton buttonOK, buttonCancel;
 
     public XDialog() {
         panel = new XPanel();
@@ -46,6 +46,29 @@ public class XDialog extends JDialog {
 
     public Component componentAt(int n) {
         return panel.componentAt(n);
+    }
+
+    private abstract static class MeasurableItem extends JPanel implements MeasurablePanel {
+    }
+
+    public void addItem(Component component, int width, int height) {
+        panel.addItem(new MeasurableItem() {
+            {
+                setLayout(null);
+                add(component);
+                component.setBounds(0, 0, width(), height());
+            }
+
+            @Override
+            public int width() {
+                return width;
+            }
+
+            @Override
+            public int height() {
+                return height;
+            }
+        });
     }
 
     public void addItem(Component component) {

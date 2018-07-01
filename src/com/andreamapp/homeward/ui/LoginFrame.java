@@ -10,6 +10,7 @@ import com.andreamapp.homeward.dao.MySQLManager;
 import com.andreamapp.homeward.ui.manager.ManagerFrame;
 import com.andreamapp.homeward.ui.seller.SellerFrame;
 import com.andreamapp.homeward.utils.Constants;
+import com.andreamapp.homeward.utils.LookUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -132,7 +133,7 @@ public class LoginFrame extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-//        LookUtils.beautyEye();
+        LookUtils.beautyEye();
 
         /* Create and display the form */
         EventQueue.invokeLater(() -> {

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings({"FieldCanBeLocal", "WeakerAccess"})
-public class XPanel extends JPanel {
+public class XPanel extends JPanel implements MeasurablePanel {
     private List<Component> labelList = new ArrayList<>();
     private List<Component> componentList = new ArrayList<>();
     private List<JButton> btnList = new ArrayList<>();
@@ -21,7 +21,6 @@ public class XPanel extends JPanel {
     private int fieldHeight = 30;
     private int padding = 10;
     private int btnWidth = 100, btnHeight = 30;
-    private int tableHeight = 200;
     protected int panelWidth = 400, panelHeight = 300;
 
     public XPanel() {
@@ -36,21 +35,37 @@ public class XPanel extends JPanel {
     protected void initComponents() {
     }
 
+    private void move(Component component, int x, int y) {
+        Rectangle rect = component.getBounds();
+        rect.x += x;
+        rect.y += y;
+        component.setBounds(rect);
+    }
+
     /**
      * 由于使用绝对布局，每次添加新控件时会调用此方法
      */
     private void relayout() {
+        int panelWidth = 0, panelHeight = 0;
         int x = leftMargin + padding, y = topMargin, width = labelWidth, height = labelHeight;
         for (int i = 0; i < labelList.size(); i++) {
             y += padding;
-            if (labelList.get(i) != null)
+            int margin = 0;
+            if (labelList.get(i) != null) {
+                margin = width;
                 labelList.get(i).setBounds(x, y, width, height);
-            Component c = componentList.get(i);
-            int componentHeight = fieldHeight;
-            if (c instanceof JScrollPane) {
-                componentHeight = tableHeight;
             }
-            c.setBounds(x + width + padding, y, fieldWidth, componentHeight);
+            Component c = componentList.get(i);
+            int componentHeight = fieldHeight, componentWidth = fieldWidth;
+            if (c instanceof MeasurablePanel) {
+                componentHeight = ((MeasurablePanel) c).height();
+                componentWidth = ((MeasurablePanel) c).width();
+                if (componentWidth == -1) {
+                    componentWidth = panelWidth - margin;
+                }
+                panelWidth = Math.max(panelWidth, margin + componentWidth);
+            }
+            c.setBounds(x + margin + padding, y, componentWidth, componentHeight);
             y += componentHeight;
             y += padding;
         }
@@ -58,15 +73,23 @@ public class XPanel extends JPanel {
         // add btn as last line
         int offset = x;
         for (JButton btn : btnList) {
-            btn.setBounds(x, y, btnWidth, btnHeight);
+            btn.setBounds(x + offset, y, btnWidth, btnHeight);
             offset += padding + btnWidth + padding;
         }
-        offset -= btnWidth + padding;
+
 
         y += btnHeight;
         y += padding;
-        panelWidth = Math.max(x + width + padding + fieldWidth + padding + leftMargin + 70, offset);
+        panelWidth = Math.max(panelWidth, x + width + fieldWidth);
+        panelWidth = Math.max(panelWidth, offset);
+        // let button align center to parent
+        for (JButton btn : btnList) {
+            move(btn, (panelWidth - offset) / 2, 0);
+        }
+        panelWidth += padding + padding + leftMargin + 60; // skin param
         panelHeight = y + topMargin + 85;
+        this.panelWidth = panelWidth;
+        this.panelHeight = panelHeight;
     }
 
     public Component componentAt(int n) {
@@ -213,7 +236,7 @@ public class XPanel extends JPanel {
      * @return {@link JTable}
      */
     public JTable addTable(String text) {
-        XTable table = new XTable();
+        ComponentTable table = new ComponentTable();
         JScrollPane scrollPane = new JScrollPane(table);
         addItem(text, scrollPane);
         return table;
@@ -293,4 +316,31 @@ public class XPanel extends JPanel {
         return ((JCheckBox) componentList.get(n)).isSelected();
     }
 
+    @Override
+    public int width() {
+        return panelWidth;
+    }
+
+    @Override
+    public int height() {
+        return panelHeight;
+    }
+
+    /**
+     * 固定长宽的Table控件
+     */
+    private static class ComponentTable extends XTable implements MeasurablePanel {
+        private static final int TABLE_WIDTH = 300;
+        private static final int TABLE_HEIGHT = 200;
+
+        @Override
+        public int width() {
+            return TABLE_WIDTH;
+        }
+
+        @Override
+        public int height() {
+            return TABLE_HEIGHT;
+        }
+    }
 }
