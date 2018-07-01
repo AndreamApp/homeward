@@ -125,11 +125,11 @@ public class TrainSchedulePanel extends ModelPanel {
             protected void onOK() {
                 try {
                     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                    schedule.setDepartTime(format.parse(field(0)));
-                    schedule.setPresellTime(format.parse(field(1)));
-                    schedule.setSpeed(fieldFloat(2));
+                    schedule.setDepartTime(format.parse(field(1)));
+                    schedule.setPresellTime(format.parse(field(2)));
+                    schedule.setSpeed(fieldFloat(3));
                     Train train = new Train();
-                    train.setTrainId(field(3));
+                    train.setTrainId(field(4));
                     schedule.setTrain(train);
                     MySQLManager.getInstance().dao().updateTrainSchedule(schedule);
                     refresh();

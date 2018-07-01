@@ -7,14 +7,6 @@ public class Seat {
     private int seat_num;
     private String seat_type;
 
-    // TODO: enum Type toString(). eg. 软卧，硬卧，硬座，无座
-    public enum Type{
-        SoftBerth,
-        HardBerth,
-        HardSeat,
-        NoSeat,
-    }
-
     public int getSeatId() {
         return seat_id;
     }

@@ -65,7 +65,7 @@ public class TrainOrderPanel extends ModelPanel {
 
     private JComboBox carriageBox, seatNumBox, seatTypeBox;
     private JComboBox departBox, arriveBox, stuBox;
-    private JTextField moneyField;
+    private JLabel moneyField;
     private Train train = new Train();
 
     @SuppressWarnings("unchecked")
@@ -179,7 +179,7 @@ public class TrainOrderPanel extends ModelPanel {
                 (departBox = addComboBox(columns[7])).setEnabled(false); // 起始站
                 (arriveBox = addComboBox(columns[8])).setEnabled(false); // 到达站
                 stuBox = addComboBox(columns[9], "普通票", "学生票"); // 学生票
-                (moneyField = addFloatField(columns[10], 0.0f)).setEnabled(false); // 金额
+                moneyField = addLabel(columns[10], String.valueOf(0.0f)); // 金额
                 addLabel(columns[11], "预订"); // 订单状态
                 addListener();
                 train = null; // reset train avoid use old dialog data
@@ -220,7 +220,7 @@ public class TrainOrderPanel extends ModelPanel {
                 order.setDepartStationRrder(option(7) + 1);
                 order.setArriveStationOrder(option(8) + 2);
                 order.setStudentTicket(option(9) == 1);
-                order.setMoney(fieldFloat(10));
+                order.setMoney(Float.parseFloat(field(10)));
                 order.setOrderState(TrainOrder.STATE_RESERVED);
                 MySQLManager.getInstance().dao().insertTrainOrder(order);
                 fetchAll();
@@ -270,7 +270,7 @@ public class TrainOrderPanel extends ModelPanel {
                 (departBox = addComboBox(columns[7])).setEnabled(false); // 起始站
                 (arriveBox = addComboBox(columns[8])).setEnabled(false); // 到达站
                 stuBox = addComboBox(columns[9], "普通票", "学生票"); // 学生票
-                (moneyField = addFloatField(columns[10], order.getMoney())).setEnabled(false); // 金额
+                moneyField = addLabel(columns[10], String.valueOf(order.getMoney())); // 金额
                 addLabel(columns[11], order.getOrderStateString()); // 订单状态
 
                 addListener();
@@ -317,7 +317,7 @@ public class TrainOrderPanel extends ModelPanel {
                 order.setDepartStationRrder(option(7) + 1);
                 order.setArriveStationOrder(option(8) + 2);
                 order.setStudentTicket(option(9) == 1);
-                order.setMoney(fieldFloat(10));
+                order.setMoney(Float.parseFloat(field(10)));
                 order.setOrderState(TrainOrder.STATE_RESERVED);
                 MySQLManager.getInstance().dao().updateTrainOrder(order);
                 refresh();

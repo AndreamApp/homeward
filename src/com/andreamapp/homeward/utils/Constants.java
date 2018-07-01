@@ -20,7 +20,7 @@ public class Constants {
                 "车次", "列车类型", "途经站点"
         };
         public static final String[] SCHEDULE = {
-                "列车行程ID", "出发时间", "预售时间", "配速", "车次"
+                "列车行程ID", "出发时间", "预售时间", "配速（km/h）", "车次"
         };
         public static final String[] ORDER_INSERT = {
                 "售票点ID", "用户身份证", "列车行程ID", "车次", "车厢", "座位号", "座位类型", "起始站", "到达站", "学生票", "金额", "订单状态"

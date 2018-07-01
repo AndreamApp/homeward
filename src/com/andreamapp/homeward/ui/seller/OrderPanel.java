@@ -116,6 +116,100 @@ public class OrderPanel extends JPanel {
         relayout();
     }
 
+    private class TrainInfoItem extends JPanel {
+        private TrainSchedule schedule;
+        private Train train;
+        private TrainSchedule.Extra extra;
+
+        private JLabel departTime, departStation, arriveTime, arriveStation;
+        private JLabel trainId, passTime;
+        int itemWidth = 900, itemHeight = 200;
+
+        public TrainInfoItem(TrainSchedule schedule, TrainSchedule.Extra extra) {
+            this.schedule = schedule;
+            this.train = schedule.getTrain();
+            this.extra = extra;
+            initComponents();
+        }
+
+        private void initValues() {
+            SimpleDateFormat format = new SimpleDateFormat("hh:mm");
+            departTime.setText(format.format(extra.departTime));
+            arriveTime.setText(format.format(extra.arriveTime));
+            departStation.setText(extra.departStationName);
+            arriveStation.setText(extra.arriveStationName);
+            trainId.setText(extra.trainId);
+            passTime.setText(extra.passTime);
+        }
+
+        private void initComponents() {
+            initialize();
+            initAlignment();
+            initLayout();
+            initValues();
+        }
+
+        private void initialize() {
+            add(departTime = new JLabel());
+            add(arriveTime = new JLabel());
+            add(departStation = new JLabel());
+            add(arriveStation = new JLabel());
+            add(trainId = new JLabel());
+            add(passTime = new JLabel());
+        }
+
+        private void initBtn(JLabel btn, Font font, int horizontalAlign, int verticalAlign) {
+            btn.setFont(font);
+            btn.setHorizontalAlignment(horizontalAlign);
+            btn.setVerticalAlignment(verticalAlign);
+        }
+
+        private void initBtn(JButton btn, Font font, int horizontalAlign, int verticalAlign) {
+            btn.setFont(font);
+            btn.setHorizontalAlignment(horizontalAlign);
+            btn.setVerticalAlignment(verticalAlign);
+        }
+
+        private void initAlignment() {
+            Font boldFont = new Font("黑体", Font.BOLD, 24);
+            Font bigFont = new Font("宋体", Font.PLAIN, 24);
+            Font midFont = new Font("宋体", Font.PLAIN, 16);
+            Font smallFont = new Font("宋体", Font.PLAIN, 14);
+
+            initBtn(departTime, boldFont, SwingConstants.CENTER, SwingConstants.BOTTOM);
+            initBtn(departStation, bigFont, SwingConstants.CENTER, SwingConstants.TOP);
+            initBtn(arriveTime, boldFont, SwingConstants.CENTER, SwingConstants.BOTTOM);
+            initBtn(arriveStation, bigFont, SwingConstants.CENTER, SwingConstants.TOP);
+
+            initBtn(trainId, smallFont, SwingConstants.CENTER, SwingConstants.BOTTOM);
+            initBtn(passTime, smallFont, SwingConstants.CENTER, SwingConstants.TOP);
+        }
+
+        private void initLayout() {
+            setLayout(null);
+            int x = leftMargin, y = topMargin;
+            x += padding;
+            y += padding;
+            departTime.setBounds(x, y, 100, 50);
+            y += padding + 50 + padding;
+            departStation.setBounds(x, y, 100, 50);
+            x += 100 + 50;
+            y = leftMargin + padding + 20;
+            trainId.setBounds(x, y, 160, 30);
+            y += padding + 30 + padding;
+            passTime.setBounds(x, y, 160, 30);
+            x += 160 + 50;
+            y = leftMargin + padding;
+            arriveTime.setBounds(x, y, 100, 50);
+            y += padding + 50 + padding;
+            arriveStation.setBounds(x, y, 100, 50);
+            x += 100 + 50;
+            y = leftMargin + padding;
+            itemWidth = x;
+            itemHeight = y;
+        }
+    }
+
     private class ScheduleItem extends JPanel {
         private TrainSchedule schedule;
         private Train train;
@@ -178,11 +272,12 @@ public class OrderPanel extends JPanel {
             add(orderSoftBerth = new JButton("预订"));
             add(orderNoSeat = new JButton("预订"));
             orderHardBerth.addActionListener(e -> {
-//                TODO
+//                TODO: order dialog
 //                buyer info
 //                choose seat
 //                MySQLManager.getInstance().dao().insertTrainOrder(order);
-//                jie zhang dialog
+//                TODO: jie zhang dialog
+
             });
         }
 

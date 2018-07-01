@@ -10,7 +10,6 @@ import com.andreamapp.homeward.dao.MySQLManager;
 import com.andreamapp.homeward.ui.manager.ManagerFrame;
 import com.andreamapp.homeward.ui.seller.SellerFrame;
 import com.andreamapp.homeward.utils.Constants;
-import com.andreamapp.homeward.utils.LookUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -106,7 +105,6 @@ public class LoginFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void login(ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
-        // TODO add your handling code here:
         String username = edit_username.getText();
         String password = edit_password.getText();
         Manager manager = MySQLManager.getInstance().dao()
@@ -134,7 +132,7 @@ public class LoginFrame extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        LookUtils.beautyEye();
+//        LookUtils.beautyEye();
 
         /* Create and display the form */
         EventQueue.invokeLater(() -> {
