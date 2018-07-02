@@ -45,7 +45,7 @@ public class TrainOrderPanel extends ModelPanel {
                     case 5:
                         return order.getMoney();
                     case 6:
-                        return order.getOrderState();
+                        return order.getOrderStateString();
                 }
                 return null;
             }

@@ -535,6 +535,7 @@ public class MySQLDAO implements
 
         Customer buyer = new Customer();
         buyer.setIdNum(res.getString("id_num"));
+        buyer.setName(res.getString("name"));
         order.setBuyer(buyer);
 
         TrainSchedule schedule = new TrainSchedule();
@@ -566,16 +567,19 @@ public class MySQLDAO implements
     @Override
     public List<TrainOrder> getTrainOrderList(int limit, int skip) {
         return new Loader<>(this::getOrderFromResult)
-                .load("select * from ticket_order");
+                .load("select ticket_order.*, customer.name from ticket_order, customer" +
+                        " where ticket_order.id_num = customer.id_num");
     }
 
     @Override
     public List<TrainOrder> searchTrainOrders(String key) {
         String likeKey = '%' + key + '%';
         return new Loader<>(this::getOrderFromResult)
-                .load("select * from ticket_order where order_id = ? or point_id = ? or id_num like ?" +
-                                " or sche_id = ? or train_id = ? or depart_station like ? or arrive_station like ?",
-                        key, key, likeKey, key, key, likeKey, likeKey);
+                .load("select o.*, c.name from ticket_order as o, customer as c" +
+                                " where o.id_num = c.id_num" +
+                                " and (order_id = ? or point_id = ? or o.id_num like ? or c.name like ?" +
+                                " or sche_id = ? or train_id = ? or depart_station like ? or arrive_station like ?)",
+                        key, key, likeKey, likeKey, key, key, likeKey, likeKey);
     }
 
     @Override
