@@ -9,6 +9,7 @@ import com.andreamapp.homeward.ui.widget.XDialog;
 import com.andreamapp.homeward.utils.Constants;
 
 import javax.swing.*;
+import java.awt.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -47,12 +48,14 @@ public class TrainSchedulePanel extends ModelPanel {
 
     @Override
     public void onSearch(String key) {
-        if (key.equals("")) {
-            fetchAll();
-        } else {
-            schedules = MySQLManager.getInstance().dao().searchTrainSchedule(key);
-        }
-        refresh();
+        EventQueue.invokeLater(() -> {
+            if (key.equals("")) {
+                fetchAll();
+            } else {
+                schedules = MySQLManager.getInstance().dao().searchTrainSchedule(key);
+            }
+            refresh();
+        });
     }
 
     @Override
@@ -79,9 +82,11 @@ public class TrainSchedulePanel extends ModelPanel {
                     Train train = new Train();
                     train.setTrainId(field(3));
                     schedule.setTrain(train);
-                    MySQLManager.getInstance().dao().insertTrainSchedule(schedule);
-                    fetchAll();
-                    refresh();
+                    EventQueue.invokeLater(() -> {
+                        MySQLManager.getInstance().dao().insertTrainSchedule(schedule);
+                        fetchAll();
+                        refresh();
+                    });
                     super.onOK();
                 } catch (ParseException e) {
                     e.printStackTrace();
@@ -94,14 +99,16 @@ public class TrainSchedulePanel extends ModelPanel {
     @Override
     public void onDelete(int[] selectedRows) {
         if (selectedRows.length <= 0) return;
-        for (int row : selectedRows) {
-            TrainSchedule schedule = schedules.get(row);
-            MySQLManager.getInstance().dao().deleteTrainSchedule(schedule);
-        }
-        for (int i = selectedRows.length - 1; i >= 0; i--) {
-            schedules.remove(i);
-        }
-        refresh();
+        EventQueue.invokeLater(() -> {
+            for (int row : selectedRows) {
+                TrainSchedule schedule = schedules.get(row);
+                MySQLManager.getInstance().dao().deleteTrainSchedule(schedule);
+            }
+            for (int i = selectedRows.length - 1; i >= 0; i--) {
+                schedules.remove(i);
+            }
+            refresh();
+        });
     }
 
     @Override
@@ -131,9 +138,11 @@ public class TrainSchedulePanel extends ModelPanel {
                     Train train = new Train();
                     train.setTrainId(field(4));
                     schedule.setTrain(train);
-                    MySQLManager.getInstance().dao().updateTrainSchedule(schedule);
-                    refresh();
-                    super.onOK();
+                    EventQueue.invokeLater(() -> {
+                        MySQLManager.getInstance().dao().updateTrainSchedule(schedule);
+                        refresh();
+                        super.onOK();
+                    });
                 } catch (ParseException e) {
                     e.printStackTrace();
                     JOptionPane.showMessageDialog(null, "日期格式错误！请按照 年-月-日 时:分:秒 的格式输入！");

@@ -6,6 +6,7 @@ import com.andreamapp.homeward.ui.manager.TrainOrderPanel;
 import com.andreamapp.homeward.ui.widget.XDialog;
 
 import javax.swing.*;
+import java.awt.*;
 
 @SuppressWarnings("WeakerAccess")
 public class HistoryPanel extends TrainOrderPanel {
@@ -28,9 +29,11 @@ public class HistoryPanel extends TrainOrderPanel {
             @Override
             protected void onOK() {
                 order.setOrderState(TrainOrder.STATE_REFUNDED);
-                MySQLManager.getInstance().dao().updateTrainOrder(order);
-                JOptionPane.showMessageDialog(null, "退款成功！");
-                super.onOK();
+                EventQueue.invokeLater(() -> {
+                    MySQLManager.getInstance().dao().updateTrainOrder(order);
+                    JOptionPane.showMessageDialog(null, "退款成功！");
+                    super.onOK();
+                });
             }
         }.popup("确认退款");
     }

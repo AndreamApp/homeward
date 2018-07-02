@@ -1,6 +1,8 @@
 package com.andreamapp.homeward.ui.manager;
 
+import com.andreamapp.homeward.bean.Manager;
 import com.andreamapp.homeward.ui.widget.Measurable;
+import com.andreamapp.homeward.utils.Constants;
 import com.andreamapp.homeward.utils.LookUtils;
 import com.andreamapp.homeward.utils.WidgetUtils;
 
@@ -18,6 +20,8 @@ public class ManagerFrame extends JFrame implements Measurable {
 
     @SuppressWarnings("WeakerAccess")
     public ManagerFrame() {
+        Constants.checkManagerType(Manager.TYPE_SUPERUSER);
+        setTitle("Homeward后台管理系统");
         initComponents();
     }
 

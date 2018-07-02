@@ -1,6 +1,9 @@
 package com.andreamapp.homeward.utils;
 
 import com.andreamapp.homeward.bean.Manager;
+import com.andreamapp.homeward.ui.login.LoginFrame;
+
+import javax.swing.*;
 
 public class Constants {
     public static final String BG_PATH = "D:/Andream/CQU/Homework/数据库实验/课程设计/homeward/res/bg.jpg";
@@ -33,4 +36,18 @@ public class Constants {
     }
 
     public static Manager currentManager;
+
+    public static boolean checkManagerType(int type) {
+        if (Constants.currentManager == null) {
+            JOptionPane.showMessageDialog(null, "未登录！");
+            WidgetUtils.popup(LoginFrame.class, WindowConstants.EXIT_ON_CLOSE);
+            System.exit(0);
+            return false;
+        } else if (Constants.currentManager.getManagerType() != type) {
+            JOptionPane.showMessageDialog(null, "无相应的管理员权限！");
+            System.exit(0);
+            return false;
+        }
+        return true;
+    }
 }

@@ -15,6 +15,7 @@ import com.andreamapp.homeward.utils.StringUtils;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -90,8 +91,10 @@ public class TrainPanel extends ModelPanel {
 
     @Override
     public void onSearch(String key) {
-        trains = MySQLManager.getInstance().dao().searchTrains(key);
-        refresh();
+        EventQueue.invokeLater(() -> {
+            trains = MySQLManager.getInstance().dao().searchTrains(key);
+            refresh();
+        });
     }
 
     @Override
@@ -112,11 +115,13 @@ public class TrainPanel extends ModelPanel {
             protected void onOK() {
                 Train train = new Train();
                 loadTrain(train, field(0), field(1));
-                // update train info
-                MySQLManager.getInstance().dao().updateTrain(train);
-                fetchAll();
-                refresh();
-                super.onOK();
+                EventQueue.invokeLater(() -> {
+                    // update train info
+                    MySQLManager.getInstance().dao().updateTrain(train);
+                    fetchAll();
+                    refresh();
+                    super.onOK();
+                });
             }
         }.popup("添加列车");
     }
@@ -124,14 +129,16 @@ public class TrainPanel extends ModelPanel {
     @Override
     public void onDelete(int[] selectedRows) {
         if(selectedRows.length <= 0) return;
-        for(int row : selectedRows){
-            Train train = trains.get(row);
-            MySQLManager.getInstance().dao().deleteTrain(train);
-        }
-        for(int i = selectedRows.length - 1; i >= 0; i--){
-            trains.remove(i);
-        }
-        refresh();
+        EventQueue.invokeLater(() -> {
+            for (int row : selectedRows) {
+                Train train = trains.get(row);
+                MySQLManager.getInstance().dao().deleteTrain(train);
+            }
+            for (int i = selectedRows.length - 1; i >= 0; i--) {
+                trains.remove(i);
+            }
+            refresh();
+        });
     }
 
     @Override
@@ -182,11 +189,13 @@ public class TrainPanel extends ModelPanel {
             @Override
             protected void onOK() {
                 loadTrain(train, field(0), field(1));
-                // update train info
-                MySQLManager.getInstance().dao().updateTrain(train);
-                fetchAll();
-                refresh();
-                super.onOK();
+                EventQueue.invokeLater(() -> {
+                    // update train info
+                    MySQLManager.getInstance().dao().updateTrain(train);
+                    fetchAll();
+                    refresh();
+                    super.onOK();
+                });
             }
         }.popup("修改列车信息");
     }

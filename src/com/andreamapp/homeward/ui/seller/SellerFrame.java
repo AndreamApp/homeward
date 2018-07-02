@@ -1,6 +1,8 @@
 package com.andreamapp.homeward.ui.seller;
 
+import com.andreamapp.homeward.bean.Manager;
 import com.andreamapp.homeward.ui.widget.Measurable;
+import com.andreamapp.homeward.utils.Constants;
 import com.andreamapp.homeward.utils.LookUtils;
 import com.andreamapp.homeward.utils.WidgetUtils;
 
@@ -14,6 +16,8 @@ public class SellerFrame extends JFrame implements Measurable {
 
     @SuppressWarnings("WeakerAccess")
     public SellerFrame() {
+        Constants.checkManagerType(Manager.TYPE_SELLER);
+        setTitle("Homeward售票系统");
         initComponents();
     }
 

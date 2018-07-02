@@ -8,6 +8,7 @@ import com.andreamapp.homeward.ui.base.ModelPanel;
 import com.andreamapp.homeward.ui.widget.XDialog;
 import com.andreamapp.homeward.utils.Constants;
 
+import java.awt.*;
 import java.util.List;
 
 public class ManagerPanel extends ModelPanel {
@@ -52,13 +53,14 @@ public class ManagerPanel extends ModelPanel {
 
     @Override
     public void onSearch(String key) {
-        if(key.equals("")){
-            fetchAll();
-        }
-        else{
-            managers = MySQLManager.getInstance().dao().searchManagers(key);
-        }
-        refresh();
+        EventQueue.invokeLater(() -> {
+            if (key.equals("")) {
+                fetchAll();
+            } else {
+                managers = MySQLManager.getInstance().dao().searchManagers(key);
+            }
+            refresh();
+        });
     }
 
     @Override
@@ -84,10 +86,12 @@ public class ManagerPanel extends ModelPanel {
                 manager.setName(field(3));
                 manager.setSex(option(4));
                 manager.setManagerType(option(5) + 1);
-                MySQLManager.getInstance().dao().insertManager(manager);
-                fetchAll();
-                refresh();
-                super.onOK();
+                EventQueue.invokeLater(() -> {
+                    MySQLManager.getInstance().dao().insertManager(manager);
+                    fetchAll();
+                    refresh();
+                    super.onOK();
+                });
             }
         }.popup("添加管理员");
     }
@@ -95,14 +99,16 @@ public class ManagerPanel extends ModelPanel {
     @Override
     public void onDelete(int[] selectedRows) {
         if(selectedRows.length <= 0) return;
-        for(int row : selectedRows){
-            Manager manager = managers.get(row);
-            MySQLManager.getInstance().dao().deleteManager(manager);
-        }
-        for(int i = selectedRows.length - 1; i >= 0; i--){
-            managers.remove(i);
-        }
-        refresh();
+        EventQueue.invokeLater(() -> {
+            for (int row : selectedRows) {
+                Manager manager = managers.get(row);
+                MySQLManager.getInstance().dao().deleteManager(manager);
+            }
+            for (int i = selectedRows.length - 1; i >= 0; i--) {
+                managers.remove(i);
+            }
+            refresh();
+        });
     }
 
     @Override
@@ -131,9 +137,11 @@ public class ManagerPanel extends ModelPanel {
                 manager.setName(field(4));
                 manager.setSex(option(5));
                 manager.setManagerType(option(6) + 1);
-                MySQLManager.getInstance().dao().updateManager(manager);
-                refresh();
-                super.onOK();
+                EventQueue.invokeLater(() -> {
+                    MySQLManager.getInstance().dao().updateManager(manager);
+                    refresh();
+                    super.onOK();
+                });
             }
         }.popup("修改管理员");
     }

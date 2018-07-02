@@ -11,7 +11,10 @@ import com.andreamapp.homeward.utils.WidgetUtils;
 import org.jdesktop.swingx.JXImagePanel;
 
 import javax.swing.*;
+import javax.swing.plaf.BorderUIResource;
 import java.awt.*;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.awt.event.ItemEvent;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -112,9 +115,11 @@ public class OrderPanel extends JPanel {
     }
 
     private void onQuery(String departStation, String arriveStation, Date departDate, boolean isStudent) {
-        schedules = MySQLManager.getInstance().dao()
-                .searchTrainSchedule(departStation, arriveStation, departDate, isStudent);
-        refresh(departStation, arriveStation, isStudent);
+        EventQueue.invokeLater(() -> {
+            schedules = MySQLManager.getInstance().dao()
+                    .searchTrainSchedule(departStation, arriveStation, departDate, isStudent);
+            refresh(departStation, arriveStation, isStudent);
+        });
     }
 
     private void refresh(String departStation, String arriveStation, boolean isStudent) {
@@ -282,10 +287,8 @@ public class OrderPanel extends JPanel {
             orderHardBerth.addActionListener(e -> new OrderDialog("硬卧").popup("预订硬卧票"));
             orderSoftBerth.addActionListener(e -> new OrderDialog("软卧").popup("预订软卧票"));
             orderNoSeat.addActionListener(e -> new OrderDialog("无座").popup("预订无座票"));
+            setBorder(new BorderUIResource.LineBorderUIResource(new Color(200, 200, 200)));
         }
-
-
-
 
         private void initAlignment() {
             Font boldFont = new Font("黑体", Font.BOLD, 24);
@@ -348,6 +351,7 @@ public class OrderPanel extends JPanel {
         private class OrderDialog extends XDialog {
             private JLabel dateInfo, seatInfo;
             private TrainInfoItem trainInfoItem;
+            private JTextField nameField, telField;
             private JComboBox carriageBox, seatNumBox;
             private String seatType;
             private float seatMoney;
@@ -440,9 +444,22 @@ public class OrderPanel extends JPanel {
 
                 addItem(dateInfo = new JLabel(train.getTrainId() + "次列车  " + departDate + "    " + seatType + "  " + seatMoney + "元"), 500, 40);
                 addItem(trainInfoItem = new TrainInfoItem(schedule, extra));
-                addField("乘客姓名", "");
-                addField("身份证号码", "");
-                addField("手机号码", "");
+                nameField = addField("乘客姓名", "");
+                addField("身份证号码", "").addFocusListener(new FocusAdapter() {
+                    @Override
+                    public void focusLost(FocusEvent e) {
+                        // auto fill other blank
+                        String idNum = field(3);
+                        if (!StringUtils.empty(idNum)) {
+                            Customer customer = MySQLManager.getInstance().dao().getCustomerByIdNum(idNum);
+                            if (customer != null) {
+                                nameField.setText(customer.getName());
+                                telField.setText(customer.getTel());
+                            }
+                        }
+                    }
+                });
+                telField = addField("手机号码", "");
                 carriageBox = addComboBox("车厢", getCarriages());
                 (seatNumBox = addComboBox("座位号")).setEnabled(false);
 

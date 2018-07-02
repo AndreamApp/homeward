@@ -222,10 +222,12 @@ public class XDialog extends JDialog {
      * @param title 对话框标题
      */
     public void popup(String title){
-        setTitle(title);
-        setSize(panel.panelWidth, panel.panelHeight);
-        setResizable(false);
-        setLocationRelativeTo(null);
-        setVisible(true);
+        EventQueue.invokeLater(() -> {
+            setTitle(title);
+            setSize(panel.panelWidth, panel.panelHeight);
+            setResizable(false);
+            setLocationRelativeTo(null);
+            setVisible(true);
+        });
     }
 }

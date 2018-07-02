@@ -2,11 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="06737e02-fa00-4512-a447-12f3ffba06f2" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/com/andreamapp/homeward/dao/MySQLDAO.java" afterPath="$PROJECT_DIR$/src/com/andreamapp/homeward/dao/MySQLDAO.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/login/LoginFrame.java" afterPath="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/login/LoginFrame.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/manager/CustomerPanel.java" afterPath="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/manager/CustomerPanel.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/manager/ManagerFrame.java" afterPath="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/manager/ManagerFrame.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/manager/ManagerPanel.java" afterPath="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/manager/ManagerPanel.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/manager/SellPointPanel.java" afterPath="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/manager/SellPointPanel.java" />
       <change beforePath="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/manager/TrainOrderPanel.java" afterPath="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/manager/TrainOrderPanel.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/manager/TrainPanel.java" afterPath="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/manager/TrainPanel.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/manager/TrainSchedulePanel.java" afterPath="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/manager/TrainSchedulePanel.java" />
       <change beforePath="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/seller/HistoryPanel.java" afterPath="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/seller/HistoryPanel.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/seller/ModifyPasswordPanel.java" afterPath="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/seller/ModifyPasswordPanel.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/seller/OrderPanel.java" afterPath="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/seller/OrderPanel.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/seller/SellerFrame.java" afterPath="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/seller/SellerFrame.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/widget/XDialog.java" afterPath="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/widget/XDialog.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/andreamapp/homeward/utils/Constants.java" afterPath="$PROJECT_DIR$/src/com/andreamapp/homeward/utils/Constants.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -23,14 +33,56 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="TrainOrder.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/andreamapp/homeward/bean/TrainOrder.java">
+      <file leaf-file-name="HistoryPanel.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/andreamapp/homeward/ui/seller/HistoryPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="113">
-              <caret line="121" column="5" lean-forward="true" selection-start-line="121" selection-start-column="5" selection-end-line="121" selection-end-column="5" />
+            <state relative-caret-position="220">
+              <caret line="35" column="19" lean-forward="false" selection-start-line="35" selection-start-column="19" selection-end-line="35" selection-end-column="19" />
               <folding>
-                <element signature="e#2826#2827#0" expanded="true" />
-                <element signature="e#2860#2861#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#793#794#0" expanded="true" />
+                <element signature="e#889#890#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TrainOrderPanel.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/andreamapp/homeward/ui/manager/TrainOrderPanel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1115">
+              <caret line="334" column="24" lean-forward="true" selection-start-line="334" selection-start-column="24" selection-end-line="334" selection-end-column="24" />
+              <folding>
+                <element signature="method#checkTrainId#0;class#TrainOrderPanel#0" expanded="false" />
+                <element signature="method#reCalcMoney#0;class#TrainOrderPanel#0" expanded="false" />
+                <element signature="method#addListener#0;class#TrainOrderPanel#0" expanded="false" />
+                <element signature="e#4281#4517#0" expanded="false" />
+                <element signature="e#4558#4679#0" expanded="false" />
+                <element signature="method#selectCarriage#0;class#TrainOrderPanel#0" expanded="false" />
+                <element signature="method#initComponents#0;class#5657:9487" expanded="false" />
+                <element signature="method#initComponents#0;class#10153:14636" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ManagerFrame.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/andreamapp/homeward/ui/manager/ManagerFrame.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="22">
+              <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Constants.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/andreamapp/homeward/utils/Constants.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="285">
+              <caret line="49" column="25" lean-forward="true" selection-start-line="49" selection-start-column="25" selection-end-line="49" selection-end-column="25" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -79,10 +131,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/com/andreamapp/homeward/dao/ManagerDAO.java" />
-        <option value="$PROJECT_DIR$/src/com/andreamapp/homeward/dao/TicketPointDAO.java" />
-        <option value="$PROJECT_DIR$/src/com/andreamapp/homeward/dao/TrainDAO.java" />
-        <option value="$PROJECT_DIR$/src/com/andreamapp/homeward/dao/TrainOrderDAO.java" />
         <option value="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/panel/BaseDialog.java" />
         <option value="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/panel/base/ResultSetTableModel.java" />
         <option value="$PROJECT_DIR$/src/com/andreamapp/homeward/bean/Station.java" />
@@ -103,33 +151,37 @@
         <option value="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/widget/XWebView.java" />
         <option value="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/seller/QueryPanel.java" />
         <option value="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/Test.form" />
-        <option value="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/seller/ModifyPasswordPanel.java" />
         <option value="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/widget/XTextField.java" />
         <option value="$PROJECT_DIR$/src/com/andreamapp/homeward/bean/SeatAggregate.java" />
         <option value="$PROJECT_DIR$/src/com/andreamapp/homeward/dao/TrainScheduleDAO.java" />
         <option value="$PROJECT_DIR$/src/com/andreamapp/homeward/bean/Train.java" />
         <option value="$PROJECT_DIR$/src/com/andreamapp/homeward/bean/TrainSchedule.java" />
         <option value="$PROJECT_DIR$/src/com/andreamapp/homeward/bean/Seat.java" />
-        <option value="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/manager/TrainSchedulePanel.java" />
         <option value="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/widget/MesurablePanel.java" />
         <option value="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/widget/MesuablePanelImpl.java" />
-        <option value="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/seller/OrderPanel.java" />
-        <option value="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/widget/XDialog.java" />
         <option value="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/LoginFrame.java" />
         <option value="$PROJECT_DIR$/src/com/andreamapp/homeward/utils/LookUtils.java" />
-        <option value="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/seller/SellerFrame.java" />
         <option value="$PROJECT_DIR$/src/com/andreamapp/homeward/utils/WidgetUtils.java" />
-        <option value="$PROJECT_DIR$/src/com/andreamapp/homeward/utils/Constants.java" />
         <option value="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/widget/XPanel.java" />
         <option value="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/base/ModelPanel.java" />
-        <option value="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/login/LoginFrame.java" />
         <option value="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/widget/XPasswordField.java" />
         <option value="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/widget/XTable.java" />
-        <option value="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/manager/ManagerFrame.java" />
         <option value="$PROJECT_DIR$/src/com/andreamapp/homeward/dao/MySQLManager.java" />
-        <option value="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/manager/TrainOrderPanel.java" />
         <option value="$PROJECT_DIR$/src/com/andreamapp/homeward/dao/MySQLDAO.java" />
+        <option value="$PROJECT_DIR$/src/com/andreamapp/homeward/utils/Constants.java" />
+        <option value="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/manager/ManagerFrame.java" />
+        <option value="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/seller/SellerFrame.java" />
+        <option value="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/login/LoginFrame.java" />
+        <option value="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/manager/CustomerPanel.java" />
+        <option value="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/widget/XDialog.java" />
+        <option value="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/manager/ManagerPanel.java" />
+        <option value="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/manager/SellPointPanel.java" />
+        <option value="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/manager/TrainOrderPanel.java" />
+        <option value="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/manager/TrainPanel.java" />
+        <option value="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/manager/TrainSchedulePanel.java" />
+        <option value="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/seller/OrderPanel.java" />
         <option value="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/seller/HistoryPanel.java" />
+        <option value="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/seller/ModifyPasswordPanel.java" />
       </list>
     </option>
   </component>
@@ -338,6 +390,45 @@
               <item name="homeward" type="462c0819:PsiDirectoryNode" />
               <item name="ui" type="462c0819:PsiDirectoryNode" />
               <item name="base" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="homeward" type="b2602c69:ProjectViewProjectNode" />
+              <item name="homeward" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="homeward" type="462c0819:PsiDirectoryNode" />
+              <item name="ui" type="462c0819:PsiDirectoryNode" />
+              <item name="login" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="homeward" type="b2602c69:ProjectViewProjectNode" />
+              <item name="homeward" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="homeward" type="462c0819:PsiDirectoryNode" />
+              <item name="ui" type="462c0819:PsiDirectoryNode" />
+              <item name="manager" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="homeward" type="b2602c69:ProjectViewProjectNode" />
+              <item name="homeward" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="homeward" type="462c0819:PsiDirectoryNode" />
+              <item name="ui" type="462c0819:PsiDirectoryNode" />
+              <item name="seller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="homeward" type="b2602c69:ProjectViewProjectNode" />
+              <item name="homeward" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="homeward" type="462c0819:PsiDirectoryNode" />
+              <item name="ui" type="462c0819:PsiDirectoryNode" />
+              <item name="widget" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="homeward" type="b2602c69:ProjectViewProjectNode" />
+              <item name="homeward" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="homeward" type="462c0819:PsiDirectoryNode" />
+              <item name="utils" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -590,8 +681,8 @@
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Application.LoginFrame (1)" />
-        <item index="1" class="java.lang.String" itemvalue="Application.LoginFrame" />
-        <item index="2" class="java.lang.String" itemvalue="Application.SellerFrame" />
+        <item index="1" class="java.lang.String" itemvalue="Application.SellerFrame" />
+        <item index="2" class="java.lang.String" itemvalue="Application.LoginFrame" />
         <item index="3" class="java.lang.String" itemvalue="Application.ManagerFrame" />
         <item index="4" class="java.lang.String" itemvalue="Application.TestDialog" />
       </list>
@@ -751,7 +842,14 @@
       <option name="project" value="LOCAL" />
       <updated>1530512533706</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="[Fix] OrderPanel data model">
+      <created>1530514221050</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1530514221050</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TodoView">
@@ -765,6 +863,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3279483" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -779,7 +878,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25036603" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25036603" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24963397" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -820,13 +919,14 @@
     <MESSAGE value="[Add] Refund in HistoryPanel" />
     <MESSAGE value="[Add] start frame by WidgetUtils.popup()" />
     <MESSAGE value="[Add] start frame by WidgetUtils.popup(); impl LoginFrame based on XPanel" />
-    <option name="LAST_COMMIT_MESSAGE" value="[Add] start frame by WidgetUtils.popup(); impl LoginFrame based on XPanel" />
+    <MESSAGE value="[Fix] OrderPanel data model" />
+    <option name="LAST_COMMIT_MESSAGE" value="[Fix] OrderPanel data model" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="35" />
+      <option name="time" value="36" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
@@ -867,31 +967,10 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://D:/Java/jdk8/javafx-src.zip!/javafx/scene/control/DatePicker.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="104" column="40" lean-forward="true" selection-start-line="104" selection-start-column="40" selection-end-line="104" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/andreamapp/homeward/bean/Manager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="353">
           <caret line="57" column="19" lean-forward="true" selection-start-line="57" selection-start-column="19" selection-end-line="57" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/andreamapp/homeward/ui/manager/ManagerPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="131" column="42" lean-forward="true" selection-start-line="131" selection-start-column="42" selection-end-line="131" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/andreamapp/homeward/ui/manager/SellPointPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1026">
-          <caret line="50" column="0" lean-forward="true" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -945,25 +1024,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/andreamapp/homeward/ui/manager/CustomerPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1276">
-          <caret line="69" column="41" lean-forward="true" selection-start-line="69" selection-start-column="41" selection-end-line="69" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://D:/Java/jdk8/src.zip!/java/awt/Component.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="193">
           <caret line="185" column="22" lean-forward="false" selection-start-line="185" selection-start-column="22" selection-end-line="185" selection-end-column="22" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/andreamapp/homeward/ui/manager/TrainPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="111" column="27" lean-forward="false" selection-start-line="111" selection-start-column="27" selection-end-line="111" selection-end-column="27" />
         </state>
       </provider>
     </entry>
@@ -979,16 +1044,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="263">
           <caret line="66" column="0" lean-forward="false" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/andreamapp/homeward/ui/seller/ModifyPasswordPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="770">
-          <caret line="35" column="67" lean-forward="true" selection-start-line="35" selection-start-column="67" selection-end-line="35" selection-end-column="67" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1050,14 +1105,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/andreamapp/homeward/ui/manager/TrainSchedulePanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2508">
-          <caret line="133" column="83" lean-forward="true" selection-start-line="133" selection-start-column="83" selection-end-line="133" selection-end-column="83" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/andreamapp/homeward/ui/widget/Measurable.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="88">
@@ -1085,24 +1132,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/andreamapp/homeward/ui/seller/OrderPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="178" column="58" lean-forward="true" selection-start-line="178" selection-start-column="58" selection-end-line="178" selection-end-column="58" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#8006#8007#0" expanded="false" />
-            <element signature="e#8046#8047#0" expanded="false" />
-            <element signature="e#8095#8096#0" expanded="false" />
-            <element signature="e#8136#8137#0" expanded="false" />
-            <element signature="e#13236#13237#0" expanded="false" />
-            <element signature="e#13276#13277#0" expanded="false" />
-            <element signature="e#13325#13326#0" expanded="false" />
-            <element signature="e#13366#13367#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/andreamapp/homeward/ui/widget/XTextField.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="88">
@@ -1124,44 +1153,6 @@
         <state relative-caret-position="-339">
           <caret line="104" column="12" lean-forward="false" selection-start-line="104" selection-start-column="8" selection-end-line="104" selection-end-column="12" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/andreamapp/homeward/ui/seller/SellerFrame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
-          <caret line="41" column="24" lean-forward="true" selection-start-line="41" selection-start-column="24" selection-end-line="41" selection-end-column="24" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#561#562#0" expanded="true" />
-            <element signature="e#593#594#0" expanded="true" />
-            <element signature="e#972#973#0" expanded="true" />
-            <element signature="e#999#1000#0" expanded="true" />
-            <element signature="e#1040#1041#0" expanded="true" />
-            <element signature="e#1066#1067#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/andreamapp/homeward/utils/Constants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/andreamapp/homeward/utils/WidgetUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="924">
-          <caret line="54" column="35" lean-forward="true" selection-start-line="54" selection-start-column="35" selection-end-line="54" selection-end-column="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#723#724#0" expanded="true" />
-            <element signature="e#789#790#0" expanded="true" />
-            <element signature="e#870#871#0" expanded="true" />
-            <element signature="e#918#919#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1199,37 +1190,6 @@
             <element signature="e#10381#10382#0" expanded="true" />
             <element signature="e#10442#10443#0" expanded="true" />
             <element signature="e#10496#10497#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/andreamapp/homeward/ui/widget/XDialog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="62">
-          <caret line="51" column="48" lean-forward="false" selection-start-line="51" selection-start-column="48" selection-end-line="51" selection-end-column="48" />
-          <folding>
-            <element signature="docComment;method#initComponents#0;class#XDialog#0" expanded="false" />
-            <element signature="e#1460#1461#0" expanded="true" />
-            <element signature="e#1515#1516#0" expanded="true" />
-            <element signature="docComment;method#addItem#2;class#XDialog#0" expanded="false" />
-            <element signature="docComment;method#addLabel#0;class#XDialog#0" expanded="false" />
-            <element signature="docComment;method#addField#0;class#XDialog#0" expanded="false" />
-            <element signature="docComment;method#addNumberField#0;class#XDialog#0" expanded="false" />
-            <element signature="docComment;method#addFloatField#0;class#XDialog#0" expanded="false" />
-            <element signature="docComment;method#addComboBox#0;class#XDialog#0" expanded="false" />
-            <element signature="docComment;method#addCheckBox#0;class#XDialog#0" expanded="false" />
-            <element signature="docComment;method#addTable#0;class#XDialog#0" expanded="false" />
-            <element signature="docComment;method#field#0;class#XDialog#0" expanded="false" />
-            <element signature="docComment;method#fieldInt#0;class#XDialog#0" expanded="false" />
-            <element signature="docComment;method#fieldFloat#0;class#XDialog#0" expanded="false" />
-            <element signature="docComment;method#option#0;class#XDialog#0" expanded="false" />
-            <element signature="docComment;method#optionValue#0;class#XDialog#0" expanded="false" />
-            <element signature="docComment;method#checked#0;class#XDialog#0" expanded="false" />
-            <element signature="docComment;method#onOK#0;class#XDialog#0" expanded="false" />
-            <element signature="docComment;method#onCancel#0;class#XDialog#0" expanded="false" />
-            <element signature="method#onCancel#0;class#XDialog#0" expanded="false" />
-            <element signature="docComment;method#popup#0;class#XDialog#0" expanded="false" />
-            <element signature="docComment;method#popup#1;class#XDialog#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1272,39 +1232,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/andreamapp/homeward/ui/login/LoginFrame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="61" column="25" lean-forward="false" selection-start-line="61" selection-start-column="25" selection-end-line="61" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#716#717#0" expanded="true" />
-            <element signature="e#748#749#0" expanded="true" />
-            <element signature="e#1362#1363#0" expanded="true" />
-            <element signature="e#1403#1404#0" expanded="true" />
-            <element signature="e#2537#2538#0" expanded="true" />
-            <element signature="e#2563#2564#0" expanded="true" />
-            <element signature="e#2604#2605#0" expanded="true" />
-            <element signature="e#2630#2631#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/andreamapp/homeward/ui/manager/ManagerFrame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="124">
-          <caret line="37" column="42" lean-forward="false" selection-start-line="37" selection-start-column="42" selection-end-line="37" selection-end-column="42" />
-          <folding>
-            <element signature="e#750#751#0" expanded="true" />
-            <element signature="e#782#783#0" expanded="true" />
-            <element signature="e#1440#1441#0" expanded="true" />
-            <element signature="e#1467#1468#0" expanded="true" />
-            <element signature="e#1508#1509#0" expanded="true" />
-            <element signature="e#1534#1535#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/andreamapp/homeward/dao/MySQLManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="281">
@@ -1320,40 +1247,6 @@
         <state relative-caret-position="176">
           <caret line="23" column="24" lean-forward="false" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/andreamapp/homeward/ui/seller/HistoryPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="31" column="47" lean-forward="true" selection-start-line="31" selection-start-column="47" selection-end-line="31" selection-end-column="47" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#773#774#0" expanded="true" />
-            <element signature="e#869#870#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/andreamapp/homeward/ui/manager/TrainOrderPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-94">
-          <caret line="22" column="59" lean-forward="false" selection-start-line="22" selection-start-column="59" selection-end-line="22" selection-end-column="59" />
-          <folding>
-            <element signature="method#onSearch#0;class#TrainOrderPanel#0" expanded="false" />
-            <element signature="method#checkTrainId#0;class#TrainOrderPanel#0" expanded="false" />
-            <element signature="method#reCalcMoney#0;class#TrainOrderPanel#0" expanded="false" />
-            <element signature="method#addListener#0;class#TrainOrderPanel#0" expanded="false" />
-            <element signature="e#4187#4423#0" expanded="false" />
-            <element signature="e#4464#4585#0" expanded="false" />
-            <element signature="method#selectCarriage#0;class#TrainOrderPanel#0" expanded="false" />
-            <element signature="method#initComponents#0;class#5563:9170" expanded="false" />
-            <element signature="method#onDelete#0;class#TrainOrderPanel#0" expanded="false" />
-            <element signature="method#onUpdate#0;class#TrainOrderPanel#0" expanded="false" />
-            <element signature="class#9753:14021" expanded="false" />
-            <element signature="method#initComponents#0;class#9753:14021" expanded="false" />
-            <element signature="method#onOK#0;class#9753:14021" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1383,11 +1276,203 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/andreamapp/homeward/bean/TrainOrder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="113">
+        <state relative-caret-position="26">
           <caret line="121" column="5" lean-forward="true" selection-start-line="121" selection-start-column="5" selection-end-line="121" selection-end-column="5" />
           <folding>
-            <element signature="e#2826#2827#0" expanded="true" />
-            <element signature="e#2860#2861#0" expanded="true" />
+            <element signature="e#2826#2827#0" expanded="false" />
+            <element signature="e#2860#2861#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/Java/jdk8/src.zip!/javax/swing/plaf/BorderUIResource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="87">
+          <caret line="173" column="67" lean-forward="false" selection-start-line="173" selection-start-column="55" selection-end-line="173" selection-end-column="67" />
+          <folding>
+            <element signature="e#5049#5050#0" expanded="false" />
+            <element signature="e#5080#5081#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/andreamapp/homeward/utils/Constants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="49" column="25" lean-forward="true" selection-start-line="49" selection-start-column="25" selection-end-line="49" selection-end-column="25" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/andreamapp/homeward/utils/WidgetUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-199">
+          <caret line="26" column="23" lean-forward="false" selection-start-line="26" selection-start-column="23" selection-end-line="26" selection-end-column="23" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#723#724#0" expanded="true" />
+            <element signature="e#789#790#0" expanded="true" />
+            <element signature="e#870#871#0" expanded="true" />
+            <element signature="e#918#919#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/andreamapp/homeward/ui/widget/XDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="40">
+          <caret line="223" column="36" lean-forward="true" selection-start-line="223" selection-start-column="36" selection-end-line="224" selection-end-column="38" />
+          <folding>
+            <element signature="docComment;method#initComponents#0;class#XDialog#0" expanded="false" />
+            <element signature="e#1460#1461#0" expanded="true" />
+            <element signature="e#1515#1516#0" expanded="true" />
+            <element signature="docComment;method#addItem#2;class#XDialog#0" expanded="false" />
+            <element signature="docComment;method#addLabel#0;class#XDialog#0" expanded="false" />
+            <element signature="docComment;method#addField#0;class#XDialog#0" expanded="false" />
+            <element signature="docComment;method#addNumberField#0;class#XDialog#0" expanded="false" />
+            <element signature="docComment;method#addFloatField#0;class#XDialog#0" expanded="false" />
+            <element signature="docComment;method#addComboBox#0;class#XDialog#0" expanded="false" />
+            <element signature="docComment;method#addCheckBox#0;class#XDialog#0" expanded="false" />
+            <element signature="docComment;method#addTable#0;class#XDialog#0" expanded="false" />
+            <element signature="docComment;method#field#0;class#XDialog#0" expanded="false" />
+            <element signature="docComment;method#fieldInt#0;class#XDialog#0" expanded="false" />
+            <element signature="docComment;method#fieldFloat#0;class#XDialog#0" expanded="false" />
+            <element signature="docComment;method#option#0;class#XDialog#0" expanded="false" />
+            <element signature="docComment;method#optionValue#0;class#XDialog#0" expanded="false" />
+            <element signature="docComment;method#checked#0;class#XDialog#0" expanded="false" />
+            <element signature="docComment;method#onOK#0;class#XDialog#0" expanded="false" />
+            <element signature="docComment;method#onCancel#0;class#XDialog#0" expanded="false" />
+            <element signature="method#onCancel#0;class#XDialog#0" expanded="false" />
+            <element signature="docComment;method#popup#0;class#XDialog#0" expanded="false" />
+            <element signature="docComment;method#popup#1;class#XDialog#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/andreamapp/homeward/ui/manager/ManagerFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/andreamapp/homeward/ui/manager/ManagerPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="143" column="19" lean-forward="false" selection-start-line="143" selection-start-column="19" selection-end-line="143" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/andreamapp/homeward/ui/manager/CustomerPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="90" column="13" lean-forward="true" selection-start-line="90" selection-start-column="13" selection-end-line="90" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/andreamapp/homeward/ui/login/LoginFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="61" column="45" lean-forward="true" selection-start-line="61" selection-start-column="45" selection-end-line="61" selection-end-column="45" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1486#1487#0" expanded="true" />
+            <element signature="e#1527#1528#0" expanded="true" />
+            <element signature="e#2807#2808#0" expanded="true" />
+            <element signature="e#2833#2834#0" expanded="true" />
+            <element signature="e#2874#2875#0" expanded="true" />
+            <element signature="e#2900#2901#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/andreamapp/homeward/ui/manager/SellPointPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="120" column="19" lean-forward="false" selection-start-line="120" selection-start-column="19" selection-end-line="120" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/andreamapp/homeward/ui/manager/TrainPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="197" column="19" lean-forward="false" selection-start-line="197" selection-start-column="19" selection-end-line="197" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/andreamapp/homeward/ui/manager/TrainSchedulePanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="48">
+          <caret line="144" column="23" lean-forward="false" selection-start-line="144" selection-start-column="23" selection-end-line="144" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/andreamapp/homeward/ui/seller/SellerFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-444">
+          <caret line="17" column="26" lean-forward="true" selection-start-line="17" selection-start-column="26" selection-end-line="17" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1156#1157#0" expanded="true" />
+            <element signature="e#1183#1184#0" expanded="true" />
+            <element signature="e#1224#1225#0" expanded="true" />
+            <element signature="e#1250#1251#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/andreamapp/homeward/ui/seller/OrderPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-590">
+          <caret line="475" column="54" lean-forward="true" selection-start-line="475" selection-start-column="54" selection-end-line="475" selection-end-column="54" />
+          <folding>
+            <element signature="e#18419#19074#0" expanded="true" />
+            <element signature="e#19073#19074#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/andreamapp/homeward/ui/manager/TrainOrderPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1115">
+          <caret line="334" column="24" lean-forward="true" selection-start-line="334" selection-start-column="24" selection-end-line="334" selection-end-column="24" />
+          <folding>
+            <element signature="method#checkTrainId#0;class#TrainOrderPanel#0" expanded="false" />
+            <element signature="method#reCalcMoney#0;class#TrainOrderPanel#0" expanded="false" />
+            <element signature="method#addListener#0;class#TrainOrderPanel#0" expanded="false" />
+            <element signature="e#4281#4517#0" expanded="false" />
+            <element signature="e#4558#4679#0" expanded="false" />
+            <element signature="method#selectCarriage#0;class#TrainOrderPanel#0" expanded="false" />
+            <element signature="method#initComponents#0;class#5657:9487" expanded="false" />
+            <element signature="method#initComponents#0;class#10153:14636" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/andreamapp/homeward/ui/seller/ModifyPasswordPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="528">
+          <caret line="29" column="0" lean-forward="true" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/andreamapp/homeward/ui/seller/HistoryPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="35" column="19" lean-forward="false" selection-start-line="35" selection-start-column="19" selection-end-line="35" selection-end-column="19" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#793#794#0" expanded="true" />
+            <element signature="e#889#890#0" expanded="true" />
           </folding>
         </state>
       </provider>

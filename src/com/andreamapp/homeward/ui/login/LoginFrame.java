@@ -6,6 +6,7 @@ import com.andreamapp.homeward.ui.manager.ManagerFrame;
 import com.andreamapp.homeward.ui.seller.SellerFrame;
 import com.andreamapp.homeward.ui.widget.Measurable;
 import com.andreamapp.homeward.ui.widget.XPanel;
+import com.andreamapp.homeward.utils.Constants;
 import com.andreamapp.homeward.utils.LookUtils;
 import com.andreamapp.homeward.utils.StringUtils;
 import com.andreamapp.homeward.utils.WidgetUtils;
@@ -18,6 +19,7 @@ public class LoginFrame extends JFrame implements Measurable {
     private JTextField usernameField, passwordField;
 
     public LoginFrame() {
+        setTitle("登录");
         initComponents();
     }
 
@@ -45,26 +47,26 @@ public class LoginFrame extends JFrame implements Measurable {
         String password = passwordField.getText();
         String error = "未知错误";
         if (StringUtils.empty(username)) {
-            error = "请输入用户名！";
+            JOptionPane.showMessageDialog(null, "请输入用户名！");
         } else if (StringUtils.empty("password")) {
-            error = "请输入密码！";
+            JOptionPane.showMessageDialog(null, "请输入密码！");
         } else {
-            Manager manager = MySQLManager.getInstance().dao().login(username, password);
-            if (manager == null) {
-                error = "密码错误！";
-            } else if (Manager.TYPE_SUPERUSER == manager.getManagerType()) {
-                JOptionPane.showMessageDialog(null, "以管理员身份登陆成功！");
-                WidgetUtils.popup(ManagerFrame.class);
-                dispose();
-                return;
-            } else if (Manager.TYPE_SELLER == manager.getManagerType()) {
-                JOptionPane.showMessageDialog(null, "以售票员身份登陆成功！");
-                WidgetUtils.popup(SellerFrame.class);
-                dispose();
-                return;
-            }
+            EventQueue.invokeLater(() -> {
+                Manager manager = MySQLManager.getInstance().dao().login(username, password);
+                Constants.currentManager = manager;
+                if (manager == null) {
+                    JOptionPane.showMessageDialog(null, "密码错误！");
+                } else if (Manager.TYPE_SUPERUSER == manager.getManagerType()) {
+                    JOptionPane.showMessageDialog(null, "以管理员身份登陆成功！");
+                    WidgetUtils.popup(ManagerFrame.class);
+                    dispose();
+                } else if (Manager.TYPE_SELLER == manager.getManagerType()) {
+                    JOptionPane.showMessageDialog(null, "以售票员身份登陆成功！");
+                    WidgetUtils.popup(SellerFrame.class);
+                    dispose();
+                }
+            });
         }
-        JOptionPane.showMessageDialog(null, error);
     }
 
     @Override

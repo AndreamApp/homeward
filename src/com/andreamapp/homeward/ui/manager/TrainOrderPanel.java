@@ -9,6 +9,7 @@ import com.andreamapp.homeward.utils.Constants;
 import com.andreamapp.homeward.utils.StringUtils;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.ItemEvent;
@@ -54,12 +55,14 @@ public class TrainOrderPanel extends ModelPanel {
 
     @Override
     public void onSearch(String key) {
-        if (key.equals("")) {
-            fetchAll();
-        } else {
-            orders = MySQLManager.getInstance().dao().searchTrainOrders(key);
-        }
-        refresh();
+        EventQueue.invokeLater(() -> {
+            if (key.equals("")) {
+                fetchAll();
+            } else {
+                orders = MySQLManager.getInstance().dao().searchTrainOrders(key);
+            }
+            refresh();
+        });
     }
 
 
@@ -187,45 +190,47 @@ public class TrainOrderPanel extends ModelPanel {
 
             @Override
             protected void onOK() {
-                TrainOrder order = new TrainOrder();
-                TicketPoint point = MySQLManager.getInstance().dao().getTicketPointById(fieldInt(0));
-                if (point == null) {
-                    JOptionPane.showMessageDialog(null, "该售票点不存在！");
-                    return;
-                }
-                order.setTicketPoint(point);
-                Customer buyer = MySQLManager.getInstance().dao().getCustomerByIdNum(field(1));
-                if (buyer == null) {
-                    JOptionPane.showMessageDialog(null, "该用户不存在！");
-                    return;
-                }
-                order.setBuyer(buyer);
-                checkTrainId(field(3));
-                order.setTrain(train);
-                TrainSchedule schedule = MySQLManager.getInstance().dao().getTrainScheduleById(fieldInt(2));
-                if (schedule == null) {
-                    JOptionPane.showMessageDialog(null, "该次列车行程不存在！");
-                    return;
-                }
-                order.setTrainSchedule(schedule);
-                Seat seat = MySQLManager.getInstance().dao().getSeat(train.getTrainId(), (int) optionValue(4), (int) optionValue(5));
-                seat.setTrain(train);
-                order.setSeat(seat);
-                if (fieldFloat(10) < 0) {
-                    JOptionPane.showMessageDialog(null, "！");
-                    return;
-                }
-                order.setDepartStation(MySQLManager.getInstance().dao().getStationByName((String) optionValue(7)));
-                order.setArriveStation(MySQLManager.getInstance().dao().getStationByName((String) optionValue(8)));
-                order.setDepartStationRrder(option(7) + 1);
-                order.setArriveStationOrder(option(8) + 2);
-                order.setStudentTicket(option(9) == 1);
-                order.setMoney(Float.parseFloat(field(10)));
-                order.setOrderState(TrainOrder.STATE_RESERVED);
-                MySQLManager.getInstance().dao().insertTrainOrder(order);
-                fetchAll();
-                refresh();
-                super.onOK();
+                EventQueue.invokeLater(() -> {
+                    TrainOrder order = new TrainOrder();
+                    TicketPoint point = MySQLManager.getInstance().dao().getTicketPointById(fieldInt(0));
+                    if (point == null) {
+                        JOptionPane.showMessageDialog(null, "该售票点不存在！");
+                        return;
+                    }
+                    order.setTicketPoint(point);
+                    Customer buyer = MySQLManager.getInstance().dao().getCustomerByIdNum(field(1));
+                    if (buyer == null) {
+                        JOptionPane.showMessageDialog(null, "该用户不存在！");
+                        return;
+                    }
+                    order.setBuyer(buyer);
+                    checkTrainId(field(3));
+                    order.setTrain(train);
+                    TrainSchedule schedule = MySQLManager.getInstance().dao().getTrainScheduleById(fieldInt(2));
+                    if (schedule == null) {
+                        JOptionPane.showMessageDialog(null, "该次列车行程不存在！");
+                        return;
+                    }
+                    order.setTrainSchedule(schedule);
+                    Seat seat = MySQLManager.getInstance().dao().getSeat(train.getTrainId(), (int) optionValue(4), (int) optionValue(5));
+                    seat.setTrain(train);
+                    order.setSeat(seat);
+                    if (fieldFloat(10) < 0) {
+                        JOptionPane.showMessageDialog(null, "！");
+                        return;
+                    }
+                    order.setDepartStation(MySQLManager.getInstance().dao().getStationByName((String) optionValue(7)));
+                    order.setArriveStation(MySQLManager.getInstance().dao().getStationByName((String) optionValue(8)));
+                    order.setDepartStationRrder(option(7) + 1);
+                    order.setArriveStationOrder(option(8) + 2);
+                    order.setStudentTicket(option(9) == 1);
+                    order.setMoney(Float.parseFloat(field(10)));
+                    order.setOrderState(TrainOrder.STATE_RESERVED);
+                    MySQLManager.getInstance().dao().insertTrainOrder(order);
+                    fetchAll();
+                    refresh();
+                    super.onOK();
+                });
             }
         }.popup("添加订单");
     }
@@ -233,14 +238,16 @@ public class TrainOrderPanel extends ModelPanel {
     @Override
     public void onDelete(int[] selectedRows) {
         if (selectedRows.length <= 0) return;
-        for (int row : selectedRows) {
-            TrainOrder order = orders.get(row);
-            MySQLManager.getInstance().dao().deleteTrainOrder(order);
-        }
-        for (int i = selectedRows.length - 1; i >= 0; i--) {
-            orders.remove(i);
-        }
-        refresh();
+        EventQueue.invokeLater(() -> {
+            for (int row : selectedRows) {
+                TrainOrder order = orders.get(row);
+                MySQLManager.getInstance().dao().deleteTrainOrder(order);
+            }
+            for (int i = selectedRows.length - 1; i >= 0; i--) {
+                orders.remove(i);
+            }
+            refresh();
+        });
     }
 
     @Override
@@ -285,43 +292,45 @@ public class TrainOrderPanel extends ModelPanel {
 
             @Override
             protected void onOK() {
-                TicketPoint point = MySQLManager.getInstance().dao().getTicketPointById(fieldInt(0));
-                if (point == null) {
-                    JOptionPane.showMessageDialog(null, "该售票点不存在！");
-                    return;
-                }
-                order.setTicketPoint(point);
-                Customer buyer = MySQLManager.getInstance().dao().getCustomerByIdNum(field(1));
-                if (buyer == null) {
-                    JOptionPane.showMessageDialog(null, "该用户不存在！");
-                    return;
-                }
-                order.setBuyer(buyer);
-                checkTrainId(field(3));
-                order.setTrain(train);
-                TrainSchedule schedule = MySQLManager.getInstance().dao().getTrainScheduleById(fieldInt(2));
-                if (schedule == null) {
-                    JOptionPane.showMessageDialog(null, "该次列车行程不存在！");
-                    return;
-                }
-                order.setTrainSchedule(schedule);
-                Seat seat = MySQLManager.getInstance().dao().getSeat(train.getTrainId(), (int) optionValue(4), (int) optionValue(5));
-                seat.setTrain(train);
-                order.setSeat(seat);
-                if (fieldFloat(10) < 0) {
-                    JOptionPane.showMessageDialog(null, "！");
-                    return;
-                }
-                order.setDepartStation(MySQLManager.getInstance().dao().getStationByName((String) optionValue(7)));
-                order.setArriveStation(MySQLManager.getInstance().dao().getStationByName((String) optionValue(8)));
-                order.setDepartStationRrder(option(7) + 1);
-                order.setArriveStationOrder(option(8) + 2);
-                order.setStudentTicket(option(9) == 1);
-                order.setMoney(Float.parseFloat(field(10)));
-                order.setOrderState(TrainOrder.STATE_RESERVED);
-                MySQLManager.getInstance().dao().updateTrainOrder(order);
-                refresh();
-                super.onOK();
+                EventQueue.invokeLater(() -> {
+                    TicketPoint point = MySQLManager.getInstance().dao().getTicketPointById(fieldInt(0));
+                    if (point == null) {
+                        JOptionPane.showMessageDialog(null, "该售票点不存在！");
+                        return;
+                    }
+                    order.setTicketPoint(point);
+                    Customer buyer = MySQLManager.getInstance().dao().getCustomerByIdNum(field(1));
+                    if (buyer == null) {
+                        JOptionPane.showMessageDialog(null, "该用户不存在！");
+                        return;
+                    }
+                    order.setBuyer(buyer);
+                    checkTrainId(field(3));
+                    order.setTrain(train);
+                    TrainSchedule schedule = MySQLManager.getInstance().dao().getTrainScheduleById(fieldInt(2));
+                    if (schedule == null) {
+                        JOptionPane.showMessageDialog(null, "该次列车行程不存在！");
+                        return;
+                    }
+                    order.setTrainSchedule(schedule);
+                    Seat seat = MySQLManager.getInstance().dao().getSeat(train.getTrainId(), (int) optionValue(4), (int) optionValue(5));
+                    seat.setTrain(train);
+                    order.setSeat(seat);
+                    if (fieldFloat(10) < 0) {
+                        JOptionPane.showMessageDialog(null, "！");
+                        return;
+                    }
+                    order.setDepartStation(MySQLManager.getInstance().dao().getStationByName((String) optionValue(7)));
+                    order.setArriveStation(MySQLManager.getInstance().dao().getStationByName((String) optionValue(8)));
+                    order.setDepartStationRrder(option(7) + 1);
+                    order.setArriveStationOrder(option(8) + 2);
+                    order.setStudentTicket(option(9) == 1);
+                    order.setMoney(Float.parseFloat(field(10)));
+                    order.setOrderState(TrainOrder.STATE_RESERVED);
+                    MySQLManager.getInstance().dao().updateTrainOrder(order);
+                    refresh();
+                    super.onOK();
+                });
             }
         }.popup("修改订单");
     }

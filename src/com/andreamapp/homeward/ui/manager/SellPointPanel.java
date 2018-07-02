@@ -7,6 +7,7 @@ import com.andreamapp.homeward.ui.base.ModelPanel;
 import com.andreamapp.homeward.ui.widget.XDialog;
 import com.andreamapp.homeward.utils.Constants;
 
+import java.awt.*;
 import java.util.List;
 
 public class SellPointPanel extends ModelPanel {
@@ -40,13 +41,14 @@ public class SellPointPanel extends ModelPanel {
 
     @Override
     public void onSearch(String key) {
-        if(key.equals("")){
-            fetchAll();
-        }
-        else{
-            ticketPoints = MySQLManager.getInstance().dao().searchTicketPoints(key);
-        }
-        refresh();
+        EventQueue.invokeLater(() -> {
+            if (key.equals("")) {
+                fetchAll();
+            } else {
+                ticketPoints = MySQLManager.getInstance().dao().searchTicketPoints(key);
+            }
+            refresh();
+        });
     }
 
     @Override
@@ -67,10 +69,12 @@ public class SellPointPanel extends ModelPanel {
                 point.setUsername(field(0));
                 point.setAddress(field(1));
                 point.setOpenTime(field(2));
-                MySQLManager.getInstance().dao().insertTicketPoint(point);
-                fetchAll();
-                refresh();
-                super.onOK();
+                EventQueue.invokeLater(() -> {
+                    MySQLManager.getInstance().dao().insertTicketPoint(point);
+                    fetchAll();
+                    refresh();
+                    super.onOK();
+                });
             }
         }.popup("添加售票点");
     }
@@ -78,14 +82,16 @@ public class SellPointPanel extends ModelPanel {
     @Override
     public void onDelete(int[] selectedRows) {
         if(selectedRows.length <= 0) return;
-        for(int row : selectedRows){
-            TicketPoint ticketPoint = ticketPoints.get(row);
-            MySQLManager.getInstance().dao().deleteTicketPoint(ticketPoint);
-        }
-        for(int i = selectedRows.length - 1; i >= 0; i--){
-            ticketPoints.remove(i);
-        }
-        refresh();
+        EventQueue.invokeLater(() -> {
+            for (int row : selectedRows) {
+                TicketPoint ticketPoint = ticketPoints.get(row);
+                MySQLManager.getInstance().dao().deleteTicketPoint(ticketPoint);
+            }
+            for (int i = selectedRows.length - 1; i >= 0; i--) {
+                ticketPoints.remove(i);
+            }
+            refresh();
+        });
     }
 
     @Override
@@ -108,9 +114,11 @@ public class SellPointPanel extends ModelPanel {
                 point.setUsername(field(1));
                 point.setAddress(field(2));
                 point.setOpenTime(field(3));
-                MySQLManager.getInstance().dao().insertTicketPoint(point);
-                refresh();
-                super.onOK();
+                EventQueue.invokeLater(() -> {
+                    MySQLManager.getInstance().dao().insertTicketPoint(point);
+                    refresh();
+                    super.onOK();
+                });
             }
         }.popup("修改售票点");
     }

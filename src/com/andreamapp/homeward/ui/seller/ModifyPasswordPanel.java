@@ -5,6 +5,7 @@ import com.andreamapp.homeward.ui.widget.XPanel;
 import com.andreamapp.homeward.utils.Constants;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class ModifyPasswordPanel extends XPanel {
 
@@ -23,6 +24,12 @@ public class ModifyPasswordPanel extends XPanel {
             String pass = String.valueOf(oldPass.getPassword());
             String now = String.valueOf(newPass.getPassword());
             String confirm = String.valueOf(newPassConfirm.getPassword());
+            modifyPassword(pass, now, confirm);
+        });
+    }
+
+    private void modifyPassword(String pass, String now, String confirm) {
+        EventQueue.invokeLater(() -> {
             if (pass.equals(Constants.currentManager.getPassword())) {
                 if (now.equals(confirm)) {
                     MySQLManager.getInstance().dao().modifyPassword(Constants.currentManager, now);

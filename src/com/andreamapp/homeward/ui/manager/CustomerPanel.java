@@ -8,6 +8,7 @@ import com.andreamapp.homeward.ui.base.ModelPanel;
 import com.andreamapp.homeward.ui.widget.XDialog;
 import com.andreamapp.homeward.utils.Constants;
 
+import java.awt.*;
 import java.util.List;
 
 public class CustomerPanel extends ModelPanel {
@@ -48,13 +49,14 @@ public class CustomerPanel extends ModelPanel {
 
     @Override
     public void onSearch(String key) {
-        if(key.equals("")){
-            fetchAll();
-        }
-        else{
-            customers = MySQLManager.getInstance().dao().searchCustomers(key);
-        }
-        refresh();
+        EventQueue.invokeLater(() -> {
+            if (key.equals("")) {
+                fetchAll();
+            } else {
+                customers = MySQLManager.getInstance().dao().searchCustomers(key);
+            }
+            refresh();
+        });
     }
 
     @Override
@@ -79,10 +81,12 @@ public class CustomerPanel extends ModelPanel {
                 customer.setSex(option(2));
                 customer.setTel(field(3));
                 customer.setCustomerType(option(4) + 1);
-                MySQLManager.getInstance().dao().insertCustomer(customer);
-                fetchAll();
-                refresh();
-                super.onOK();
+                EventQueue.invokeLater(() -> {
+                    MySQLManager.getInstance().dao().insertCustomer(customer);
+                    fetchAll();
+                    refresh();
+                    super.onOK();
+                });
             }
         }.popup("添加用户");
     }
@@ -90,14 +94,16 @@ public class CustomerPanel extends ModelPanel {
     @Override
     public void onDelete(int[] selectedRows) {
         if(selectedRows.length <= 0) return;
-        for(int row : selectedRows){
-            Customer customer = customers.get(row);
-            MySQLManager.getInstance().dao().deleteCustomer(customer);
-        }
-        for(int i = selectedRows.length - 1; i >= 0; i--){
-            customers.remove(i);
-        }
-        refresh();
+        EventQueue.invokeLater(() -> {
+            for (int row : selectedRows) {
+                Customer customer = customers.get(row);
+                MySQLManager.getInstance().dao().deleteCustomer(customer);
+            }
+            for (int i = selectedRows.length - 1; i >= 0; i--) {
+                customers.remove(i);
+            }
+            refresh();
+        });
     }
 
     @Override
@@ -122,9 +128,11 @@ public class CustomerPanel extends ModelPanel {
                 customer.setSex(option(2));
                 customer.setTel(field(3));
                 customer.setCustomerType(option(4) + 1);
-                MySQLManager.getInstance().dao().updateCustomer(customer);
-                refresh();
-                super.onOK();
+                EventQueue.invokeLater(() -> {
+                    MySQLManager.getInstance().dao().updateCustomer(customer);
+                    refresh();
+                    super.onOK();
+                });
             }
         }.popup("修改用户");
     }
