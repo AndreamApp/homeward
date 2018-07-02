@@ -4,11 +4,13 @@ import com.andreamapp.homeward.bean.*;
 import com.andreamapp.homeward.dao.MySQLManager;
 import com.andreamapp.homeward.ui.widget.Measurable;
 import com.andreamapp.homeward.ui.widget.XDialog;
+import com.andreamapp.homeward.ui.widget.XPanel;
 import com.andreamapp.homeward.ui.widget.XTextField;
 import com.andreamapp.homeward.utils.Constants;
 import com.andreamapp.homeward.utils.StringUtils;
 import com.andreamapp.homeward.utils.WidgetUtils;
 import org.jdesktop.swingx.JXImagePanel;
+import org.jdesktop.swingx.JXImageView;
 
 import javax.swing.*;
 import javax.swing.plaf.BorderUIResource;
@@ -16,6 +18,8 @@ import java.awt.*;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.ItemEvent;
+import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.ParseException;
@@ -34,6 +38,8 @@ public class OrderPanel extends JPanel {
     private JButton queryBtn;
     private List<ScheduleItem> scheduleItems = new ArrayList<>(); // view
 
+    private JScrollPane schedulesScroll;
+    private XPanel schedulesPanel;
     private List<TrainSchedule> schedules = new ArrayList<>(); // model
 
     private int leftMargin = 12;
@@ -61,6 +67,7 @@ public class OrderPanel extends JPanel {
         add(departDateText = new XTextField("出发日期 yyyy-mm-dd"));
         add(stuBox = new JCheckBox("学生票"));
         add(queryBtn = new JButton("查询"));
+        add(schedulesScroll = new JScrollPane(schedulesPanel = new XPanel()));
         queryBtn.addActionListener(e -> onQueryClicked());
 
         initLayout();
@@ -88,7 +95,7 @@ public class OrderPanel extends JPanel {
         for (ScheduleItem item : scheduleItems) {
             add(item);
             item.setBounds(x, y, item.itemWidth, item.itemHeight);
-            y += padding + padding;
+            y += padding + item.itemHeight + padding;
         }
     }
 
@@ -133,6 +140,13 @@ public class OrderPanel extends JPanel {
         relayout();
     }
 
+    private class SchedulesPanel extends XPanel {
+        @Override
+        protected void initComponents() {
+
+        }
+    }
+
     /**
      * 显示列车起始时间、起始站点、经过时间、车次名称
      */
@@ -143,6 +157,7 @@ public class OrderPanel extends JPanel {
 
         private JLabel departTime, departStation, arriveTime, arriveStation;
         private JLabel trainId, passTime;
+        private JXImageView passby;
         int itemWidth = 900, itemHeight = 200;
 
         public TrainInfoItem(TrainSchedule schedule, TrainSchedule.Extra extra) {
@@ -160,6 +175,11 @@ public class OrderPanel extends JPanel {
             arriveStation.setText(extra.arriveStationName);
             trainId.setText(extra.trainId);
             passTime.setText(extra.passTime);
+            try {
+                passby.setImage(new File("D:/Andream/CQU/Homework/数据库实验/课程设计/homeward/res/train_passby.png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         private void initComponents() {
@@ -176,6 +196,7 @@ public class OrderPanel extends JPanel {
             add(arriveStation = new JLabel());
             add(trainId = new JLabel());
             add(passTime = new JLabel());
+            add(passby = new JXImageView());
         }
 
         private void initAlignment() {
@@ -204,7 +225,9 @@ public class OrderPanel extends JPanel {
             x += 100 + 50;
             y = padding + 20;
             trainId.setBounds(x, y, 160, 30);
-            y += padding + 30 + padding;
+            y += 30 + padding;
+            passby.setBounds(x, y, 160, 14);
+            y += 14 + padding;
             passTime.setBounds(x, y, 160, 30);
             x += 160 + 50;
             y = padding;

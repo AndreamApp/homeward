@@ -1,0 +1,20 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="homeward:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/homeward_jar</output-path>
+    <root id="archive" name="homeward.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="module-output" name="homeward" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/darcula.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/mysql-connector-java-8.0.11.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/SwingSets3(BeautyEyeLNFDemo).jar" path-in-jar="/" />
+      <element id="library" level="module" name="JUnit4" module-name="homeward" />
+      <element id="library" level="module" name="testng" module-name="homeward" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-api/5.0.0/junit-jupiter-api-5.0.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/apiguardian/apiguardian-api/1.0.0/apiguardian-api-1.0.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/opentest4j/opentest4j/1.0.0/opentest4j-1.0.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-commons/1.0.0/junit-platform-commons-1.0.0.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

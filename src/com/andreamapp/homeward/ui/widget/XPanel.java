@@ -299,8 +299,8 @@ public class XPanel extends JPanel implements Measurable {
      * @return {@link JTable}
      */
     public JTable addTable(String text) {
-        ComponentTable table = new ComponentTable();
-        JScrollPane scrollPane = new JScrollPane(table);
+        XTable table = new XTable();
+        ComponentScroll scrollPane = new ComponentScroll(table);
         addItem(text, scrollPane);
         return table;
     }
@@ -409,9 +409,13 @@ public class XPanel extends JPanel implements Measurable {
     /**
      * 固定长宽的Table控件
      */
-    private static class ComponentTable extends XTable implements Measurable {
+    private static class ComponentScroll extends JScrollPane implements Measurable {
         private static final int TABLE_WIDTH = 300;
         private static final int TABLE_HEIGHT = 200;
+
+        ComponentScroll(Component component) {
+            super(component);
+        }
 
         @Override
         public int width() {
