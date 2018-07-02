@@ -3,6 +3,8 @@ package com.andreamapp.homeward.utils;
 import com.andreamapp.homeward.bean.Manager;
 
 public class Constants {
+    public static final String BG_PATH = "D:/Andream/CQU/Homework/数据库实验/课程设计/homeward/res/bg.jpg";
+
     public static class ColumnName{
         public static final String[] CUSTOMER = {
                 "身份证号码", "姓名", "性别", "电话", "用户类型"

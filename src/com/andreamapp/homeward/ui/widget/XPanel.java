@@ -1,17 +1,21 @@
 package com.andreamapp.homeward.ui.widget;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings({"FieldCanBeLocal", "WeakerAccess"})
-public class XPanel extends JPanel implements MeasurablePanel {
+public class XPanel extends JPanel implements Measurable {
     private List<Component> labelList = new ArrayList<>();
     private List<Component> componentList = new ArrayList<>();
     private List<JButton> btnList = new ArrayList<>();
+    private Image backgroundImage;
 
     private int leftMargin = 12;
     private int topMargin = 12;
@@ -29,12 +33,21 @@ public class XPanel extends JPanel implements MeasurablePanel {
         relayout();
     }
 
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        if (backgroundImage != null) {
+            g.drawImage(backgroundImage, 0, 0, this);
+        }
+    }
+
     /**
      * 子类重写该方法用于添加自定义的控件
      */
     protected void initComponents() {
     }
 
+    @SuppressWarnings("SameParameterValue")
     private void move(Component component, int x, int y) {
         Rectangle rect = component.getBounds();
         rect.x += x;
@@ -46,7 +59,7 @@ public class XPanel extends JPanel implements MeasurablePanel {
      * 由于使用绝对布局，每次添加新控件时会调用此方法
      */
     private void relayout() {
-        int panelWidth = 0, panelHeight = 0;
+        int panelWidth = 0, panelHeight;
         int x = leftMargin + padding, y = topMargin, width = labelWidth, height = labelHeight;
         for (int i = 0; i < labelList.size(); i++) {
             y += padding;
@@ -57,9 +70,9 @@ public class XPanel extends JPanel implements MeasurablePanel {
             }
             Component c = componentList.get(i);
             int componentHeight = fieldHeight, componentWidth = fieldWidth;
-            if (c instanceof MeasurablePanel) {
-                componentHeight = ((MeasurablePanel) c).height();
-                componentWidth = ((MeasurablePanel) c).width();
+            if (c instanceof Measurable) {
+                componentHeight = ((Measurable) c).height();
+                componentWidth = ((Measurable) c).width();
                 if (componentWidth == -1) {
                     componentWidth = panelWidth - margin;
                 }
@@ -94,6 +107,30 @@ public class XPanel extends JPanel implements MeasurablePanel {
 
     public Component componentAt(int n) {
         return componentList.get(n);
+    }
+
+
+    private abstract static class MeasurableItem extends JPanel implements Measurable {
+    }
+
+    public void addItem(Component component, int width, int height) {
+        addItem(new MeasurableItem() {
+            {
+                setLayout(null);
+                add(component);
+                component.setBounds(0, 0, width(), height());
+            }
+
+            @Override
+            public int width() {
+                return width;
+            }
+
+            @Override
+            public int height() {
+                return height;
+            }
+        });
     }
 
     public void addItem(Component component) {
@@ -145,6 +182,32 @@ public class XPanel extends JPanel implements MeasurablePanel {
         edit.setColumns(30);
         edit.setText(text);
         addItem(name, edit);
+        return edit;
+    }
+
+    /**
+     * 向容器中添加一个包含提示信息的{@link JTextField}
+     *
+     * @param text JTextField的提示内容
+     * @return {@link JTextField}
+     */
+    public JTextField addHint(String text) {
+        XTextField edit = new XTextField(text);
+        edit.setColumns(30);
+        addItem(edit);
+        return edit;
+    }
+
+    /**
+     * 向容器中添加一个包含提示信息的{@link XPasswordField}
+     *
+     * @param text XPasswordField 的提示内容
+     * @return {@link XPasswordField}
+     */
+    public XPasswordField addPasswordHint(String text) {
+        XPasswordField edit = new XPasswordField(text);
+        edit.setColumns(30);
+        addItem(edit);
         return edit;
     }
 
@@ -316,6 +379,23 @@ public class XPanel extends JPanel implements MeasurablePanel {
         return ((JCheckBox) componentList.get(n)).isSelected();
     }
 
+
+    public Image getBackgroundImage() {
+        return backgroundImage;
+    }
+
+    public void setBackgroundImage(Image backgroundImage) {
+        this.backgroundImage = backgroundImage;
+    }
+
+
+    public void setBackgroundImage(String path) {
+        try {
+            this.backgroundImage = ImageIO.read(new File(path));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     @Override
     public int width() {
         return panelWidth;
@@ -329,7 +409,7 @@ public class XPanel extends JPanel implements MeasurablePanel {
     /**
      * 固定长宽的Table控件
      */
-    private static class ComponentTable extends XTable implements MeasurablePanel {
+    private static class ComponentTable extends XTable implements Measurable {
         private static final int TABLE_WIDTH = 300;
         private static final int TABLE_HEIGHT = 200;
 

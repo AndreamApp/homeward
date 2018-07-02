@@ -48,27 +48,8 @@ public class XDialog extends JDialog {
         return panel.componentAt(n);
     }
 
-    private abstract static class MeasurableItem extends JPanel implements MeasurablePanel {
-    }
-
     public void addItem(Component component, int width, int height) {
-        panel.addItem(new MeasurableItem() {
-            {
-                setLayout(null);
-                add(component);
-                component.setBounds(0, 0, width(), height());
-            }
-
-            @Override
-            public int width() {
-                return width;
-            }
-
-            @Override
-            public int height() {
-                return height;
-            }
-        });
+        panel.addItem(component, width, height);
     }
 
     public void addItem(Component component) {

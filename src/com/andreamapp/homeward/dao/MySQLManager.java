@@ -14,6 +14,12 @@ public class MySQLManager {
     public static synchronized MySQLManager getInstance() {
         if (sInstance == null) {
             sInstance = new MySQLManager();
+            // auto connect
+            try {
+                sInstance.connect("root", "andreamApp97");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return sInstance;
     }
@@ -38,8 +44,6 @@ public class MySQLManager {
             this.mConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/db_train?allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=utf-8&serverTimezone=UTC", user, pass);
             this.mDAO = new MySQLDAO();
             return true;
-        } catch (SQLException e) {
-            throw e;
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -138,6 +142,7 @@ public class MySQLManager {
      *     res.close();
      * </pre>
      */
+    @SuppressWarnings("WeakerAccess")
     public class StatementBuilder {
         Statement stmt;
         StatementState state;

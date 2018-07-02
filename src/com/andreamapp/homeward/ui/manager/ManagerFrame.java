@@ -1,13 +1,13 @@
 package com.andreamapp.homeward.ui.manager;
 
-import com.andreamapp.homeward.dao.MySQLManager;
+import com.andreamapp.homeward.ui.widget.Measurable;
 import com.andreamapp.homeward.utils.LookUtils;
+import com.andreamapp.homeward.utils.WidgetUtils;
 
 import javax.swing.*;
 import java.awt.*;
-import java.sql.SQLException;
 
-public class ManagerFrame extends JFrame {
+public class ManagerFrame extends JFrame implements Measurable {
 
     private CustomerPanel customerPanel = new CustomerPanel();
     private ManagerPanel managerPanel = new ManagerPanel();
@@ -19,7 +19,6 @@ public class ManagerFrame extends JFrame {
     @SuppressWarnings("WeakerAccess")
     public ManagerFrame() {
         initComponents();
-        setSize(1024, 768);
     }
 
     private void initComponents(){
@@ -36,12 +35,18 @@ public class ManagerFrame extends JFrame {
     }
 
 
-    public static void main(String[] args) throws SQLException {
-//        LookUtils.darcula();
+    public static void main(String[] args) {
         LookUtils.beautyEye();
-        MySQLManager.getInstance().connect("root", "andreamApp97");
-        JFrame frame = new ManagerFrame();
-        frame.setSize(800, 600);
-        frame.setVisible(true);
+        WidgetUtils.popup(ManagerFrame.class);
+    }
+
+    @Override
+    public int width() {
+        return 1024;
+    }
+
+    @Override
+    public int height() {
+        return 768;
     }
 }

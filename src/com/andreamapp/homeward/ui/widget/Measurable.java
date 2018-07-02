@@ -1,6 +1,6 @@
 package com.andreamapp.homeward.ui.widget;
 
-public interface MeasurablePanel {
+public interface Measurable {
     int width();
 
     int height();

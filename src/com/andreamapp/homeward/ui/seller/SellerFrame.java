@@ -1,21 +1,19 @@
 package com.andreamapp.homeward.ui.seller;
 
-import com.andreamapp.homeward.dao.MySQLManager;
+import com.andreamapp.homeward.ui.widget.Measurable;
 import com.andreamapp.homeward.utils.LookUtils;
+import com.andreamapp.homeward.utils.WidgetUtils;
 
 import javax.swing.*;
 import java.awt.*;
-import java.sql.SQLException;
 
-public class SellerFrame extends JFrame {
+public class SellerFrame extends JFrame implements Measurable {
     private OrderPanel orderPanel = new OrderPanel();
     private HistoryPanel historyPanel = new HistoryPanel();
     private ModifyPasswordPanel modifyPasswordPanel = new ModifyPasswordPanel();
 
     @SuppressWarnings("WeakerAccess")
     public SellerFrame() {
-        setSize(1024, 768);
-        setLocationRelativeTo(null);
         initComponents();
     }
 
@@ -29,10 +27,18 @@ public class SellerFrame extends JFrame {
         add(tabbedPane1);
     }
 
-    public static void main(String[] args) throws SQLException {
+    @Override
+    public int width() {
+        return 1024;
+    }
+
+    @Override
+    public int height() {
+        return 768;
+    }
+
+    public static void main(String[] args) {
         LookUtils.beautyEye();
-        MySQLManager.getInstance().connect("root", "andreamApp97");
-        JFrame frame = new SellerFrame();
-        frame.setVisible(true);
+        WidgetUtils.popup(SellerFrame.class);
     }
 }

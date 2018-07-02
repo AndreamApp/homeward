@@ -10,7 +10,6 @@ import javax.swing.*;
 public class HistoryPanel extends TrainOrderPanel {
     private JButton btnRefund;
 
-    // TODO: 搜索 修改 *退订
     public HistoryPanel() {
         btnPanel.add(btnRefund = new JButton());
         btnRefund.setText("退款");

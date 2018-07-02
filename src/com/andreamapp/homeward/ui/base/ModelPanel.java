@@ -1,5 +1,6 @@
 package com.andreamapp.homeward.ui.base;
 
+import com.andreamapp.homeward.ui.widget.XPanel;
 import com.andreamapp.homeward.ui.widget.XTable;
 
 import javax.swing.*;
@@ -13,7 +14,7 @@ import java.awt.event.ComponentListener;
 import java.util.Arrays;
 
 @SuppressWarnings("FieldCanBeLocal")
-public abstract class ModelPanel extends JPanel {
+public abstract class ModelPanel extends XPanel {
     private JTextField editSearch;
     private JButton btnSearch, btnInsert, btnUpdate, btnDelete;
     protected JTable table;

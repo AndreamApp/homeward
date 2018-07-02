@@ -2,11 +2,12 @@ package com.andreamapp.homeward.ui.seller;
 
 import com.andreamapp.homeward.bean.*;
 import com.andreamapp.homeward.dao.MySQLManager;
-import com.andreamapp.homeward.ui.widget.MeasurablePanel;
+import com.andreamapp.homeward.ui.widget.Measurable;
 import com.andreamapp.homeward.ui.widget.XDialog;
 import com.andreamapp.homeward.ui.widget.XTextField;
 import com.andreamapp.homeward.utils.Constants;
 import com.andreamapp.homeward.utils.StringUtils;
+import com.andreamapp.homeward.utils.WidgetUtils;
 import org.jdesktop.swingx.JXImagePanel;
 
 import javax.swing.*;
@@ -130,7 +131,7 @@ public class OrderPanel extends JPanel {
     /**
      * 显示列车起始时间、起始站点、经过时间、车次名称
      */
-    private class TrainInfoItem extends JPanel implements MeasurablePanel {
+    private class TrainInfoItem extends JPanel implements Measurable {
         private TrainSchedule schedule;
         private Train train;
         private TrainSchedule.Extra extra;
@@ -172,31 +173,19 @@ public class OrderPanel extends JPanel {
             add(passTime = new JLabel());
         }
 
-        private void initBtn(JLabel btn, Font font, int horizontalAlign, int verticalAlign) {
-            btn.setFont(font);
-            btn.setHorizontalAlignment(horizontalAlign);
-            btn.setVerticalAlignment(verticalAlign);
-        }
-
-        private void initBtn(JButton btn, Font font, int horizontalAlign, int verticalAlign) {
-            btn.setFont(font);
-            btn.setHorizontalAlignment(horizontalAlign);
-            btn.setVerticalAlignment(verticalAlign);
-        }
-
         private void initAlignment() {
             Font boldFont = new Font("黑体", Font.BOLD, 24);
             Font bigFont = new Font("宋体", Font.PLAIN, 24);
             Font midFont = new Font("宋体", Font.PLAIN, 16);
             Font smallFont = new Font("宋体", Font.PLAIN, 14);
 
-            initBtn(departTime, boldFont, SwingConstants.CENTER, SwingConstants.BOTTOM);
-            initBtn(departStation, bigFont, SwingConstants.CENTER, SwingConstants.TOP);
-            initBtn(arriveTime, boldFont, SwingConstants.CENTER, SwingConstants.BOTTOM);
-            initBtn(arriveStation, bigFont, SwingConstants.CENTER, SwingConstants.TOP);
+            WidgetUtils.format(departTime, boldFont, SwingConstants.CENTER, SwingConstants.BOTTOM);
+            WidgetUtils.format(departStation, bigFont, SwingConstants.CENTER, SwingConstants.TOP);
+            WidgetUtils.format(arriveTime, boldFont, SwingConstants.CENTER, SwingConstants.BOTTOM);
+            WidgetUtils.format(arriveStation, bigFont, SwingConstants.CENTER, SwingConstants.TOP);
 
-            initBtn(trainId, smallFont, SwingConstants.CENTER, SwingConstants.BOTTOM);
-            initBtn(passTime, smallFont, SwingConstants.CENTER, SwingConstants.TOP);
+            WidgetUtils.format(trainId, smallFont, SwingConstants.CENTER, SwingConstants.BOTTOM);
+            WidgetUtils.format(passTime, smallFont, SwingConstants.CENTER, SwingConstants.TOP);
         }
 
         private void initLayout() {
@@ -237,7 +226,7 @@ public class OrderPanel extends JPanel {
     /**
      * 显示列车信息和预订信息
      */
-    private class ScheduleItem extends JPanel implements MeasurablePanel {
+    private class ScheduleItem extends JPanel implements Measurable {
         private TrainSchedule schedule;
         private Train train;
         private TrainSchedule.Extra extra;
@@ -295,17 +284,8 @@ public class OrderPanel extends JPanel {
             orderNoSeat.addActionListener(e -> new OrderDialog("无座").popup("预订无座票"));
         }
 
-        private void initBtn(JLabel btn, Font font, int horizontalAlign, int verticalAlign) {
-            btn.setFont(font);
-            btn.setHorizontalAlignment(horizontalAlign);
-            btn.setVerticalAlignment(verticalAlign);
-        }
 
-        private void initBtn(JButton btn, Font font, int horizontalAlign, int verticalAlign) {
-            btn.setFont(font);
-            btn.setHorizontalAlignment(horizontalAlign);
-            btn.setVerticalAlignment(verticalAlign);
-        }
+
 
         private void initAlignment() {
             Font boldFont = new Font("黑体", Font.BOLD, 24);
@@ -313,15 +293,15 @@ public class OrderPanel extends JPanel {
             Font midFont = new Font("宋体", Font.PLAIN, 16);
             Font smallFont = new Font("宋体", Font.PLAIN, 14);
 
-            initBtn(hardSeat, midFont, SwingConstants.CENTER, SwingConstants.CENTER);
-            initBtn(hardBerth, midFont, SwingConstants.CENTER, SwingConstants.CENTER);
-            initBtn(softBerth, midFont, SwingConstants.CENTER, SwingConstants.CENTER);
-            initBtn(noSeat, midFont, SwingConstants.CENTER, SwingConstants.CENTER);
+            WidgetUtils.format(hardSeat, midFont, SwingConstants.CENTER, SwingConstants.CENTER);
+            WidgetUtils.format(hardBerth, midFont, SwingConstants.CENTER, SwingConstants.CENTER);
+            WidgetUtils.format(softBerth, midFont, SwingConstants.CENTER, SwingConstants.CENTER);
+            WidgetUtils.format(noSeat, midFont, SwingConstants.CENTER, SwingConstants.CENTER);
 
-            initBtn(orderHardSeat, midFont, SwingConstants.CENTER, SwingConstants.CENTER);
-            initBtn(orderHardBerth, midFont, SwingConstants.CENTER, SwingConstants.CENTER);
-            initBtn(orderSoftBerth, midFont, SwingConstants.CENTER, SwingConstants.CENTER);
-            initBtn(orderNoSeat, midFont, SwingConstants.CENTER, SwingConstants.CENTER);
+            WidgetUtils.format(orderHardSeat, midFont, SwingConstants.CENTER, SwingConstants.CENTER);
+            WidgetUtils.format(orderHardBerth, midFont, SwingConstants.CENTER, SwingConstants.CENTER);
+            WidgetUtils.format(orderSoftBerth, midFont, SwingConstants.CENTER, SwingConstants.CENTER);
+            WidgetUtils.format(orderNoSeat, midFont, SwingConstants.CENTER, SwingConstants.CENTER);
         }
 
         private void initLayout() {
@@ -466,7 +446,7 @@ public class OrderPanel extends JPanel {
                 carriageBox = addComboBox("车厢", getCarriages());
                 (seatNumBox = addComboBox("座位号")).setEnabled(false);
 
-                initBtn(dateInfo, new Font("宋体", Font.PLAIN, 16), SwingConstants.CENTER, SwingConstants.CENTER);
+                WidgetUtils.format(dateInfo, new Font("宋体", Font.PLAIN, 16), SwingConstants.CENTER, SwingConstants.CENTER);
                 carriageBox.addItemListener(e -> {
                     if (ItemEvent.SELECTED == e.getStateChange()) {
                         int carriage = Integer.parseInt((String) e.getItem());

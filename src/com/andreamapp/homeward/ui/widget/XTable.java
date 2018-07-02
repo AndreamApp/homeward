@@ -9,7 +9,7 @@ public class XTable extends JTable {
     private DefaultTableCellRenderer cellRenderer = new MyCellRenderer();
 
     public XTable() {
-        setFont(new Font("宋体", 0, 14));
+        setFont(new Font("宋体", Font.PLAIN, 14));
         setRowHeight(30);
     }
 
@@ -30,7 +30,7 @@ public class XTable extends JTable {
             if (row % 2 == 0)
                 setBackground(new Color(255, 255, 255, 30)); // 设置奇数行底色
             else if (row % 2 == 1)
-                setBackground(new Color(180, 231, 255, 80)); // 设置偶数行底色
+                setBackground(new Color(0, 0, 0, 10)); // 设置偶数行底色
             return super.getTableCellRendererComponent(table, value,
                     isSelected, hasFocus, row, column);
         }
