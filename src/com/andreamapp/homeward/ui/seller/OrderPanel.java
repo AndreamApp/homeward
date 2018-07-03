@@ -429,9 +429,10 @@ public class OrderPanel extends JPanel {
                 order.setMoney(seatMoney);
                 order.setOrderState(TrainOrder.STATE_RESERVED);
                 int res = MySQLManager.getInstance().dao().insertTrainOrder(order);
-                if (res == 0) {
+                if(res == 0){
                     JOptionPane.showMessageDialog(null, "预订失败！该用户已经预约过该次行程！");
-                } else {
+                }
+                else{
                     PayDialog pay = new PayDialog();
                     pay.popup("等待用户支付...");
                     if (pay.result) {

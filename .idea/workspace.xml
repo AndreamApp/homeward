@@ -8,10 +8,8 @@
   <component name="ChangeListManager">
     <list default="true" id="06737e02-fa00-4512-a447-12f3ffba06f2" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/LoginFrame.form" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/com/andreamapp/homeward/dao/MySQLDAO.java" afterPath="$PROJECT_DIR$/src/com/andreamapp/homeward/dao/MySQLDAO.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/andreamapp/homeward/dao/TrainOrderDAO.java" afterPath="$PROJECT_DIR$/src/com/andreamapp/homeward/dao/TrainOrderDAO.java" />
       <change beforePath="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/seller/OrderPanel.java" afterPath="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/seller/OrderPanel.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/widget/XPanel.java" afterPath="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/widget/XPanel.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -28,17 +26,148 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="OrderPanel.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="OrderPanel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/andreamapp/homeward/ui/seller/OrderPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4284">
-              <caret line="439" column="26" lean-forward="true" selection-start-line="439" selection-start-column="26" selection-end-line="439" selection-end-column="26" />
+            <state relative-caret-position="131">
+              <caret line="440" column="21" lean-forward="true" selection-start-line="440" selection-start-column="21" selection-end-line="440" selection-end-column="21" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1031#1085#0" expanded="true" />
                 <element signature="e#14485#14515#0" expanded="true" />
                 <element signature="e#19412#20071#0" expanded="true" />
                 <element signature="e#20070#20071#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TrainPanel.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/andreamapp/homeward/ui/manager/TrainPanel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="186">
+              <caret line="119" column="58" lean-forward="false" selection-start-line="119" selection-start-column="58" selection-end-line="119" selection-end-column="58" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="XPanel.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/andreamapp/homeward/ui/widget/XPanel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="594">
+              <caret line="137" column="30" lean-forward="true" selection-start-line="137" selection-start-column="30" selection-end-line="137" selection-end-column="30" />
+              <folding>
+                <element signature="method#XPanel#0;class#XPanel#0" expanded="false" />
+                <element signature="docComment;method#initComponents#0;class#XPanel#0" expanded="false" />
+                <element signature="method#initComponents#0;class#XPanel#0" expanded="false" />
+                <element signature="docComment;method#relayout#0;class#XPanel#0" expanded="false" />
+                <element signature="e#4264#4265#0" expanded="true" />
+                <element signature="e#4304#4305#0" expanded="true" />
+                <element signature="method#addItem#2;class#XPanel#0" expanded="false" />
+                <element signature="docComment;method#addLabel#0;class#XPanel#0" expanded="false" />
+                <element signature="method#addLabel#0;class#XPanel#0" expanded="false" />
+                <element signature="docComment;method#addField#0;class#XPanel#0" expanded="false" />
+                <element signature="docComment;method#addNumberField#0;class#XPanel#0" expanded="false" />
+                <element signature="method#addNumberField#0;class#XPanel#0" expanded="false" />
+                <element signature="docComment;method#addFloatField#0;class#XPanel#0" expanded="false" />
+                <element signature="method#addFloatField#0;class#XPanel#0" expanded="false" />
+                <element signature="docComment;method#addComboBox#0;class#XPanel#0" expanded="false" />
+                <element signature="method#addComboBox#0;class#XPanel#0" expanded="false" />
+                <element signature="docComment;method#addCheckBox#0;class#XPanel#0" expanded="false" />
+                <element signature="method#addCheckBox#0;class#XPanel#0" expanded="false" />
+                <element signature="docComment;method#addTable#0;class#XPanel#0" expanded="false" />
+                <element signature="docComment;method#addBtn#0;class#XPanel#0" expanded="false" />
+                <element signature="method#addBtn#0;class#XPanel#0" expanded="false" />
+                <element signature="docComment;method#field#0;class#XPanel#0" expanded="false" />
+                <element signature="docComment;method#fieldInt#0;class#XPanel#0" expanded="false" />
+                <element signature="docComment;method#fieldFloat#0;class#XPanel#0" expanded="false" />
+                <element signature="docComment;method#option#0;class#XPanel#0" expanded="false" />
+                <element signature="docComment;method#optionValue#0;class#XPanel#0" expanded="false" />
+                <element signature="docComment;method#checked#0;class#XPanel#0" expanded="false" />
+                <element signature="e#10434#10435#0" expanded="true" />
+                <element signature="e#10472#10473#0" expanded="true" />
+                <element signature="e#10533#10534#0" expanded="true" />
+                <element signature="e#10587#10588#0" expanded="true" />
+                <element signature="e#11223#11224#0" expanded="true" />
+                <element signature="e#11263#11264#0" expanded="true" />
+                <element signature="e#11311#11312#0" expanded="true" />
+                <element signature="e#11353#11354#0" expanded="true" />
+                <element signature="e#11402#11403#0" expanded="true" />
+                <element signature="e#11445#11446#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MySQLDAO.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/andreamapp/homeward/dao/MySQLDAO.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="296">
+              <caret line="402" column="13" lean-forward="true" selection-start-line="402" selection-start-column="13" selection-end-line="402" selection-end-column="13" />
+              <folding>
+                <element signature="method#query#1;class#MySQLDAO#0" expanded="false" />
+                <element signature="method#update#1;class#MySQLDAO#0" expanded="false" />
+                <element signature="class#Parser#0;class#MySQLDAO#0" expanded="false" />
+                <element signature="class#Loader#0;class#MySQLDAO#0" expanded="false" />
+                <element signature="method#load#0;class#Loader#0;class#MySQLDAO#0" expanded="false" />
+                <element signature="method#loadOne#0;class#Loader#0;class#MySQLDAO#0" expanded="false" />
+                <element signature="method#insertManager#0;class#MySQLDAO#0" expanded="false" />
+                <element signature="method#deleteManager#0;class#MySQLDAO#0" expanded="false" />
+                <element signature="method#updateManager#0;class#MySQLDAO#0" expanded="false" />
+                <element signature="method#modifyPassword#0;class#MySQLDAO#0" expanded="false" />
+                <element signature="method#getManagerFromResult#0;class#MySQLDAO#0" expanded="false" />
+                <element signature="method#getManagerById#0;class#MySQLDAO#0" expanded="false" />
+                <element signature="method#getAllManagers#0;class#MySQLDAO#0" expanded="false" />
+                <element signature="method#searchManagers#0;class#MySQLDAO#0" expanded="false" />
+                <element signature="method#getManagerByUsername#0;class#MySQLDAO#0" expanded="false" />
+                <element signature="method#login#0;class#MySQLDAO#0" expanded="false" />
+                <element signature="method#insertCustomer#0;class#MySQLDAO#0" expanded="false" />
+                <element signature="method#deleteCustomer#0;class#MySQLDAO#0" expanded="false" />
+                <element signature="method#updateCustomer#0;class#MySQLDAO#0" expanded="false" />
+                <element signature="method#upsertCustomer#0;class#MySQLDAO#0" expanded="false" />
+                <element signature="method#getCustomerFromResult#0;class#MySQLDAO#0" expanded="false" />
+                <element signature="method#getCustomerByIdNum#0;class#MySQLDAO#0" expanded="false" />
+                <element signature="method#searchCustomers#0;class#MySQLDAO#0" expanded="false" />
+                <element signature="method#getAllCustomers#0;class#MySQLDAO#0" expanded="false" />
+                <element signature="method#getSexFromIdNum#0;class#MySQLDAO#0" expanded="false" />
+                <element signature="method#insertStation#0;class#MySQLDAO#0" expanded="false" />
+                <element signature="method#updateStation#0;class#MySQLDAO#0" expanded="false" />
+                <element signature="method#getStationFromResult#0;class#MySQLDAO#0" expanded="false" />
+                <element signature="method#getStationByName#0;class#MySQLDAO#0" expanded="false" />
+                <element signature="method#getStationById#0;class#MySQLDAO#0" expanded="false" />
+                <element signature="method#getAllStations#0;class#MySQLDAO#0" expanded="false" />
+                <element signature="method#insertTicketPoint#0;class#MySQLDAO#0" expanded="false" />
+                <element signature="method#updateTicketPoint#0;class#MySQLDAO#0" expanded="false" />
+                <element signature="method#getTicketPointById#0;class#MySQLDAO#0" expanded="false" />
+                <element signature="method#getTicketPointFromResult#0;class#MySQLDAO#0" expanded="false" />
+                <element signature="method#getAllTicketPoints#0;class#MySQLDAO#0" expanded="false" />
+                <element signature="method#searchTicketPoints#0;class#MySQLDAO#0" expanded="false" />
+                <element signature="method#getTrainById#0;class#MySQLDAO#0" expanded="false" />
+                <element signature="method#getTrainFromResult#0;class#MySQLDAO#0" expanded="false" />
+                <element signature="method#getAllTrains#0;class#MySQLDAO#0" expanded="false" />
+                <element signature="method#searchTrains#0;class#MySQLDAO#0" expanded="false" />
+                <element signature="method#getSeatFromResult#0;class#MySQLDAO#0" expanded="false" />
+                <element signature="method#getSeat#0;class#MySQLDAO#0" expanded="false" />
+                <element signature="method#getSeatById#0;class#MySQLDAO#0" expanded="false" />
+                <element signature="method#insertTrainOrder#0;class#MySQLDAO#0" expanded="false" />
+                <element signature="method#updateTrainOrder#0;class#MySQLDAO#0" expanded="false" />
+                <element signature="method#getOrderFromResult#0;class#MySQLDAO#0" expanded="false" />
+                <element signature="method#getTrainOrderList#0;class#MySQLDAO#0" expanded="false" />
+                <element signature="method#searchTrainOrders#0;class#MySQLDAO#0" expanded="false" />
+                <element signature="method#insertTrainSchedule#0;class#MySQLDAO#0" expanded="false" />
+                <element signature="method#updateTrainSchedule#0;class#MySQLDAO#0" expanded="false" />
+                <element signature="method#getScheduleFromResult#0;class#MySQLDAO#0" expanded="false" />
+                <element signature="method#getTrainScheduleList#0;class#MySQLDAO#0" expanded="false" />
+                <element signature="method#getTrainScheduleById#0;class#MySQLDAO#0" expanded="false" />
+                <element signature="method#searchTrainSchedule#0;class#MySQLDAO#0" expanded="false" />
+                <element signature="method#fillScheduleWithTrain#0;class#MySQLDAO#0" expanded="false" />
+                <element signature="e#24853#24885#0" expanded="false" />
+                <element signature="e#24853#24885#0" expanded="false" />
+                <element signature="method#searchTrainSchedule#1;class#MySQLDAO#0" expanded="false" />
+                <element signature="method#getSeatAggregateFromResult#0;class#MySQLDAO#0" expanded="false" />
+                <element signature="method#getSeatAggregateInSchedule#0;class#MySQLDAO#0" expanded="false" />
+                <element signature="method#getFreeSeats#0;class#MySQLDAO#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -70,6 +199,7 @@
       <find>insertTrainO</find>
       <find>\\</find>
       <find>initBtn</find>
+      <find>Border</find>
     </findStrings>
     <replaceStrings>
       <replace>ticket_order</replace>
@@ -134,17 +264,17 @@
         <option value="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/manager/TrainSchedulePanel.java" />
         <option value="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/seller/HistoryPanel.java" />
         <option value="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/seller/ModifyPasswordPanel.java" />
-        <option value="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/widget/XPanel.java" />
         <option value="$PROJECT_DIR$/src/com/andreamapp/homeward/dao/TrainOrderDAO.java" />
         <option value="$PROJECT_DIR$/src/com/andreamapp/homeward/dao/MySQLDAO.java" />
+        <option value="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/widget/XPanel.java" />
         <option value="$PROJECT_DIR$/src/com/andreamapp/homeward/ui/seller/OrderPanel.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds">
     <option name="x" value="-6" />
-    <option name="y" value="1" />
-    <option name="width" value="1378" />
+    <option name="y" value="2" />
+    <option name="width" value="1374" />
     <option name="height" value="733" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
@@ -820,7 +950,14 @@
       <option name="project" value="LOCAL" />
       <updated>1530541815142</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="[Add] EventQueue.invokeLater() for UI startup and Data access --amend">
+      <created>1530581474259</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1530581474259</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TodoView">
@@ -833,7 +970,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-6" y="2" width="1374" height="733" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -844,12 +981,12 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33333334" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33764136" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25036603" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25184095" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Statistic" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32857144" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24963397" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1230,17 +1367,9 @@
           <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#793#794#0" expanded="true" />
-            <element signature="e#889#890#0" expanded="true" />
+            <element signature="e#793#794#0" expanded="false" />
+            <element signature="e#889#890#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/andreamapp/homeward/ui/manager/TrainPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1936">
-          <caret line="108" column="34" lean-forward="false" selection-start-line="108" selection-start-column="34" selection-end-line="108" selection-end-column="34" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1335,15 +1464,25 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/andreamapp/homeward/ui/manager/TrainSchedulePanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-556">
+          <caret line="92" column="50" lean-forward="false" selection-start-line="92" selection-start-column="50" selection-end-line="92" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/andreamapp/homeward/ui/widget/XPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="300" column="41" lean-forward="false" selection-start-line="300" selection-start-column="41" selection-end-line="300" selection-end-column="41" />
+        <state relative-caret-position="594">
+          <caret line="137" column="30" lean-forward="true" selection-start-line="137" selection-start-column="30" selection-end-line="137" selection-end-column="30" />
           <folding>
             <element signature="method#XPanel#0;class#XPanel#0" expanded="false" />
             <element signature="docComment;method#initComponents#0;class#XPanel#0" expanded="false" />
             <element signature="method#initComponents#0;class#XPanel#0" expanded="false" />
             <element signature="docComment;method#relayout#0;class#XPanel#0" expanded="false" />
+            <element signature="e#4264#4265#0" expanded="true" />
+            <element signature="e#4304#4305#0" expanded="true" />
             <element signature="method#addItem#2;class#XPanel#0" expanded="false" />
             <element signature="docComment;method#addLabel#0;class#XPanel#0" expanded="false" />
             <element signature="method#addLabel#0;class#XPanel#0" expanded="false" />
@@ -1365,71 +1504,109 @@
             <element signature="docComment;method#option#0;class#XPanel#0" expanded="false" />
             <element signature="docComment;method#optionValue#0;class#XPanel#0" expanded="false" />
             <element signature="docComment;method#checked#0;class#XPanel#0" expanded="false" />
-            <element signature="e#10335#10336#0" expanded="true" />
-            <element signature="e#10373#10374#0" expanded="true" />
             <element signature="e#10434#10435#0" expanded="true" />
-            <element signature="e#10488#10489#0" expanded="true" />
-            <element signature="e#11124#11125#0" expanded="true" />
-            <element signature="e#11164#11165#0" expanded="true" />
-            <element signature="e#11212#11213#0" expanded="true" />
-            <element signature="e#11254#11255#0" expanded="true" />
-            <element signature="e#11303#11304#0" expanded="true" />
-            <element signature="e#11346#11347#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/andreamapp/homeward/ui/manager/TrainSchedulePanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-556">
-          <caret line="92" column="50" lean-forward="false" selection-start-line="92" selection-start-column="50" selection-end-line="92" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/andreamapp/homeward/dao/MySQLDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="548" column="31" lean-forward="true" selection-start-line="548" selection-start-column="31" selection-end-line="548" selection-end-column="31" />
-          <folding>
-            <element signature="class#Parser#0;class#MySQLDAO#0" expanded="false" />
-            <element signature="method#getManagerFromResult#0;class#MySQLDAO#0" expanded="false" />
-            <element signature="method#getManagerById#0;class#MySQLDAO#0" expanded="false" />
-            <element signature="method#login#0;class#MySQLDAO#0" expanded="false" />
-            <element signature="method#deleteCustomer#0;class#MySQLDAO#0" expanded="false" />
-            <element signature="method#updateCustomer#0;class#MySQLDAO#0" expanded="false" />
-            <element signature="method#updateStation#0;class#MySQLDAO#0" expanded="false" />
-            <element signature="method#insertTicketPoint#0;class#MySQLDAO#0" expanded="false" />
-            <element signature="method#updateTicketPoint#0;class#MySQLDAO#0" expanded="false" />
-            <element signature="method#getTicketPointFromResult#0;class#MySQLDAO#0" expanded="false" />
-            <element signature="e#18448#18449#0" expanded="true" />
-            <element signature="e#18500#18501#0" expanded="true" />
-            <element signature="e#18564#18565#0" expanded="true" />
-            <element signature="e#18643#18644#0" expanded="true" />
-            <element signature="e#22084#22085#0" expanded="true" />
-            <element signature="e#22111#22112#0" expanded="true" />
-            <element signature="e#22219#22220#0" expanded="true" />
-            <element signature="e#22246#22247#0" expanded="true" />
-            <element signature="method#insertTrainSchedule#0;class#MySQLDAO#0" expanded="false" />
-            <element signature="e#22761#22762#0" expanded="true" />
-            <element signature="e#22823#22824#0" expanded="true" />
-            <element signature="e#22889#22890#0" expanded="true" />
-            <element signature="e#22968#22969#0" expanded="true" />
-            <element signature="method#updateTrainSchedule#0;class#MySQLDAO#0" expanded="false" />
+            <element signature="e#10472#10473#0" expanded="true" />
+            <element signature="e#10533#10534#0" expanded="true" />
+            <element signature="e#10587#10588#0" expanded="true" />
+            <element signature="e#11223#11224#0" expanded="true" />
+            <element signature="e#11263#11264#0" expanded="true" />
+            <element signature="e#11311#11312#0" expanded="true" />
+            <element signature="e#11353#11354#0" expanded="true" />
+            <element signature="e#11402#11403#0" expanded="true" />
+            <element signature="e#11445#11446#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/andreamapp/homeward/ui/seller/OrderPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4284">
-          <caret line="439" column="26" lean-forward="true" selection-start-line="439" selection-start-column="26" selection-end-line="439" selection-end-column="26" />
+        <state relative-caret-position="131">
+          <caret line="440" column="21" lean-forward="true" selection-start-line="440" selection-start-column="21" selection-end-line="440" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1031#1085#0" expanded="true" />
             <element signature="e#14485#14515#0" expanded="true" />
             <element signature="e#19412#20071#0" expanded="true" />
             <element signature="e#20070#20071#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/andreamapp/homeward/ui/manager/TrainPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="186">
+          <caret line="119" column="58" lean-forward="false" selection-start-line="119" selection-start-column="58" selection-end-line="119" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/andreamapp/homeward/dao/MySQLDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="296">
+          <caret line="402" column="13" lean-forward="true" selection-start-line="402" selection-start-column="13" selection-end-line="402" selection-end-column="13" />
+          <folding>
+            <element signature="method#query#1;class#MySQLDAO#0" expanded="false" />
+            <element signature="method#update#1;class#MySQLDAO#0" expanded="false" />
+            <element signature="class#Parser#0;class#MySQLDAO#0" expanded="false" />
+            <element signature="class#Loader#0;class#MySQLDAO#0" expanded="false" />
+            <element signature="method#load#0;class#Loader#0;class#MySQLDAO#0" expanded="false" />
+            <element signature="method#loadOne#0;class#Loader#0;class#MySQLDAO#0" expanded="false" />
+            <element signature="method#insertManager#0;class#MySQLDAO#0" expanded="false" />
+            <element signature="method#deleteManager#0;class#MySQLDAO#0" expanded="false" />
+            <element signature="method#updateManager#0;class#MySQLDAO#0" expanded="false" />
+            <element signature="method#modifyPassword#0;class#MySQLDAO#0" expanded="false" />
+            <element signature="method#getManagerFromResult#0;class#MySQLDAO#0" expanded="false" />
+            <element signature="method#getManagerById#0;class#MySQLDAO#0" expanded="false" />
+            <element signature="method#getAllManagers#0;class#MySQLDAO#0" expanded="false" />
+            <element signature="method#searchManagers#0;class#MySQLDAO#0" expanded="false" />
+            <element signature="method#getManagerByUsername#0;class#MySQLDAO#0" expanded="false" />
+            <element signature="method#login#0;class#MySQLDAO#0" expanded="false" />
+            <element signature="method#insertCustomer#0;class#MySQLDAO#0" expanded="false" />
+            <element signature="method#deleteCustomer#0;class#MySQLDAO#0" expanded="false" />
+            <element signature="method#updateCustomer#0;class#MySQLDAO#0" expanded="false" />
+            <element signature="method#upsertCustomer#0;class#MySQLDAO#0" expanded="false" />
+            <element signature="method#getCustomerFromResult#0;class#MySQLDAO#0" expanded="false" />
+            <element signature="method#getCustomerByIdNum#0;class#MySQLDAO#0" expanded="false" />
+            <element signature="method#searchCustomers#0;class#MySQLDAO#0" expanded="false" />
+            <element signature="method#getAllCustomers#0;class#MySQLDAO#0" expanded="false" />
+            <element signature="method#getSexFromIdNum#0;class#MySQLDAO#0" expanded="false" />
+            <element signature="method#insertStation#0;class#MySQLDAO#0" expanded="false" />
+            <element signature="method#updateStation#0;class#MySQLDAO#0" expanded="false" />
+            <element signature="method#getStationFromResult#0;class#MySQLDAO#0" expanded="false" />
+            <element signature="method#getStationByName#0;class#MySQLDAO#0" expanded="false" />
+            <element signature="method#getStationById#0;class#MySQLDAO#0" expanded="false" />
+            <element signature="method#getAllStations#0;class#MySQLDAO#0" expanded="false" />
+            <element signature="method#insertTicketPoint#0;class#MySQLDAO#0" expanded="false" />
+            <element signature="method#updateTicketPoint#0;class#MySQLDAO#0" expanded="false" />
+            <element signature="method#getTicketPointById#0;class#MySQLDAO#0" expanded="false" />
+            <element signature="method#getTicketPointFromResult#0;class#MySQLDAO#0" expanded="false" />
+            <element signature="method#getAllTicketPoints#0;class#MySQLDAO#0" expanded="false" />
+            <element signature="method#searchTicketPoints#0;class#MySQLDAO#0" expanded="false" />
+            <element signature="method#getTrainById#0;class#MySQLDAO#0" expanded="false" />
+            <element signature="method#getTrainFromResult#0;class#MySQLDAO#0" expanded="false" />
+            <element signature="method#getAllTrains#0;class#MySQLDAO#0" expanded="false" />
+            <element signature="method#searchTrains#0;class#MySQLDAO#0" expanded="false" />
+            <element signature="method#getSeatFromResult#0;class#MySQLDAO#0" expanded="false" />
+            <element signature="method#getSeat#0;class#MySQLDAO#0" expanded="false" />
+            <element signature="method#getSeatById#0;class#MySQLDAO#0" expanded="false" />
+            <element signature="method#insertTrainOrder#0;class#MySQLDAO#0" expanded="false" />
+            <element signature="method#updateTrainOrder#0;class#MySQLDAO#0" expanded="false" />
+            <element signature="method#getOrderFromResult#0;class#MySQLDAO#0" expanded="false" />
+            <element signature="method#getTrainOrderList#0;class#MySQLDAO#0" expanded="false" />
+            <element signature="method#searchTrainOrders#0;class#MySQLDAO#0" expanded="false" />
+            <element signature="method#insertTrainSchedule#0;class#MySQLDAO#0" expanded="false" />
+            <element signature="method#updateTrainSchedule#0;class#MySQLDAO#0" expanded="false" />
+            <element signature="method#getScheduleFromResult#0;class#MySQLDAO#0" expanded="false" />
+            <element signature="method#getTrainScheduleList#0;class#MySQLDAO#0" expanded="false" />
+            <element signature="method#getTrainScheduleById#0;class#MySQLDAO#0" expanded="false" />
+            <element signature="method#searchTrainSchedule#0;class#MySQLDAO#0" expanded="false" />
+            <element signature="method#fillScheduleWithTrain#0;class#MySQLDAO#0" expanded="false" />
+            <element signature="e#24853#24885#0" expanded="false" />
+            <element signature="e#24853#24885#0" expanded="false" />
+            <element signature="method#searchTrainSchedule#1;class#MySQLDAO#0" expanded="false" />
+            <element signature="method#getSeatAggregateFromResult#0;class#MySQLDAO#0" expanded="false" />
+            <element signature="method#getSeatAggregateInSchedule#0;class#MySQLDAO#0" expanded="false" />
+            <element signature="method#getFreeSeats#0;class#MySQLDAO#0" expanded="false" />
           </folding>
         </state>
       </provider>

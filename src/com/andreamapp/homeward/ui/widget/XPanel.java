@@ -133,6 +133,11 @@ public class XPanel extends JPanel implements Measurable {
         });
     }
 
+    public void removeAllItems(){
+        labelList.clear();
+        componentList.clear();
+    }
+
     public void addItem(Component component) {
         addItem(null, component);
     }
