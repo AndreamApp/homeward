@@ -97,6 +97,8 @@ public class OrderPanel extends JPanel {
             item.setBounds(x, y, item.itemWidth, item.itemHeight);
             y += padding + item.itemHeight + padding;
         }
+        validate();
+        updateUI();
     }
 
     public void onQueryClicked() {
@@ -426,12 +428,16 @@ public class OrderPanel extends JPanel {
                 order.setStudentTicket(isStudent);
                 order.setMoney(seatMoney);
                 order.setOrderState(TrainOrder.STATE_RESERVED);
-                MySQLManager.getInstance().dao().insertTrainOrder(order);
-                PayDialog pay = new PayDialog();
-                pay.popup("等待用户支付...");
-                if (pay.result) {
-                    order.setOrderState(TrainOrder.STATE_PAYED);
-                    MySQLManager.getInstance().dao().updateTrainOrder(order);
+                int res = MySQLManager.getInstance().dao().insertTrainOrder(order);
+                if (res == 0) {
+                    JOptionPane.showMessageDialog(null, "预订失败！该用户已经预约过该次行程！");
+                } else {
+                    PayDialog pay = new PayDialog();
+                    pay.popup("等待用户支付...");
+                    if (pay.result) {
+                        order.setOrderState(TrainOrder.STATE_PAYED);
+                        MySQLManager.getInstance().dao().updateTrainOrder(order);
+                    }
                     JOptionPane.showMessageDialog(null, "支付成功！");
                     dispose();
                 }
@@ -496,7 +502,6 @@ public class OrderPanel extends JPanel {
                 buttonOK.setText("去支付");
                 // init carriage and seat
                 selectCarriage(Integer.parseInt((String) carriageBox.getItemAt(0)));
-                relayout();
             }
 
             private void selectCarriage(int carriage) {

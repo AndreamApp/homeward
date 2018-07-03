@@ -485,7 +485,14 @@ public class MySQLDAO implements
     }
 
     @Override
-    public void insertTrainOrder(TrainOrder order) {
+    public int insertTrainOrder(TrainOrder order) {
+        TrainOrder ordered = new Loader<>(this::getOrderFromResult)
+                .loadOne("select * from ticket_order" +
+                                " where sche_id = ? and id_num = ? and (order_state = 1 or order_state = 3)",
+                        order.getTrainSchedule().getScheId(), order.getBuyer().getIdNum());
+        if (ordered == null) {
+            return 0;
+        }
         update("insert into ticket_order " +
                         "(point_id, id_num, sche_id, seat_id, train_id, depart_station_order, arrive_station_order, depart_station, arrive_station, is_stu_ticket, money, order_state) values " +
                         "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
@@ -502,6 +509,7 @@ public class MySQLDAO implements
                 order.getMoney(),
                 order.getOrderState()
         );
+        return 1;
     }
 
     @Override
@@ -535,7 +543,10 @@ public class MySQLDAO implements
 
         Customer buyer = new Customer();
         buyer.setIdNum(res.getString("id_num"));
-        buyer.setName(res.getString("name"));
+        try {
+            buyer.setName(res.getString("name"));
+        } catch (SQLException e) {
+        }
         order.setBuyer(buyer);
 
         TrainSchedule schedule = new TrainSchedule();
@@ -691,11 +702,11 @@ public class MySQLDAO implements
     public List<SeatAggregate> getSeatAggregateInSchedule(TrainSchedule schedule, int departStationOrder, int arriveStationOrder) {
         return new Loader<>(this::getSeatAggregateFromResult)
                 .load("select s.seat_type, count(s.seat_id) as seat_cnt from seat as s" +
-                                " left outer join ticket_order as o on  s.seat_id = o.seat_id and sche_id = ?" +
-                                " where order_state is null or order_state = ? or order_state = ?" +
-                                " or depart_station_order >= ? or arrive_station_order <= ?" +
+                                " left outer join ticket_order as o on  s.seat_id = o.seat_id" +
+                                " where s.train_id = ? and (sche_id is null or (sche_id = ? and (order_state is null or order_state = ? or order_state = ?" +
+                                " or depart_station_order >= ? or arrive_station_order <= ?)))" +
                                 " group by seat_type",
-                        schedule.getScheId(),
+                        schedule.getTrain().getTrainId(), schedule.getScheId(),
                         TrainOrder.STATE_CANCLED, TrainOrder.STATE_REFUNDED,
                         arriveStationOrder, departStationOrder);
     }
